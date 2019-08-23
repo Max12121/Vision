@@ -1,0 +1,27 @@
+{
+    "rules": {
+        "no-default-export": true,
+        "class-name": true,
+        "member-access": true,
+        "prefer-readonly": true,
+        "curly": true,
+        "no-duplicate-variable": true,
+        "no-return-await": true,
+        "semicolon": [
+            true,
+            "always"
+        ],
+        "typedef": [
+            true,
+            "call-signature",
+            "arrow-call-signature",
+            "parameter",
+            "arrow-parameter",
+            "property-declaration",
+            "variable-declaration",
+            "member-variable-declaration",
+            "object-destructuring",
+            "array-destructuring"
+        ]
+    }
+}
