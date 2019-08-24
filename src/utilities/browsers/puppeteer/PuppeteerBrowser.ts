@@ -1,7 +1,6 @@
 import * as Puppeteer from "puppeteer";
 import { IVisionBrowser } from "../../../browser/IVisionBrowser";
-import { IVisionPage } from "../../../browser/IVisionPage";
-import { PuppeteerPage } from "./PuppeteerPage";
+import { PuppeteerWindow } from "./PuppeteerWindow";
 
 export class PuppeteerBrowser implements IVisionBrowser {
     private _puppeteerBrowser: Puppeteer.Browser;
@@ -16,8 +15,8 @@ export class PuppeteerBrowser implements IVisionBrowser {
         }
     }
 
-    public async openPage (): Promise<IVisionPage> {
-        return new PuppeteerPage(await this._puppeteerBrowser.newPage()) as IVisionPage;
+    public async openWindow (): Promise<PuppeteerWindow> {
+        return new PuppeteerWindow(await this._puppeteerBrowser.newPage());
     }
 
     public async close (): Promise<void> {

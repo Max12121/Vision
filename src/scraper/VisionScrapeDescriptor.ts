@@ -1,3 +1,4 @@
+import { IVisionWindow } from "../browser/IVisionWindow";
 import { VisionHTTPResponse } from "../browser/VisionHTTPResponse";
 
 export type VisionScrapeDescriptor = {
@@ -22,7 +23,7 @@ export type VisionScrapeDescriptor = {
 
         // Used as keys of the "window" object,
         // populated after the "load" event is fired.
-        readonly globals: string[];
+        readonly globalDeclarations: string[];
     };
 
     // Used as styles information.
@@ -50,7 +51,7 @@ export type VisionScrapeDescriptor = {
 
     // Represents all local storage keys and values,
     // populated after the "load" event is fired.
-    readonly storage: {
+    readonly localStorage: {
         readonly [name: string]: string;
     };
 
@@ -65,6 +66,9 @@ export type VisionScrapeDescriptor = {
     // Used as current language.
     readonly language: string;
 
-    // Used as languages the URI is available.
+    // Used as languages the scraped website is available.
     readonly languages: string[];
+
+    // Used as browser window reference.
+    readonly window?: IVisionWindow;
 };

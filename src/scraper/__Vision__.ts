@@ -1,9 +1,3 @@
-/*
- * !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!!
- * !!! NOTE: THE FOLLOWING CODE IS EVALUATED IN BROWSER CONTEXT.
- * !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!!
- */
-
 // tslint:disable
 module __Vision__ {
     // Returns the whole source of the document.
@@ -15,17 +9,6 @@ module __Vision__ {
         return [ ...window.document.querySelectorAll("script[src]") ].map((script) => {
             return script.getAttribute("src");
         });
-    }
-
-    export function getDocumentLanguage () {
-        return window.document.documentElement.lang || "unknown";
-    }
-
-    export function getDocumentLanguages () {
-        const links = window.document.querySelectorAll("link[rel=alternate][hreflang]");
-        const languages = new Set();
-
-        return [ ...languages ];
     }
 
     export function getAllScriptsInnerContent () {
@@ -122,7 +105,31 @@ module __Vision__ {
         });
     }
 
-    // Collect the information necessary to represent part of the IVisionScrapeDescriptor interface.
+    export function getDocumentLanguage () {
+        const language = window.document.documentElement.lang;
+
+        if (!language || language === "zxx") {
+            return "unknown";
+        }
+
+        return language;
+    }
+
+    export function getDocumentLanguages () {
+        const languages = new Set();
+
+        [ ...window.document.querySelectorAll("link[rel=alternate][hreflang]") ].forEach((link) => {
+            const language = link.getAttribute("hreflang");
+
+            if (language && language !== "x-default") {
+                languages.add(language);
+            }
+        });
+
+        return [ ...languages ];
+    }
+
+    // Collect the information necessary to represent part of the scrape descriptor.
     export async function getScrapeDescriptor () {
         // Wait for the page to load before collecting the information.
         await __Vision__.waitLoadEvent();
@@ -140,7 +147,7 @@ module __Vision__ {
             },
             metas: getMetas(),
             cookies: getCookies(),
-            storage: getLocalStorage(),
+            localStorage: getLocalStorage(),
             links: getAllLinks(),
             frames: getAllFramesSources(),
         };

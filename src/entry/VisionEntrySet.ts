@@ -7,7 +7,11 @@ export class VisionEntrySet {
     };
 
     public constructor () {
-        // Silence is golden.
+        this._entries = {};
+    }
+
+    public get length (): number {
+        return Object.keys(this._entries).length;
     }
 
     public add (entry: VisionEntry): void {
@@ -18,6 +22,18 @@ export class VisionEntrySet {
         return this._entries[entryName] || null;
     }
 
+    public getByCategory (category: string): VisionEntrySet {
+        const entries: VisionEntrySet = new VisionEntrySet();
+
+        for (const entry of this.toArray()) {
+            if (entry.categories.has(category)) {
+                entries.add(entry);
+            }
+        }
+
+        return entries;
+    }
+
     public has (entryName: string): boolean {
         return this.get(entryName) !== null;
     }
@@ -26,8 +42,24 @@ export class VisionEntrySet {
         delete this._entries[entryName];
     }
 
+    public clear (): void {
+        Object.keys(this._entries).forEach((entryName: string): void => {
+            this.remove(entryName);
+        });
+    }
+
     public toArray (): VisionEntry[] {
-        return Object.keys(this._entries).map((entryName: string): VisionEntry => this._entries[entryName]);
+        return Object.keys(this._entries).map((entryName: string): VisionEntry => {
+            return this._entries[entryName];
+        });
+    }
+
+    public toJSON (): string {
+        return JSON.stringify({
+            entries: {
+                ...this._entries,
+            },
+        });
     }
 
     public static fromJSON (filePath: string): VisionEntrySet {

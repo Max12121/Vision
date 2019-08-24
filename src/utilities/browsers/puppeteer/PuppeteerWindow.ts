@@ -1,12 +1,16 @@
 import * as Puppeteer from "puppeteer";
-import { IVisionPage } from "../../../browser/IVisionPage";
+import { IVisionWindow } from "../../../browser/IVisionWindow";
 import { VisionHTTPResponse } from "../../../browser/VisionHTTPResponse";
 
-export class PuppeteerPage implements IVisionPage {
+export class PuppeteerWindow implements IVisionWindow {
     private readonly _puppeteerPage: Puppeteer.Page;
 
     public constructor (puppeteerPage: Puppeteer.Page) {
         this._puppeteerPage = puppeteerPage;
+    }
+
+    public async setUserAgent (userAgent: string): Promise<void> {
+        return this._puppeteerPage.setUserAgent(userAgent);
     }
 
     public async goto (uri: string): Promise<VisionHTTPResponse> {

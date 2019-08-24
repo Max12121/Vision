@@ -1,7 +1,7 @@
 import * as FileSystem from "fs";
 import * as Path from "path";
 import { IVisionBrowser } from "../browser/IVisionBrowser";
-import { IVisionPage } from "../browser/IVisionPage";
+import { IVisionWindow } from "../browser/IVisionWindow";
 import { VisionHTTPResponse } from "../browser/VisionHTTPResponse";
 import { VisionScrapeDescriptor } from "./VisionScrapeDescriptor";
 
@@ -14,21 +14,18 @@ export class VisionScraper {
     }
 
     public async scrape (uri: string): Promise<VisionScrapeDescriptor> {
-        const page: IVisionPage = await this._browser.openPage();
-        const response: VisionHTTPResponse = await page.goto(uri);
+        const window: IVisionWindow = await this._browser.openWindow();
+        const response: VisionHTTPResponse = await window.goto(uri);
+        
+        await window.evaluate(VisionScraper.VISION_HELPER);
 
-        await page.evaluate(VisionScraper.VISION_HELPER);
-
-        const localDescriptor: any = await page.evaluate("__Vision__.getScrapeDescriptor()");
+        const localDescriptor: any = await window.evaluate("__Vision__.getScrapeDescriptor()");
 
         return {
             uri,
             response,
             ...localDescriptor,
+            window,
         };
-    }
-
-    public async crawl (uri: string, maxDepth: number): Promise<void> {
-        return;
     }
 }

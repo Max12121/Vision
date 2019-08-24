@@ -1,3 +1,3 @@
-export interface VisionParserDictionary {
+export type VisionParserDictionary = {
     readonly [key: string]: string;
-}
+};

@@ -1,7 +1,7 @@
-import { IVisionPage } from "./IVisionPage";
+import { IVisionWindow } from "./IVisionWindow";
 
 export interface IVisionBrowser {
     open (): Promise<void>;
-    openPage (): Promise<IVisionPage>;
+    openWindow (): Promise<IVisionWindow>;
     close (): Promise<void>;
 }

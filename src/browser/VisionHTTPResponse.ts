@@ -1,12 +1,12 @@
 export type VisionHTTPResponse = {
-    // Used as response status.
+    // Represents the response status.
     readonly status: number;
 
-    // Used as response headers.
+    // Represents the response headers.
     readonly headers: {
         readonly [name: string]: string
     };
 
-    // Used as response body.
+    // Represents the response body.
     readonly body: string;
 };
