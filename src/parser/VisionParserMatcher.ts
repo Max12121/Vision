@@ -3,5 +3,5 @@ import { VisionScrapeDescriptor } from "../scraper/VisionScrapeDescriptor";
 
 export type VisionParserMatcher = {
     readonly name: string;
-    matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean;
+    matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean|Promise<boolean>;
 };

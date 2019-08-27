@@ -86,6 +86,12 @@ module __Vision__ {
         });
     }
 
+    export function getAllImagesSources () {
+        return [ ...window.document.querySelectorAll("img[src]") ].map((image) => {
+            return image.getAttribute("src");
+        });
+    }
+
     export function getAllFramesSources () {
         return [ ...window.document.querySelectorAll("iframe[src]") ].map((frame) => {
             return frame.getAttribute("src");
@@ -116,30 +122,56 @@ module __Vision__ {
     }
 
     export function getDocumentLanguages () {
+        const currentLanguage = getDocumentLanguage();
         const languages = new Set();
 
         [ ...window.document.querySelectorAll("link[rel=alternate][hreflang]") ].forEach((link) => {
             const language = link.getAttribute("hreflang");
 
             if (language && language !== "x-default") {
-                languages.add(language);
+                languages.add(language.toLocaleLowerCase());
             }
         });
+
+        [ ...window.document.querySelectorAll("a[href][hreflang]") ].forEach((link) => {
+            if (link.getAttribute("href").indexOf(window.location.host) === -1) {
+                return;
+            }
+
+            const language = link.getAttribute("hreflang");
+
+            if (language) {
+                languages.add(language.toLocaleLowerCase());
+            }
+        });
+
+        languages.add(currentLanguage);
 
         return [ ...languages ];
     }
 
+    function scrollMaxY () {
+        window.scrollTo(0, 314159265);
+    }
+
     // Collect the information necessary to represent part of the scrape descriptor.
+    // TODO: Collect information before load, after load and after lazy load, in a Set.
     export async function getScrapeDescriptor () {
         // Wait for the page to load before collecting the information.
         await __Vision__.waitLoadEvent();
+
+        /*
+        scrollMaxY();
+
+        await new Promise((resolve) => setTimeout(resolve, 3141));
+        //*/
 
         return {
             loadedContent: getDocumentOuterHTML(),
             scripts: {
                 sources: getAllScriptsSource(),
                 contents: getAllScriptsInnerContent(),
-                globals: getWindowKeys(),
+                globalDeclarations: getWindowKeys(),
             },
             styles: {
                 sources: getAllStylesSource(),
@@ -149,6 +181,7 @@ module __Vision__ {
             cookies: getCookies(),
             localStorage: getLocalStorage(),
             links: getAllLinks(),
+            images: getAllImagesSources(),
             frames: getAllFramesSources(),
         };
     }

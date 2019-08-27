@@ -1,5 +1,4 @@
 {
-    "compileOnSave": true,
     "compilerOptions": {
         "target": "es6",
         "module": "commonjs",
@@ -10,6 +9,7 @@
         "noImplicitAny": true,
         "noImplicitReturns": true
     },
+    "compileOnSave": true,
     "exclude": [
         "node_modules"
     ]

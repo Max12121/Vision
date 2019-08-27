@@ -1,24 +1,23 @@
 {
-    "version": "2019.0",
+    "version": "2019.1.0",
     "entries": {
         "iubenda": {
-            "description": "SaaS accomplishing law requirements through automation.",
+            "description": "SaaS organization accomplishing law requirements through automation.",
             "categories": [
-                "Law", "Privacy", "Freemium"
+                "Law", "Privacy", "Freemium", "SaaS"
             ],
             "uri": "https://www.iubenda.com",
             "image": "iubenda.svg",
-            "fingerprint": {
-
-            }
+            "creationYear": "2011"
         },
         "iubenda Privacy Policy": {
             "description": "Privacy Policy generator offered by iubenda.",
             "categories": [
-                "Law", "Privacy", "Freemium"
+                "Law", "Privacy", "Freemium", "SaaS"
             ],
             "uri": "https://www.iubenda.com",
             "image": "iubenda.svg",
+            "creationYear": "2011",
             "fingerprint": {
                 "links": [
                     "^https://www.iubenda.com/privacy-policy/[0-9]+"
@@ -35,22 +34,102 @@
             ],
             "uri": "https://www.iubenda.com",
             "image": "iubenda.svg",
+            "creationYear": "2015",
             "fingerprint": {
                 "links": [
                     "^https://www.iubenda.com/privacy-policy/[0-9]+/cookie-policy"
                 ]
             },
             "implies": [
-                "iubenda"
+                "iubenda",
+                "iubenda Privacy Policy"
             ]
         },
 
-        
+
         "Twitter Follow Button": {
+            "description": "Twitter follow button exposed through Twitter.",
+            "categories": [
+                "Widget"
+            ],
+            "uri": "https://developer.twitter.com/en/docs/twitter-for-websites/follow-button/overview.html",
             "fingerprint": {
                 "frames": [
                     "^https://platform.twitter.com/widgets/follow_button"
                 ]
+            }
+        },
+
+
+        "Capterra": {
+            "description": "Website for software peer review.",
+            "categories": [
+                "Review"
+            ],
+            "uri": "https://www.capterra.com"
+        },
+        "Capterra Reviews Badge": {
+            "description": "Badge showing the reviews of a software offered by Capterra.",
+            "categories": [
+                "Review", "Badge"
+            ],
+            "fingerprint": {
+                "images": [
+                    "^https://assets.capterra.com/badge/"
+                ]
+            },
+            "implies": [
+                "Capterra"
+            ]
+        },
+
+
+        "Pickr": {
+            "description": "Hackable color picker library.",
+            "categories": [
+                "Library", "JavaScript", "CSS"
+            ],
+            "uri": "https://github.com/Simonwep/pickr",
+            "license": "MIT",
+            "creationYear": "2018",
+            "fingerprint": {
+                "scripts": {
+                    "globalDeclarations": [
+                        "^Pickr$"
+                    ]
+                }
+            }
+        },
+
+
+        "jQuery": {
+            "description": "JavaScript library designed to simplify HTML DOM tree traversal, manipulation and event handling.",
+            "categories": [
+                "Library", "JavaScript"
+            ],
+            "uri": "https://jquery.com",
+            "license": "MIT",
+            "creationYear": "2006",
+            "fingerprint": {
+                "scripts": {
+                    "globalDeclarations": [
+                        "^jQuery$"
+                    ]
+                }
+            }
+        },
+
+
+        "Google Analytics": {
+            "categories": [
+                "Analytics"
+            ],
+            "fingerprint": {
+                "scripts": {
+                    "globalDeclarations": [
+                        "^GoogleAnalyticsObject$"
+                    ]
+                }
             }
         }
     }

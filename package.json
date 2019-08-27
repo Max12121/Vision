@@ -1,10 +1,11 @@
 {
     "name": "vision",
     "description": "",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "scripts": {
         "build": "tsc",
-        "start": "tsc && node build/index.js"
+        "start": "tsc && node build/index.js",
+        "statistics": "tsc && node build/statistics.js"
     },
     "dependencies": {
         "puppeteer": "1.19.0"

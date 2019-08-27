@@ -2,6 +2,9 @@ import { IVisionWindow } from "../browser/IVisionWindow";
 import { VisionHTTPResponse } from "../browser/VisionHTTPResponse";
 
 export type VisionScrapeDescriptor = {
+    // Represents the requested hostname.
+    readonly hostname: string;
+    
     // Used as requested URI.
     readonly uri: string;
 
@@ -55,9 +58,13 @@ export type VisionScrapeDescriptor = {
         readonly [name: string]: string;
     };
 
-    // Represents the "href" values of all the "a" elements,
-    // populated after the "load" event is fired.
+    // Represents the "href" values of all links (<a>),
+    // populated after the "load" event.
     readonly links: string[];
+
+    // Represents the "src" values of all images (<img>),
+    // populated after the "load" event.
+    readonly images: string[];
 
     // Represents the "src" values of all the "iframe" elements,
     // populated after the "load" event is fired.

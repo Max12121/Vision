@@ -15,6 +15,9 @@ export type VisionEntryFingerprint = {
     // List of regular expressions used to match the body of the document after the "load" event is fired.
     readonly loadedContent?: string[];
 
+    // List of CSS selectors, if at least one matches at least one element then the entry is matched.
+    readonly selectors?: string[];
+
     // Collection of regular expressions used to match scripts in the document.
     readonly scripts?: {
         // List of regular expressions used to match the value of the "src" attribute of all scripts.
@@ -27,6 +30,20 @@ export type VisionEntryFingerprint = {
         readonly globalDeclarations?: string[];
     };
 
+    // Collection of regular expressions used to match styles in the document.
+    readonly styles?: {
+        // List of regular expressions used to match the value of the "src" attribute of all style sheet links.
+        readonly sources?: string[];
+
+        // List of regular expressions used to match the inner value of all styles.
+        readonly contents?: string[];
+    };
+
+    // Set of regular expressions used to match meta elements.
+    readonly metas?: {
+        readonly [name: string]: string;
+    };
+
     // Set of regular expressions used to match cookies.
     readonly cookies?: {
         readonly [name: string]: string;
@@ -37,15 +54,13 @@ export type VisionEntryFingerprint = {
         readonly [name: string]: string;
     };
 
-    // Set of regular expressions used to match meta elements.
-    readonly metas?: {
-        readonly [name: string]: string;
-    };
-
     // List of regular expressions used to match the value of the "href" attribute of all links (<a>).
     readonly links?: string[];
 
-    // List of regular expressions used to match the value of the "src" attribute of all iframes.
+    // List of regular expressions used to match the value of the "src" attribute of all images (<img>).
+    readonly images?: string[];
+
+    // List of regular expressions used to match the value of the "src" attribute of all frames (<iframe>).
     readonly frames?: string[];
 
     // Used as code evaluated on the document.

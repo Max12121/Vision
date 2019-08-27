@@ -15,15 +15,16 @@ export class VisionScraper {
 
     public async scrape (uri: string): Promise<VisionScrapeDescriptor> {
         const window: IVisionWindow = await this._browser.openWindow();
-        const response: VisionHTTPResponse = await window.goto(uri);
-        
+        const httpResponse: VisionHTTPResponse = await window.goto(uri);
+
         await window.evaluate(VisionScraper.VISION_HELPER);
 
         const localDescriptor: any = await window.evaluate("__Vision__.getScrapeDescriptor()");
 
         return {
+            hostname: await window.evaluate("window.location.hostname"),
             uri,
-            response,
+            response: httpResponse,
             ...localDescriptor,
             window,
         };
