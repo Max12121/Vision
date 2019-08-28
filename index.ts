@@ -1,5 +1,5 @@
 import { Vision } from "./src/Vision";
 
 (async function main (): Promise<void> {
-    console.log(await Vision.cast("https://aranzulla.it"));
+    console.log(await Vision.cast("https://malgol.com"));
 }());

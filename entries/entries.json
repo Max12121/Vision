@@ -8,7 +8,14 @@
             ],
             "uri": "https://www.iubenda.com",
             "image": "iubenda.svg",
-            "creationYear": "2011"
+            "creationYear": "2011",
+            "fingerprint": {
+                "scripts": {
+                    "globalDeclarations": [
+                        "^_iub$"
+                    ]
+                }
+            }
         },
         "iubenda Privacy Policy": {
             "description": "Privacy Policy generator offered by iubenda.",
@@ -46,18 +53,49 @@
             ]
         },
 
-
-        "Twitter Follow Button": {
-            "description": "Twitter follow button exposed through Twitter.",
+        "Twitter for Websites": {
+            "description": "",
             "categories": [
-                "Widget"
+                "Widget", "Social"
+            ],
+            "uri": "https://developer.twitter.com/en/docs/twitter-for-websites/overview",
+            "fingerprint": {
+                "scripts": {
+                    "sources": [
+                        "^https://platform.twitter.com/widgets.js$"
+                    ]
+                }
+            }
+        },
+        "Twitter Follow Button": {
+            "description": "Button exposed for following a user on Twitter.",
+            "categories": [
+                "Widget", "Social"
             ],
             "uri": "https://developer.twitter.com/en/docs/twitter-for-websites/follow-button/overview.html",
             "fingerprint": {
                 "frames": [
                     "^https://platform.twitter.com/widgets/follow_button"
                 ]
-            }
+            },
+            "implies": [
+                "Twitter for Websites"
+            ]
+        },
+        "Twitter Tweet Button": {
+            "description": "Button exposed for sharing content on Twitter.",
+            "categories": [
+                "Widget", "Social"
+            ],
+            "uri": "https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview.html",
+            "fingerprint": {
+                "frames": [
+                    "^https://platform.twitter.com/widgets/tweet_button"
+                ]
+            },
+            "implies": [
+                "Twitter for Websites"
+            ]
         },
 
 
