@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="vision.svg" alt="" width="256px">
+    <img src="vision.svg" alt="" width="210px">
 </p>
 
 # Vision
