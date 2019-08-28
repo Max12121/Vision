@@ -9,24 +9,19 @@ server software, content management systems, forum platforms,
 e-commerce platforms, APIs, libraries, widgets, analytics software,
 developer tools and more.
 
-## Why Vision?
-Vision is here to fill the lack of reliability of its alternatives
-which are changing API too frequently and difficult to handle
-and enrich.
-
 Through Vision you can:
 -   **Define technologies and services easily without
 advanced technical knowledge**, for instance you can detect
 a library by just adding its JavaScript file name.
 -   **Have maximum flexibility for defining technologies and
-services through intuitive predefined patterns** or through custom
-JavaScript code, you can also directly use CSS selectors!
+services through a wide range of intuitive predefined patterns** or through custom
+JavaScript code.
 -   **Match anything thanks to options like headless browser
-detection bypass or lazy load bypass**.
--   **Have atomic definitions**, for
-instance "Facebook Like Button" and "Facebook
-Share Button" are clearly distinguished and not defined
-as just "Facebook".
+detection bypass or lazy load bypass** making Vision to act exactly like
+a real user.
+-   **Have atomic definitions**, for instance "Facebook Like Button"
+and "Facebook Share Button" are clearly distinguished and not superficially
+defined as just "Facebook".
 
 ## Installation
 pass.
