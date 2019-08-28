@@ -1,3 +1,7 @@
+<p align="center"> 
+    <img src="vision.svg" alt="">
+</p>
+
 # Vision
 Vision is the most powerful tool detecting technologies and
 services used on websites like web frameworks, web services,
