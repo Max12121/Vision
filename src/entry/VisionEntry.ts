@@ -1,6 +1,7 @@
 import { VisionEntryAuthor } from "./VisionEntryAuthor";
 import { VisionEntryFingerprint } from "./VisionEntryFingerprint";
 
+// Represents a technology or service, generically referred as "Entry".
 export type VisionEntry = {
     // Represents the entry name.
     readonly name: string;

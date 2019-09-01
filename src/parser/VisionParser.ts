@@ -358,7 +358,7 @@ VisionParser.matchers.add({
 
 VisionParser.matchers.add({
     name: "evaluation/match",
-    matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
+    async matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<boolean> {
         // TODO: TODO.
         return false;
     },

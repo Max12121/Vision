@@ -34,6 +34,20 @@ export class VisionEntrySet {
         return entries;
     }
 
+    public getByCategories (categories: string[]): VisionEntrySet {
+        let entries: VisionEntrySet = this;
+
+        for (const category of categories) {
+            entries = this.getByCategory(category);
+
+            if (entries.length === 0) {
+                break;
+            }
+        }
+
+        return entries;
+    }
+
     public has (entryName: string): boolean {
         return this.get(entryName) !== null;
     }

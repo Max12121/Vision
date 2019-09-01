@@ -1,3 +1,4 @@
+// Represents a HTTP response but only with the information necessary to Vision.
 export type VisionHTTPResponse = {
     // Represents the response status.
     readonly status: number;
