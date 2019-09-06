@@ -3,6 +3,9 @@ import { VisionEntryFingerprint } from "../entry/VisionEntryFingerprint";
 import { VisionEntrySet } from "../entry/VisionEntrySet";
 import { VisionScrapeDescriptor } from "../scraper/VisionScrapeDescriptor";
 import { VisionParserDictionary } from "./VisionParserDictionary";
+import { VisionParserMatch } from "./VisionParserMatch";
+import { VisionParserMatchSet } from "./VisionParserMatchSet";
+import { VisionParserMatcher } from "./VisionParserMatcher";
 import { VisionParserMatcherSet } from "./VisionParserMatcherSet";
 
 export class VisionParser {
@@ -17,16 +20,27 @@ export class VisionParser {
         return this._entries;
     }
 
-    public async match (scrapeDescriptor: VisionScrapeDescriptor): Promise<VisionEntrySet> {
-        const matchedEntries: VisionEntrySet = new VisionEntrySet();
-        const impliedEntries: Set<string> = new Set();
-        const addEntry: Function = (entry: VisionEntry): void => {
-            matchedEntries.add(entry);
+    public async match (scrapeDescriptor: VisionScrapeDescriptor): Promise<VisionParserMatchSet> {
+        const matchedEntries: VisionParserMatchSet = new VisionParserMatchSet();
+        const addEntry: Function = async (entry: VisionEntry, matcher: VisionParserMatcher, impliedBy: VisionEntry): Promise<void> => {
+            matchedEntries.add({
+                parser: this,
+                scrapeDescriptor,
+                entry,
+                entryMatcher: matcher,
+                entryImpliedBy: impliedBy,
+                entryVersion: await evaluateEntryVersion(entry.fingerprint, scrapeDescriptor),
+                entryExtra: await evaluateEntryExtra(entry.fingerprint, scrapeDescriptor),
+            });
 
             if (Array.isArray(entry.implies)) {
-                entry.implies.forEach((entryName: string): void => {
-                    impliedEntries.add(entryName);
-                });
+                for (const impliedEntryName of entry.implies) {
+                    if (matchedEntries.has(impliedEntryName)) {
+                        continue;
+                    }
+
+                    await addEntry(this._entries.get(impliedEntryName), null, entry);
+                }
             }
         };
 
@@ -39,21 +53,10 @@ export class VisionParser {
                 const matched: boolean = await matcher.matches(entry.fingerprint, scrapeDescriptor);
 
                 if (matched) {
-                    addEntry(entry);
+                    await addEntry(entry, matcher, null);
+
                     break;
                 }
-            }
-        }
-
-        while (impliedEntries.size !== 0) {
-            for (const impliedEntryName of impliedEntries) {
-                const impliedEntry: VisionEntry = this._entries.get(impliedEntryName);
-
-                if (impliedEntry) {
-                    addEntry(impliedEntry);
-                }
-
-                impliedEntries.delete(impliedEntryName);
             }
         }
 
@@ -357,27 +360,56 @@ VisionParser.matchers.add({
 });
 
 VisionParser.matchers.add({
-    name: "evaluation/match",
+    name: "customEvaluation/match",
     async matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<boolean> {
-        // TODO: TODO.
-        return false;
+        if (typeof entryFingerprint.customEvaluation !== "object" || typeof scrapeDescriptor.window !== "object") {
+            return false;
+        }
+
+        const matchEvaluation: string = entryFingerprint.customEvaluation.match;
+
+        if (typeof matchEvaluation !== "string") {
+            return false;
+        }
+
+        return await scrapeDescriptor.window.evaluate(matchEvaluation) == true;
     },
 });
 
-/*
-VisionParser.matchers.add({
-    name: "evaluation/version",
-    matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
-        // TODO: TODO.
-        return false;
-    },
-});
+async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<string> {
+    if (typeof entryFingerprint !== "object") {
+        return "";
+    }
 
-VisionParser.matchers.add({
-    name: "evaluation/additional",
-    matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
-        // TODO: TODO.
-        return false;
-    },
-});
-//*/
+    if (typeof entryFingerprint.customEvaluation !== "object" || typeof scrapeDescriptor.window !== "object") {
+        return "";
+    }
+
+    const versionEvaluation: string = entryFingerprint.customEvaluation.version;
+
+    if (typeof versionEvaluation !== "string") {
+        return "";
+    }
+
+    return await scrapeDescriptor.window.evaluate(versionEvaluation) as string;
+}
+
+async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<{}> {
+    if (typeof entryFingerprint !== "object") {
+        return {};
+    }
+
+    if (typeof entryFingerprint.customEvaluation !== "object" || typeof scrapeDescriptor.window !== "object") {
+        return {};
+    }
+
+    const extraEvaluation: string = entryFingerprint.customEvaluation.extra;
+
+    if (typeof extraEvaluation !== "string") {
+        return {};
+    }
+
+    return {
+        ...(await scrapeDescriptor.window.evaluate(extraEvaluation)),
+    };
+}

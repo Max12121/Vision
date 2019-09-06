@@ -1,9 +1,9 @@
-import { VisionHTTPResponse } from "./VisionHTTPResponse";
+import { IVisionHTTPResponse } from "./IVisionHTTPResponse";
 
-// Represents a page used by Vision to load websites and interact with them.
+// Represents a page used by Vision to load and manipulate websites.
 export interface IVisionWindow {
     setUserAgent (userAgent: string): Promise<void>;
-    goto (uri: string): Promise<VisionHTTPResponse>;
+    goto (uri: string): Promise<IVisionHTTPResponse>;
     evaluate (text: string): Promise<any>;
     close (): Promise<void>;
 }

@@ -125,7 +125,7 @@
         "Pickr": {
             "description": "Hackable color picker library.",
             "categories": [
-                "Library", "JavaScript", "CSS"
+                "Library", "JavaScript", "Cascading Style Sheets"
             ],
             "uri": "https://github.com/Simonwep/pickr",
             "license": "MIT",
@@ -169,6 +169,17 @@
                     ]
                 }
             }
+        },
+
+
+        "Bootstrap": {
+            "description": "An open source toolkit for developing with HTML, CSS, and JS.",
+            "categories": [
+                "Framework", "Hypertext Markup Language", "Cascading Style Sheets", "JavaScript"
+            ],
+            "uri": "https://getbootstrap.com",
+            "license": "MIT",
+            "creationYear": "2011"
         }
     }
 }

@@ -1,5 +1,5 @@
 import { IVisionWindow } from "../browser/IVisionWindow";
-import { VisionHTTPResponse } from "../browser/VisionHTTPResponse";
+import { IVisionHTTPResponse } from "../browser/IVisionHTTPResponse";
 
 export type VisionScrapeDescriptor = {
     // Represents the requested hostname.
@@ -9,7 +9,7 @@ export type VisionScrapeDescriptor = {
     readonly uri: string;
 
     // Used as response information.
-    readonly response: VisionHTTPResponse;
+    readonly response: IVisionHTTPResponse;
 
     // Used as page content after the "load" event is fired.
     readonly loadedContent: string;

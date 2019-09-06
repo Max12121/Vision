@@ -64,14 +64,14 @@ export type VisionEntryFingerprint = {
     readonly frames?: string[];
 
     // Used as code evaluated on the document.
-    readonly evaluation?: {
+    readonly customEvaluation?: {
         // Used as code evaluated on the document for matching the entry: if returns "true" then the entry will be matched.
         readonly match?: string;
-        
-        // Used as code evaluated on the document when the entry is matched for detecting its version.
+
+        // Used as code evaluated on the document when the entry is matched for retrieving the version of the entry.
         readonly version?: string;
 
-        // Used as code evaluated on the document when the entry is matched for retrieving additional information.
-        readonly additional?: string;
+        // Used as code evaluated on the document when the entry is matched for retrieving extra information regarding the entry.
+        readonly extra?: string;
     };
 };

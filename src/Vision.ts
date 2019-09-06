@@ -29,13 +29,13 @@ export module Vision {
 
         const entries: VisionEntrySet = VisionEntrySet.fromJSON("entries/entries.json");
         const parser: VisionParser = new VisionParser(entries);
-        const matchedEntries: VisionEntrySet = await parser.match(scrapeDescriptor);
+        const matchedEntries: any = await parser.match(scrapeDescriptor);
         const visionDescriptor: VisionDescriptor = {
             hostname: scrapeDescriptor.hostname,
             uris: [
                 scrapeDescriptor.uri,
             ],
-            entries: removeEntriesProperties(matchedEntries.toArray(), finalOptions.excludedEntryProperties),
+            entries: matchedEntries.toArray().map((item: any): any => item.entry) as any,
             meta: {
                 language: scrapeDescriptor.language,
                 languages: scrapeDescriptor.languages,

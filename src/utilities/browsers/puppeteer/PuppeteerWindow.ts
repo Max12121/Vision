@@ -1,6 +1,6 @@
 import * as Puppeteer from "puppeteer";
 import { IVisionWindow } from "../../../browser/IVisionWindow";
-import { VisionHTTPResponse } from "../../../browser/VisionHTTPResponse";
+import { IVisionHTTPResponse } from "../../../browser/IVisionHTTPResponse";
 
 export class PuppeteerWindow implements IVisionWindow {
     private readonly _puppeteerPage: Puppeteer.Page;
@@ -13,7 +13,7 @@ export class PuppeteerWindow implements IVisionWindow {
         return this._puppeteerPage.setUserAgent(userAgent);
     }
 
-    public async goto (uri: string): Promise<VisionHTTPResponse> {
+    public async goto (uri: string): Promise<IVisionHTTPResponse> {
         const response: Puppeteer.Response = await this._puppeteerPage.goto(uri);
 
         return {
