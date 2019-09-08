@@ -3,35 +3,35 @@ import { VisionEntryFingerprint } from "./VisionEntryFingerprint";
 
 // Represents a technology or service, generically referred as "Entry".
 export type VisionEntry = {
-    // Represents the entry name.
+    // Used as entry name.
     readonly name: string;
 
-    // Represents the entry description.
+    // Used as entry description.
     readonly description?: string;
 
-    // Represents the categories the entry belongs.
+    // The categories the entry belongs.
     readonly categories?: Set<string>;
 
-    // Represents the entry authors.
+    // The entry authors.
     readonly authors?: VisionEntryAuthor[];
 
-    // Represents a URI related to the entry.
+    // Used as entry URI.
     readonly uri?: string;
 
-    // Represents the entry license, must be a common name or a URI to the license.
+    // Used as entry license, can be a common name or a URI to the license.
     readonly license?: string;
 
-    // Represents the entry creation year.
+    // Used as entry creation year.
     readonly creationYear?: string;
 
-    // Represents the entry discontinuation year.
+    // Used as entry discontinuation year.
     readonly discontinuationYear?: string;
 
-    // Represents the fingerprint for matching the entry.
+    // Used as entry fingerprint, for matching the entry.
     readonly fingerprint?: VisionEntryFingerprint;
 
     // The presence of this entry implies the presence of the entries defined in this list.
-    // Consider using this especially when a entry has no fingerprint.
+    // Used especially when a entry has no fingerprint.
     readonly implies?: Set<string>;
 
     /*

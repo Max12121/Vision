@@ -1,10 +1,11 @@
+// Represents an author.
 export type VisionEntryAuthor = {
-    // Represents the author name.
+    // Used as author name.
     readonly name: string;
 
-    // Represents the author email.
+    // Used as author email.
     readonly email: string;
 
-    // Represents a URI related to the author.
+    // Used as author URI.
     readonly uri: string;
 };

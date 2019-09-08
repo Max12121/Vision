@@ -1,13 +1,13 @@
 // Represents a HTTP response with the information necessary to Vision.
 export interface IVisionHTTPResponse {
-    // Represents the response status.
+    // Used as response status.
     readonly status: number;
 
-    // Represents the response headers.
+    // Used as response headers.
     readonly headers: {
         readonly [name: string]: string
     };
 
-    // Represents the response body.
+    // Used as response body.
     readonly body: string;
 }

@@ -1,5 +1,6 @@
 import { VisionEntry } from "./VisionEntry";
 
+// Represents a entry fingerprint.
 export type VisionEntryFingerprint = {
     // Used as reference to the entry.
     readonly entry: VisionEntry;
@@ -65,13 +66,13 @@ export type VisionEntryFingerprint = {
 
     // Used as code evaluated on the document.
     readonly customEvaluation?: {
-        // Used as code evaluated on the document for matching the entry: if returns "true" then the entry will be matched.
+        // Used as custom code evaluated on the document for matching the entry: if returns "true" then the entry will be matched.
         readonly match?: string;
 
-        // Used as code evaluated on the document when the entry is matched for retrieving the version of the entry.
+        // Used as custom code evaluated on the document when the entry is matched for retrieving the version of the entry.
         readonly version?: string;
 
-        // Used as code evaluated on the document when the entry is matched for retrieving extra information regarding the entry.
+        // Used as custom code evaluated on the document when the entry is matched for retrieving extra information regarding the entry.
         readonly extra?: string;
     };
 };
