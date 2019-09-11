@@ -121,6 +121,18 @@ module __Vision__ {
         return language;
     }
 
+    export function getInternalLinks () {
+        const links = new Set();
+        const linkNodes = [ ...window.document.getElementsByTagName("a") ].filter((link) => {
+            // @ts-ignore
+            return window.location.hostname === link.hostname;
+        });
+
+        linkNodes.forEach((link) => links.add(link.href.toLowerCase()));
+
+        return [ ...links ];
+    }
+
     export function getDocumentLanguages () {
         const currentLanguage = getDocumentLanguage();
         const languages = new Set();

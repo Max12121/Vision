@@ -6,20 +6,36 @@ import { VisionParserDictionary } from "./VisionParserDictionary";
 import { VisionParserMatchSet } from "./VisionParserMatchSet";
 import { VisionParserMatcher } from "./VisionParserMatcher";
 import { VisionParserMatcherSet } from "./VisionParserMatcherSet";
+import { VisionParserOptions } from "./VisionParserOptions";
+
+export const defaultOptions: VisionParserOptions = {
+
+};
 
 export class VisionParser {
     private static readonly _matchers: VisionParserMatcherSet = new VisionParserMatcherSet();
-    private readonly _entries: VisionEntrySet;
 
-    public constructor (entries?: VisionEntrySet) {
-        this._entries = entries || new VisionEntrySet();
+    private readonly _entries: VisionEntrySet;
+    private readonly _options: VisionParserOptions;
+
+    public constructor (entries: VisionEntrySet = new VisionEntrySet(), options: VisionParserOptions = {}) {
+        this._entries = entries;
+        this._options = {
+            ...defaultOptions,
+            ...options,
+        };
     }
 
     public get entries (): VisionEntrySet {
         return this._entries;
     }
 
+    public get options (): VisionParserOptions {
+        return this._options;
+    }
+
     public async match (scrapeDescriptor: VisionScrapeDescriptor): Promise<VisionParserMatchSet> {
+        const matchers: VisionParserMatcher[] = VisionParser.matchers.valuesToArray();
         const matchedEntries: VisionParserMatchSet = new VisionParserMatchSet();
         const addEntry: Function = async (entry: VisionEntry, matcher: VisionParserMatcher, impliedBy: VisionEntry): Promise<void> => {
             matchedEntries.add({
@@ -46,7 +62,7 @@ export class VisionParser {
                 continue;
             }
 
-            for (const matcher of VisionParser.matchers.valuesToArray()) {
+            for (const matcher of matchers) {
                 const matched: boolean = await matcher.matches(entry.fingerprint, scrapeDescriptor);
 
                 if (matched) {

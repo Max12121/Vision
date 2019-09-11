@@ -4,8 +4,7 @@
     "version": "0.1.0",
     "scripts": {
         "build": "tsc",
-        "start": "tsc && node build/index.js",
-        "statistics": "tsc && node build/statistics.js"
+        "start": "tsc && node build/index.js"
     },
     "dependencies": {
         "puppeteer": "1.19.0"

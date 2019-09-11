@@ -24,6 +24,14 @@ export class VisionScraper {
         };
     }
 
+    public get browser (): IVisionBrowser {
+        return this._browser;
+    }
+
+    public get options (): VisionScraperOptions {
+        return this._options;
+    }
+
     public async scrape (uri: string): Promise<VisionScrapeDescriptor> {
         const window: IVisionWindow = await this._browser.openWindow();
 
