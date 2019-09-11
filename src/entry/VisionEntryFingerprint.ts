@@ -1,6 +1,6 @@
 import { VisionEntry } from "./VisionEntry";
 
-// Represents a entry fingerprint.
+// Represents a entry fingerprint: a set of patterns used to match the entry.
 export type VisionEntryFingerprint = {
     // Used as reference to the entry.
     readonly entry: VisionEntry;
@@ -64,7 +64,7 @@ export type VisionEntryFingerprint = {
     // List of regular expressions used to match the value of the "src" attribute of all frames (<iframe>).
     readonly frames?: string[];
 
-    // Used as code evaluated on the document.
+    // Represents custom code evaluated on the document.
     readonly customEvaluation?: {
         // Used as custom code evaluated on the document for matching the entry: if returns "true" then the entry will be matched.
         readonly match?: string;

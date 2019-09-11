@@ -1,4 +1,4 @@
-// Represents an author.
+// Represents an entry author.
 export type VisionEntryAuthor = {
     // Used as author name.
     readonly name: string;

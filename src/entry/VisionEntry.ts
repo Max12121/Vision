@@ -1,7 +1,7 @@
 import { VisionEntryAuthor } from "./VisionEntryAuthor";
 import { VisionEntryFingerprint } from "./VisionEntryFingerprint";
 
-// Represents a technology or service, generically referred as "Entry".
+// Represents a technology or service, generically referred as entry.
 export type VisionEntry = {
     // Used as entry name.
     readonly name: string;
@@ -27,11 +27,10 @@ export type VisionEntry = {
     // Used as entry discontinuation year.
     readonly discontinuationYear?: string;
 
-    // Used as entry fingerprint, for matching the entry.
+    // Used as entry fingerprint.
     readonly fingerprint?: VisionEntryFingerprint;
 
     // The presence of this entry implies the presence of the entries defined in this list.
-    // Used especially when a entry has no fingerprint.
     readonly implies?: Set<string>;
 
     /*

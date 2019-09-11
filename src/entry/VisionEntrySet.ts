@@ -25,7 +25,7 @@ export class VisionEntrySet {
     public getByCategory (category: string): VisionEntrySet {
         const entries: VisionEntrySet = new VisionEntrySet();
 
-        for (const entry of this.toArray()) {
+        for (const entry of this.valuesToArray()) {
             if (entry.categories.has(category)) {
                 entries.add(entry);
             }
@@ -62,7 +62,7 @@ export class VisionEntrySet {
         });
     }
 
-    public toArray (): VisionEntry[] {
+    public valuesToArray (): VisionEntry[] {
         return Object.keys(this._entries).map((entryName: string): VisionEntry => {
             return this._entries[entryName];
         });

@@ -3,7 +3,6 @@ import { VisionEntryFingerprint } from "../entry/VisionEntryFingerprint";
 import { VisionEntrySet } from "../entry/VisionEntrySet";
 import { VisionScrapeDescriptor } from "../scraper/VisionScrapeDescriptor";
 import { VisionParserDictionary } from "./VisionParserDictionary";
-import { VisionParserMatch } from "./VisionParserMatch";
 import { VisionParserMatchSet } from "./VisionParserMatchSet";
 import { VisionParserMatcher } from "./VisionParserMatcher";
 import { VisionParserMatcherSet } from "./VisionParserMatcherSet";
@@ -35,21 +34,19 @@ export class VisionParser {
 
             if (Array.isArray(entry.implies)) {
                 for (const impliedEntryName of entry.implies) {
-                    if (matchedEntries.has(impliedEntryName)) {
-                        continue;
+                    if (!matchedEntries.has(impliedEntryName)) {
+                        await addEntry(this._entries.get(impliedEntryName), null, entry);
                     }
-
-                    await addEntry(this._entries.get(impliedEntryName), null, entry);
                 }
             }
         };
 
-        for (const entry of this._entries.toArray()) {
+        for (const entry of this._entries.valuesToArray()) {
             if (typeof entry.fingerprint !== "object") {
                 continue;
             }
 
-            for (const matcher of VisionParser.matchers.toArray()) {
+            for (const matcher of VisionParser.matchers.valuesToArray()) {
                 const matched: boolean = await matcher.matches(entry.fingerprint, scrapeDescriptor);
 
                 if (matched) {
@@ -68,7 +65,7 @@ export class VisionParser {
     }
 }
 
-function patternsMatchesList (patterns: string[], haystack: string[]): boolean {
+function patternMatchesList (patterns: string[], haystack: string[]): boolean {
     for (const pattern of patterns) {
         const patternRegExp: RegExp = new RegExp(pattern);
 
@@ -82,7 +79,7 @@ function patternsMatchesList (patterns: string[], haystack: string[]): boolean {
     return false;
 }
 
-function patternsMatchesDictionary (patterns: VisionParserDictionary, haystack: VisionParserDictionary): boolean {
+function patternMatchesDictionary (patterns: VisionParserDictionary, haystack: VisionParserDictionary): boolean {
     for (const patternKey in patterns) {
         const patternKeyRegExp: RegExp = new RegExp(patternKey);
         const patternValueRegExp: RegExp = new RegExp(patterns[patternKey]);
@@ -118,7 +115,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesDictionary(headersPatterns, descriptorHeaders);
+        return patternMatchesDictionary(headersPatterns, descriptorHeaders);
     },
 });
 
@@ -137,7 +134,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesList(initialContentPatterns, [ descriptorInitialContent ]);
+        return patternMatchesList(initialContentPatterns, [ descriptorInitialContent ]);
     },
 });
 
@@ -151,7 +148,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesList(loadedContentPatterns, [ descriptorLoadedContent ]);
+        return patternMatchesList(loadedContentPatterns, [ descriptorLoadedContent ]);
     },
 });
 
@@ -187,7 +184,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesList(scriptsSourcesPatterns, descriptorScriptsSources);
+        return patternMatchesList(scriptsSourcesPatterns, descriptorScriptsSources);
    },
 });
 
@@ -205,7 +202,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesList(scriptsContentsPatterns, descriptorScriptsContents);
+        return patternMatchesList(scriptsContentsPatterns, descriptorScriptsContents);
     },
 });
 
@@ -223,7 +220,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesList(scriptsGlobalsPatterns, descriptorScriptsGlobals);
+        return patternMatchesList(scriptsGlobalsPatterns, descriptorScriptsGlobals);
     },
 });
 
@@ -241,7 +238,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesList(stylesSourcesPatterns, descriptorStylesSources);
+        return patternMatchesList(stylesSourcesPatterns, descriptorStylesSources);
     },
 });
 
@@ -259,7 +256,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesList(stylesContentsPatterns, descriptorStylesContents);
+        return patternMatchesList(stylesContentsPatterns, descriptorStylesContents);
     },
 });
 
@@ -277,7 +274,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesDictionary(metasPatterns, descriptorMetas);
+        return patternMatchesDictionary(metasPatterns, descriptorMetas);
     },
 });
 
@@ -295,7 +292,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesDictionary(cookiesPatterns, descriptorCookies);
+        return patternMatchesDictionary(cookiesPatterns, descriptorCookies);
     },
 });
 
@@ -313,7 +310,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesDictionary(localStoragePatterns, descriptorLocalStorage);
+        return patternMatchesDictionary(localStoragePatterns, descriptorLocalStorage);
     },
 });
 
@@ -327,7 +324,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesList(linksPatterns, descriptorLinks);
+        return patternMatchesList(linksPatterns, descriptorLinks);
     },
 });
 
@@ -341,7 +338,7 @@ VisionParser.matchers.add({
             return false;
         }
         
-        return patternsMatchesList(imagesPatterns, descriptorImages);
+        return patternMatchesList(imagesPatterns, descriptorImages);
     },
 });
 
@@ -355,7 +352,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternsMatchesList(framesPatterns, descriptorFrames);
+        return patternMatchesList(framesPatterns, descriptorFrames);
     },
 });
 
@@ -395,19 +392,16 @@ async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerprint, s
 }
 
 async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<{}> {
-    if (typeof entryFingerprint !== "object") {
-        return {};
-    }
-
-    if (typeof entryFingerprint.customEvaluation !== "object" || typeof scrapeDescriptor.window !== "object") {
+    if (
+        typeof entryFingerprint !== "object" ||
+        typeof entryFingerprint.customEvaluation !== "object" ||
+        typeof entryFingerprint.customEvaluation.extra !== "string" ||
+        typeof scrapeDescriptor.window !== "object"
+    ) {
         return {};
     }
 
     const extraEvaluation: string = entryFingerprint.customEvaluation.extra;
-
-    if (typeof extraEvaluation !== "string") {
-        return {};
-    }
 
     return {
         ...(await scrapeDescriptor.window.evaluate(extraEvaluation)),

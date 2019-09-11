@@ -1,4 +1,4 @@
-// Represents a HTTP response with the information necessary to Vision.
+// Represents a HTTP response (contains the information necessary to Vision).
 export interface IVisionHTTPResponse {
     // Used as response status.
     readonly status: number;

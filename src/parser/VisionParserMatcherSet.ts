@@ -35,7 +35,7 @@ export class VisionParserMatcherSet {
         });
     }
 
-    public toArray (): VisionParserMatcher[] {
+    public valuesToArray (): VisionParserMatcher[] {
         return Object.keys(this._matchers).map((matcherName: string): VisionParserMatcher => {
             return this._matchers[matcherName];
         });

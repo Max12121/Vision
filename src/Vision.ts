@@ -35,7 +35,7 @@ export module Vision {
             uris: [
                 scrapeDescriptor.uri,
             ],
-            entries: matchedEntries.toArray().map((item: any): any => item.entry) as any,
+            entries: matchedEntries.valuesToArray().map((item: any): any => item.entry) as any,
             meta: {
                 language: scrapeDescriptor.language,
                 languages: scrapeDescriptor.languages,
