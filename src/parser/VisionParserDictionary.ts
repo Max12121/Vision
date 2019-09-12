@@ -1,5 +1,5 @@
 // Represents a key-value pair set.
 export type VisionParserDictionary = {
-    // Used as key and value of the set.
+    // Used as key-value pair.
     readonly [name: string]: string;
 };

@@ -33,6 +33,8 @@ export type VisionEntry = {
     // The presence of this entry implies the presence of the entries defined in this list.
     readonly implies?: Set<string>;
 
+    // The presence of this entry implies the non-presence of the entries defined in this list.
+    // readonly excludes: Set<string>;
     /*
      * This is not implemented because of the large amount of negative points.
      * 1. Requires to be constantly updated: for instance Apache excludes Nginx and the others web servers,
@@ -40,6 +42,4 @@ export type VisionEntry = {
      * 2. It's not really necessary to exclude a entry: if a entry is really excluded, it will not be matched.
      * 3. Ambiguity case, if a entry is matched but it's also excluded by another entry, what we should do?
     */
-    // The presence of this entry implies the non-presence of the entries defined in this list.
-    // readonly excludes: Set<string>;
 };

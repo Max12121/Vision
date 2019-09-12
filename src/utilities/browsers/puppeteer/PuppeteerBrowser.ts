@@ -16,7 +16,7 @@ export class PuppeteerBrowser implements IVisionBrowser {
     }
 
     public async openWindow (): Promise<PuppeteerWindow> {
-        return new PuppeteerWindow(await this._puppeteerBrowser.newPage());
+        return new PuppeteerWindow(this, await this._puppeteerBrowser.newPage());
     }
 
     public async close (): Promise<void> {

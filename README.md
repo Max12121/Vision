@@ -14,6 +14,10 @@ thanks to a list of patterns constantly updated and maintained.
 -   **Define new technologies and services easily without
 advanced technical knowledge**, for instance you can detect
 a JavaScript library by just adding its file name.
+-   **Have specific information for each technology or service detected**:
+for instance if Vision finds `Google Analytics` you can get the user ID of
+that specific user, or for example if Vision finds `Twitter Follow Button` you can get
+the username of the specific user to follow.
 -   **Have maximum flexibility for defining how technologies and
 services are detected**: from a wide range of intuitive
 predefined patterns to custom JavaScript code.

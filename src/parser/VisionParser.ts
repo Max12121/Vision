@@ -9,7 +9,8 @@ import { VisionParserMatcherSet } from "./VisionParserMatcherSet";
 import { VisionParserOptions } from "./VisionParserOptions";
 
 export const defaultOptions: VisionParserOptions = {
-
+    evaluateEntryVersion: true,
+    evaluateEntryExtraInformation: true,
 };
 
 export class VisionParser {
@@ -57,8 +58,8 @@ export class VisionParser {
             }
         };
 
-        for (const entry of this._entries.valuesToArray()) {
-            if (typeof entry.fingerprint !== "object") {
+        for (const entry of this._entries.valuesToArray().reverse()) {
+            if (typeof entry.fingerprint !== "object" || matchedEntries.has(entry.name)) {
                 continue;
             }
 
@@ -178,11 +179,17 @@ VisionParser.matchers.add({
         }
 
         const selector: string = selectors.join(",");
-        const selectorMatchesElement: boolean|string = await scrapeDescriptor.window.evaluate(`
-            window.document.querySelectorAll("${selector}").length !== 0
-        `);
 
-        return selectorMatchesElement === true || selectorMatchesElement === "true";
+        try {
+            const selectorMatchesElement: string|boolean = await scrapeDescriptor.window.evaluate(`
+                window.document.querySelectorAll("${selector}").length !== 0
+            `);
+
+            return selectorMatchesElement === "true" || selectorMatchesElement === true;
+        }
+        catch (error) {
+            return false;
+        }
     },
 });
 
@@ -375,36 +382,45 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "customEvaluation/match",
     async matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<boolean> {
-        if (typeof entryFingerprint.customEvaluation !== "object" || typeof scrapeDescriptor.window !== "object") {
+        if (
+            typeof entryFingerprint.customEvaluation !== "object" ||
+            typeof entryFingerprint.customEvaluation.match !== "string" ||
+            typeof scrapeDescriptor.window !== "object"
+        ) {
             return false;
         }
 
         const matchEvaluation: string = entryFingerprint.customEvaluation.match;
 
-        if (typeof matchEvaluation !== "string") {
+        try {
+            const matched: string|boolean = await scrapeDescriptor.window.evaluate(matchEvaluation);
+
+            return matched === "true" || matched === true;
+        }
+        catch (error) {
             return false;
         }
-
-        return await scrapeDescriptor.window.evaluate(matchEvaluation) == true;
     },
 });
 
 async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<string> {
-    if (typeof entryFingerprint !== "object") {
-        return "";
-    }
-
-    if (typeof entryFingerprint.customEvaluation !== "object" || typeof scrapeDescriptor.window !== "object") {
+    if (
+        typeof entryFingerprint !== "object" ||
+        typeof entryFingerprint.customEvaluation !== "object" ||
+        typeof entryFingerprint.customEvaluation.version !== "string" ||
+        typeof scrapeDescriptor.window !== "object"
+    ) {
         return "";
     }
 
     const versionEvaluation: string = entryFingerprint.customEvaluation.version;
 
-    if (typeof versionEvaluation !== "string") {
+    try {
+        return "" + await scrapeDescriptor.window.evaluate(versionEvaluation);
+    }
+    catch (error) {
         return "";
     }
-
-    return await scrapeDescriptor.window.evaluate(versionEvaluation) as string;
 }
 
 async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<{}> {
@@ -419,7 +435,12 @@ async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerprint, scr
 
     const extraEvaluation: string = entryFingerprint.customEvaluation.extra;
 
-    return {
-        ...(await scrapeDescriptor.window.evaluate(extraEvaluation)),
-    };
+    try {
+        return {
+            ...(await scrapeDescriptor.window.evaluate(extraEvaluation)),
+        };
+    }
+    catch (error) {
+        return {};
+    }
 }

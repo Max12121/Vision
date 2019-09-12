@@ -53,6 +53,7 @@
             ]
         },
 
+
         "Twitter for Websites": {
             "description": "",
             "categories": [
@@ -153,8 +154,29 @@
                     "globalDeclarations": [
                         "^jQuery$"
                     ]
+                },
+                "customEvaluation": {
+                    "version": "window.jQuery.fn.jquery"
                 }
             }
+        },
+        "jQuery UI": {
+            "description": "A curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library.",
+            "categories": [
+                "Library", "JavaScript", "User Interface"
+            ],
+            "uri": "https://jqueryui.com/",
+            "license": "https://github.com/jquery/jquery-ui/blob/master/LICENSE.txt",
+            "creationYear": "2007",
+            "fingerprint": {
+                "customEvaluation": {
+                    "match": "!!(window.jQuery && window.jQuery.ui)",
+                    "version": "window.jQuery.ui.version"
+                }
+            },
+            "implies": [
+                "jQuery"
+            ]
         },
 
 
@@ -173,7 +195,7 @@
 
 
         "Bootstrap": {
-            "description": "An open source toolkit for developing with HTML, CSS, and JS.",
+            "description": "An open source toolkit for developing with HTML, CSS, and JavaScript.",
             "categories": [
                 "Framework", "Hypertext Markup Language", "Cascading Style Sheets", "JavaScript"
             ],

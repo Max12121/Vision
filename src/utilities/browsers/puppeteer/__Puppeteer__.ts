@@ -1,5 +1,5 @@
 // tslint:disable
-// Used to prevent "puppeteer" from being detected.
+// Used to prevent puppeteer from being detected.
 (function () {
     // Bypass detection through "navigator.languages".
     Object.defineProperty(navigator, "languages", {

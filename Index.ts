@@ -1,6 +1,10 @@
+import { Vision } from "./src/Vision";
+
+// Extra information for analytics include user ID, for twitter follow, users to follow, etc...
+
 export class Index {
     public static async main (): Promise<void> {
-        // Silence is golden.
+        console.log(await Vision.cast("https://malgol.com"));
     }
 }
 

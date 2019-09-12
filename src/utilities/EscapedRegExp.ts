@@ -1,3 +1,4 @@
+// Represents a escaped regular expression.
 export class EscapedRegExp extends RegExp {
     public constructor (pattern: string, ...parameters: any[]) {
         super(EscapedRegExp.escapeRegExp(pattern), ...parameters);
