@@ -19,24 +19,24 @@ export type VisionEntryFingerprint = {
     // List of CSS selectors, if at least one matches at least one element then the entry is matched.
     readonly selectors?: string[];
 
-    // Collection of regular expressions used to match scripts in the document.
+    // Collection of regular expressions used to match scripts in the website.
     readonly scripts?: {
-        // List of regular expressions used to match the value of the "src" attribute of all scripts.
+        // List of regular expressions used to match the value of the "src" attribute of all script elements.
         readonly sources?: string[];
 
-        // List of regular expressions used to match the inner value of all scripts.
+        // List of regular expressions used to match the inner value of all script elements without the "src" attribute.
         readonly contents?: string[];
 
         // List of regular expressions used to match the keys created by scripts in the window object.
         readonly globalDeclarations?: string[];
     };
 
-    // Collection of regular expressions used to match styles in the document.
+    // Collection of regular expressions used to match style sheets in the website.
     readonly styles?: {
-        // List of regular expressions used to match the value of the "src" attribute of all style sheet links.
+        // List of regular expressions used to match the value of the "href" attribute of all style sheet links.
         readonly sources?: string[];
 
-        // List of regular expressions used to match the inner value of all styles.
+        // List of regular expressions used to match the inner value of all style elements.
         readonly contents?: string[];
     };
 

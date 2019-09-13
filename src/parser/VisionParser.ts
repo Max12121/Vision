@@ -39,14 +39,21 @@ export class VisionParser {
         const matchers: VisionParserMatcher[] = VisionParser.matchers.valuesToArray();
         const matchedEntries: VisionParserMatchSet = new VisionParserMatchSet();
         const addEntry: Function = async (entry: VisionEntry, matcher: VisionParserMatcher, impliedBy: VisionEntry): Promise<void> => {
+            const entryVersion: string = (
+                this._options.evaluateEntryVersion ?  await evaluateEntryVersion(entry.fingerprint, scrapeDescriptor) : ""
+            );
+            const entryExtra: {} = (
+                this._options.evaluateEntryExtraInformation ? await evaluateEntryExtra(entry.fingerprint, scrapeDescriptor) : {}
+            );
+
             matchedEntries.add({
                 parser: this,
                 scrapeDescriptor,
                 entry,
                 entryMatcher: matcher,
                 entryImpliedBy: impliedBy,
-                entryVersion: await evaluateEntryVersion(entry.fingerprint, scrapeDescriptor),
-                entryExtra: await evaluateEntryExtra(entry.fingerprint, scrapeDescriptor),
+                entryVersion,
+                entryExtra,
             });
 
             if (Array.isArray(entry.implies)) {
@@ -58,7 +65,7 @@ export class VisionParser {
             }
         };
 
-        for (const entry of this._entries.valuesToArray().reverse()) {
+        for (const entry of this._entries.valuesToArray()) {
             if (typeof entry.fingerprint !== "object" || matchedEntries.has(entry.name)) {
                 continue;
             }
