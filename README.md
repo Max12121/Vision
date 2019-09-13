@@ -26,8 +26,8 @@ and `Facebook Share Button` are clearly distinguished and not superficially
 defined as just `Facebook`.
 
 ## Entries
-All technologies and services that can
-be identified by Vision are defined as entries.
+All technologies and services that can be identified by Vision are defined as
+entries. All entries
 
 ## Fingerprint
 

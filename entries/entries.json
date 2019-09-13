@@ -7,7 +7,6 @@
                 "Law", "Privacy", "Freemium", "SaaS"
             ],
             "uri": "https://www.iubenda.com",
-            "image": "iubenda.svg",
             "creationYear": "2011",
             "fingerprint": {
                 "scripts": {
@@ -23,7 +22,6 @@
                 "Law", "Privacy", "Freemium", "SaaS"
             ],
             "uri": "https://www.iubenda.com",
-            "image": "iubenda.svg",
             "creationYear": "2011",
             "fingerprint": {
                 "links": [
@@ -40,7 +38,6 @@
                 "Law", "Privacy", "Freemium"
             ],
             "uri": "https://www.iubenda.com",
-            "image": "iubenda.svg",
             "creationYear": "2015",
             "fingerprint": {
                 "links": [
@@ -201,7 +198,10 @@
             ],
             "uri": "https://getbootstrap.com",
             "license": "MIT",
-            "creationYear": "2011"
+            "creationYear": "2011",
+            "fingerprint": {
+
+            }
         }
     }
 }
