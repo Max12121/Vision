@@ -22,7 +22,6 @@ export class PuppeteerBrowser implements IVisionBrowser {
     public async close (): Promise<void> {
         if (this._puppeteerBrowser) {
             await this._puppeteerBrowser.close();
-            this._puppeteerBrowser = null;
         }
     }
 }

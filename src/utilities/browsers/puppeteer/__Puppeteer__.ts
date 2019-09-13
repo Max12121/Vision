@@ -112,4 +112,4 @@
     }
 
     Function.prototype.toString = functionToString;
-})();
+}());
