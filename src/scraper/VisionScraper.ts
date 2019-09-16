@@ -7,11 +7,14 @@ import { VisionScrapeDescriptor } from "./VisionScrapeDescriptor";
 import { VisionScraperOptions } from "./VisionScraperOptions";
 
 export const defaultOptions: VisionScraperOptions = {
-    userAgent: "Mozilla/5.0 (Vision Engine) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36",
+    userAgent: "Vision Engine",
 };
 
 export class VisionScraper {
     private static readonly VISION_HELPER: string = FileSystem.readFileSync(Path.resolve(__dirname, "__Vision__.js")).toString();
+
+    private static readonly EXPRESSION_HOSTNAME: string = "window.location.hostname";
+    private static readonly EXPRESSION_LOCAL_SCRAPE_DESCRIPTOR: string = "__Vision__.getScrapeDescriptor()";
 
     private readonly _browser: IVisionBrowser;
     private readonly _options: VisionScraperOptions;
@@ -41,10 +44,10 @@ export class VisionScraper {
 
         await window.evaluate(VisionScraper.VISION_HELPER);
 
-        const localDescriptor: any = await window.evaluate("__Vision__.getScrapeDescriptor()");
+        const localDescriptor: any = await window.evaluate(VisionScraper.EXPRESSION_LOCAL_SCRAPE_DESCRIPTOR);
 
         return {
-            hostname: await window.evaluate("window.location.hostname"),
+            hostname: await window.evaluate(VisionScraper.EXPRESSION_HOSTNAME),
             uri,
             response: httpResponse,
             ...localDescriptor,

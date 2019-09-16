@@ -16,6 +16,9 @@ export type VisionEntryFingerprint = {
     // List of regular expressions used to match the body of the document after the "load" event is fired.
     readonly loadedContent?: string[];
 
+    // TODO: List of regular expressions used to match the URI of a web request.
+    // readonly webRequests?: string[];
+
     // List of CSS selectors, if at least one matches at least one element then the entry is matched.
     readonly selectors?: string[];
 

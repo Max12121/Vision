@@ -2,7 +2,7 @@
     "version": "2019.1.0",
     "entries": {
         "iubenda": {
-            "description": "SaaS organization accomplishing law requirements through automation.",
+            "description": "A SaaS accomplishing law requirements through software.",
             "categories": [
                 "Law", "Privacy", "Freemium", "SaaS"
             ],
@@ -17,7 +17,7 @@
             }
         },
         "iubenda Privacy Policy": {
-            "description": "Privacy Policy generator offered by iubenda.",
+            "description": "A privacy policy generated through iubenda.",
             "categories": [
                 "Law", "Privacy", "Freemium", "SaaS"
             ],
@@ -33,9 +33,9 @@
             ]
         },
         "iubenda Cookie Policy": {
-            "description": "Cookie Policy generator offered by iubenda.",
+            "description": "A cookie policy generated through iubenda.",
             "categories": [
-                "Law", "Privacy", "Freemium"
+                "Law", "Privacy", "Freemium", "SaaS"
             ],
             "uri": "https://www.iubenda.com",
             "creationYear": "2015",
@@ -54,7 +54,7 @@
         "Twitter for Websites": {
             "description": "",
             "categories": [
-                "Widget", "Social"
+                "Widgets", "Social Networks"
             ],
             "uri": "https://developer.twitter.com/en/docs/twitter-for-websites/overview",
             "fingerprint": {
@@ -66,9 +66,9 @@
             }
         },
         "Twitter Follow Button": {
-            "description": "Button exposed for following a user on Twitter.",
+            "description": "A button exposed for following a user on Twitter.",
             "categories": [
-                "Widget", "Social"
+                "Widgets", "Social Networks"
             ],
             "uri": "https://developer.twitter.com/en/docs/twitter-for-websites/follow-button/overview.html",
             "fingerprint": {
@@ -81,9 +81,9 @@
             ]
         },
         "Twitter Tweet Button": {
-            "description": "Button exposed for sharing content on Twitter.",
+            "description": "A button exposed for sharing content on Twitter.",
             "categories": [
-                "Widget", "Social"
+                "Widgets", "Social Networks"
             ],
             "uri": "https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview.html",
             "fingerprint": {
@@ -98,16 +98,16 @@
 
 
         "Capterra": {
-            "description": "Website for software peer review.",
+            "description": "A service for software peer review.",
             "categories": [
-                "Review"
+                "Review Sites"
             ],
             "uri": "https://www.capterra.com"
         },
         "Capterra Reviews Badge": {
-            "description": "Badge showing the reviews of a software offered by Capterra.",
+            "description": "A badge showing the Capterra reviews of a software.",
             "categories": [
-                "Review", "Badge"
+                "Review Sites", "Widgets", "Badges"
             ],
             "fingerprint": {
                 "images": [
@@ -121,9 +121,9 @@
 
 
         "Pickr": {
-            "description": "Hackable color picker library.",
+            "description": "A color picker library.",
             "categories": [
-                "Library", "JavaScript", "Cascading Style Sheets"
+                "JavaScript", "JavaScript Libraries", "CSS"
             ],
             "uri": "https://github.com/Simonwep/pickr",
             "license": "MIT",
@@ -139,9 +139,9 @@
 
 
         "jQuery": {
-            "description": "JavaScript library designed to simplify HTML DOM tree traversal, manipulation and event handling.",
+            "description": "A JavaScript library designed to simplify HTML DOM tree traversal, manipulation and event handling.",
             "categories": [
-                "Library", "JavaScript"
+                "JavaScript", "JavaScript Libraries"
             ],
             "uri": "https://jquery.com",
             "license": "MIT",
@@ -160,7 +160,7 @@
         "jQuery UI": {
             "description": "A curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library.",
             "categories": [
-                "Library", "JavaScript", "User Interface"
+                "JavaScript", "JavaScript Libraries", "UI", "CSS"
             ],
             "uri": "https://jqueryui.com/",
             "license": "https://github.com/jquery/jquery-ui/blob/master/LICENSE.txt",
@@ -192,16 +192,103 @@
 
 
         "Bootstrap": {
-            "description": "An open source toolkit for developing with HTML, CSS, and JavaScript.",
+            "description": "An open source development toolkit for HTML, CSS, and JavaScript.",
             "categories": [
-                "Framework", "Hypertext Markup Language", "Cascading Style Sheets", "JavaScript"
+                "HTML", "CSS", "JavaScript", "Web Frameworks"
             ],
             "uri": "https://getbootstrap.com",
             "license": "MIT",
-            "creationYear": "2011",
-            "fingerprint": {
+            "creationYear": "2011"
+        },
 
+
+        "Cookiebot": {
+            "description": "A cookie and online tracking consent solution that complies with the EU consent and information requirements.",
+            "categories": [
+                "Law", "Privacy", "SaaS"
+            ]
+        },
+        "Cookiebot Banner": {
+            "categories": [
+                "Law", "Privacy", "SaaS"
+            ],
+            "fingerprint": {
+                "scripts": {
+                    "globalDeclarations": [
+                        "^Cookiebot$",
+                        "^CookiebotDialog$"
+                    ]
+                }
+            },
+            "implies": [
+                "Cookiebot"
+            ]
+        },
+
+
+        "Yoast SEO": {
+            "description": "A plugin making websites as search-engine-friendly as possible.",
+            "categories": [
+                "Web Plugins", "SEO", "Freemium"
+            ],
+            "uri": "https://yoast.com",
+            "creationYear": "2010",
+            "fingerprint": {
+                "selectors": [
+                    "script.yoast-schema-graph"
+                ]
             }
+        },
+
+
+        "Prism": {
+            "description": "A lightweight, extensible syntax highlighter, built with modern web standards in mind.",
+            "fingerprint": {
+                "scripts": {
+                    "globalDeclarations": [
+                        "^Prism$"
+                    ]
+                }
+            }
+        },
+
+
+        "PHP": {
+            "description": "A popular general-purpose scripting language that is especially suited to web servers.",
+            "creationYear": "1995"
+        },
+
+
+        "WordPress": {
+            "fingerprint": {
+                "selectors": [
+                    "link#wp-block-library-css"
+                ],
+                "scripts": {
+                    "globalDeclarations": [
+                        "^_wpemojiSettings$"
+                    ]
+                },
+                "metas": {
+                    "^generator$": "^WordPress"
+                }
+            },
+            "implies": [
+                "PHP",
+                "MySQL"
+            ]
+        },
+
+
+        "Joomla!": {
+            "fingerprint": {
+                "metas": {
+                    "^generator$": "^Joomla!"
+                }
+            },
+            "implies": [
+                "PHP"
+            ]
         }
     }
 }

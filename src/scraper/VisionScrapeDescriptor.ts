@@ -2,7 +2,7 @@ import { IVisionWindow } from "../browser/IVisionWindow";
 import { IVisionHTTPResponse } from "../browser/IVisionHTTPResponse";
 
 export type VisionScrapeDescriptor = {
-    // Used as hostname of the scraped website.
+    // Used as hostname.
     readonly hostname: string;
 
     // Used as requested URI.
@@ -70,7 +70,7 @@ export type VisionScrapeDescriptor = {
     // populated after the "load" event is fired.
     readonly frames: string[];
 
-    // Used as current page language.
+    // Used as page language.
     readonly language: string;
 
     // Used as languages the scraped website is available.

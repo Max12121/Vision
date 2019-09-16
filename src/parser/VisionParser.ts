@@ -10,7 +10,7 @@ import { VisionParserOptions } from "./VisionParserOptions";
 
 export const defaultOptions: VisionParserOptions = {
     evaluateEntryVersion: true,
-    evaluateEntryExtraInformation: true,
+    evaluateEntryExtra: true,
 };
 
 export class VisionParser {
@@ -43,7 +43,7 @@ export class VisionParser {
                 this._options.evaluateEntryVersion ?  await evaluateEntryVersion(entry.fingerprint, scrapeDescriptor) : ""
             );
             const entryExtra: {} = (
-                this._options.evaluateEntryExtraInformation ? await evaluateEntryExtra(entry.fingerprint, scrapeDescriptor) : {}
+                this._options.evaluateEntryExtra ? await evaluateEntryExtra(entry.fingerprint, scrapeDescriptor) : {}
             );
 
             matchedEntries.add({
@@ -89,35 +89,46 @@ export class VisionParser {
     }
 }
 
-function patternMatchesList (patterns: string[], haystack: string[]): boolean {
-    for (const pattern of patterns) {
-        const patternRegExp: RegExp = new RegExp(pattern);
-
-        for (const hay of haystack) {
-            if (patternRegExp.test(hay)) {
-                return true;
-            }
-        }
+export async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<string> {
+    if (
+        typeof entryFingerprint !== "object" ||
+        typeof entryFingerprint.customEvaluation !== "object" ||
+        typeof entryFingerprint.customEvaluation.version !== "string" ||
+        typeof scrapeDescriptor.window !== "object"
+    ) {
+        return "";
     }
 
-    return false;
+    const versionEvaluation: string = entryFingerprint.customEvaluation.version;
+
+    try {
+        return "" + await scrapeDescriptor.window.evaluate(versionEvaluation);
+    }
+    catch (error) {
+        return "";
+    }
 }
 
-function patternMatchesDictionary (patterns: VisionParserDictionary, haystack: VisionParserDictionary): boolean {
-    for (const patternKey in patterns) {
-        const patternKeyRegExp: RegExp = new RegExp(patternKey);
-        const patternValueRegExp: RegExp = new RegExp(patterns[patternKey]);
-
-        for (const hayKey in haystack) {
-            const hayValue: string = haystack[hayKey];
-
-            if (patternKeyRegExp.test(hayKey) && patternValueRegExp.test(hayValue)) {
-                return true;
-            }
-        }
+export async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<{}> {
+    if (
+        typeof entryFingerprint !== "object" ||
+        typeof entryFingerprint.customEvaluation !== "object" ||
+        typeof entryFingerprint.customEvaluation.extra !== "string" ||
+        typeof scrapeDescriptor.window !== "object"
+    ) {
+        return {};
     }
 
-    return false;
+    const extraEvaluation: string = entryFingerprint.customEvaluation.extra;
+
+    try {
+        return {
+            ...(await scrapeDescriptor.window.evaluate(extraEvaluation)),
+        };
+    }
+    catch (error) {
+        return {};
+    }
 }
 
 VisionParser.matchers.add({
@@ -410,44 +421,33 @@ VisionParser.matchers.add({
     },
 });
 
-async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<string> {
-    if (
-        typeof entryFingerprint !== "object" ||
-        typeof entryFingerprint.customEvaluation !== "object" ||
-        typeof entryFingerprint.customEvaluation.version !== "string" ||
-        typeof scrapeDescriptor.window !== "object"
-    ) {
-        return "";
+function patternMatchesList (patterns: string[], haystack: string[]): boolean {
+    for (const pattern of patterns) {
+        const patternRegExp: RegExp = new RegExp(pattern);
+
+        for (const hay of haystack) {
+            if (patternRegExp.test(hay)) {
+                return true;
+            }
+        }
     }
 
-    const versionEvaluation: string = entryFingerprint.customEvaluation.version;
-
-    try {
-        return "" + await scrapeDescriptor.window.evaluate(versionEvaluation);
-    }
-    catch (error) {
-        return "";
-    }
+    return false;
 }
 
-async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<{}> {
-    if (
-        typeof entryFingerprint !== "object" ||
-        typeof entryFingerprint.customEvaluation !== "object" ||
-        typeof entryFingerprint.customEvaluation.extra !== "string" ||
-        typeof scrapeDescriptor.window !== "object"
-    ) {
-        return {};
+function patternMatchesDictionary (patterns: VisionParserDictionary, haystack: VisionParserDictionary): boolean {
+    for (const patternKey in patterns) {
+        const patternKeyRegExp: RegExp = new RegExp(patternKey);
+        const patternValueRegExp: RegExp = new RegExp(patterns[patternKey]);
+
+        for (const hayKey in haystack) {
+            const hayValue: string = haystack[hayKey];
+
+            if (patternKeyRegExp.test(hayKey) && patternValueRegExp.test(hayValue)) {
+                return true;
+            }
+        }
     }
 
-    const extraEvaluation: string = entryFingerprint.customEvaluation.extra;
-
-    try {
-        return {
-            ...(await scrapeDescriptor.window.evaluate(extraEvaluation)),
-        };
-    }
-    catch (error) {
-        return {};
-    }
+    return false;
 }

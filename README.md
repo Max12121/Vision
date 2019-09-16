@@ -18,7 +18,7 @@ a JavaScript library by just adding its file name.
 services are detected**: from a wide range of intuitive
 predefined patterns to custom JavaScript code.
 -   **Have specific information for each technology or service detected**:
-for instance if Vision finds `Google Analytics` you can get the user ID of
+for instance if Vision finds `Google Analytics` you can get the tracking ID of
 that specific user, or for example if Vision finds `Twitter Follow Button`
 you can get the username of the specific user to follow.
 -   **Have atomic definitions**, for instance `Facebook Like Button`

@@ -1,10 +1,10 @@
-import { PuppeteerBrowser } from "./utilities/browsers/puppeteer/PuppeteerBrowser";
 import { VisionEntrySet } from "./entry/VisionEntrySet";
-import {VisionScraper} from "./scraper/VisionScraper";
-import {VisionScrapeDescriptor} from "./scraper/VisionScrapeDescriptor";
-import {VisionParser} from "./parser/VisionParser";
-import {VisionParserMatchSet} from "./parser/VisionParserMatchSet";
-import {VisionParserMatch} from "./parser/VisionParserMatch";
+import { VisionScraper } from "./scraper/VisionScraper";
+import { VisionScrapeDescriptor } from "./scraper/VisionScrapeDescriptor";
+import { VisionParser } from "./parser/VisionParser";
+import { VisionParserMatch } from "./parser/VisionParserMatch";
+import { VisionParserMatchSet } from "./parser/VisionParserMatchSet";
+import { PuppeteerBrowser } from "./utilities/browsers/puppeteer/PuppeteerBrowser";
 
 export module Vision {
     export async function cast (uri: string): Promise<any> {
@@ -18,8 +18,9 @@ export module Vision {
         const parser: VisionParser = new VisionParser(entries);
         const matchedEntries: VisionParserMatchSet = await parser.match(scrape);
 
+        await scrape.window.close();
         await browser.close();
-
+        
         return matchedEntries.valuesToArray().map((item: VisionParserMatch): any => [ item.entry.name, item.entryVersion ]);
     }
 }
