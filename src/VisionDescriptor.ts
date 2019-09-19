@@ -1,11 +1,11 @@
 export type VisionDescriptor = {
-    // Used as hostname of the analyzed website.
+    // Used as hostname.
     readonly hostname: string;
 
-    // Used as list of analyzed uris.
+    // Used as list of uris.
     readonly uris: string[];
 
-    // Used as cast date.
+    // Used as date.
     readonly date: string;
 
     // Used as set of matched entries.
@@ -14,7 +14,6 @@ export type VisionDescriptor = {
     };
 
     readonly meta: {
-        readonly language: string;
         readonly languages: Set<string>;
     };
 };

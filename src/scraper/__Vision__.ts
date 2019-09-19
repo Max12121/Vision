@@ -106,7 +106,20 @@ module __Vision__ {
                 resolve();
             }
             else {
-                window.addEventListener("load", () => resolve());
+                window.addEventListener("load", resolve);
+            }
+        });
+    }
+
+    // Returns a Promise resolved when the "DOMContentLoaded" event is fired.
+    // In case the "DOMContentLoaded" event is already fired then the Promise is immediately resolved.
+    export function waitDOMContentLoadedEvent () {
+        return new Promise((resolve) => {
+            if (window.document.readyState === "interactive" || window.document.readyState === "complete") {
+                resolve();
+            }
+            else {
+                window.document.addEventListener("DOMContentLoaded", resolve);
             }
         });
     }
@@ -114,11 +127,7 @@ module __Vision__ {
     export function getDocumentLanguage () {
         const language = window.document.documentElement.lang;
 
-        if (!language || language === "zxx") {
-            return "unknown";
-        }
-
-        return language;
+        return (language && language !== "zxx") ? language : null;
     }
 
     export function getInternalLinks () {
@@ -134,30 +143,33 @@ module __Vision__ {
     }
 
     export function getDocumentLanguages () {
-        const currentLanguage = getDocumentLanguage();
+        const documentLanguage = getDocumentLanguage();
         const languages = new Set();
 
-        [ ...window.document.querySelectorAll("link[rel=alternate][hreflang]") ].forEach((link) => {
-            const language = link.getAttribute("hreflang");
+        if (documentLanguage) {
+            languages.add(documentLanguage.toLowerCase());
+        }
+
+        [ ...window.document.querySelectorAll("link[rel=alternate][hreflang]") ].forEach((node) => {
+            const language = node.getAttribute("hreflang");
 
             if (language && language !== "x-default") {
-                languages.add(language.toLocaleLowerCase());
+                languages.add(language.toLowerCase());
             }
         });
 
-        [ ...window.document.querySelectorAll("a[href][hreflang]") ].forEach((link) => {
-            if (link.getAttribute("href").indexOf(window.location.host) === -1) {
+        [ ...window.document.querySelectorAll("a[href][hreflang]") ].forEach((node) => {
+            // @ts-ignore
+            if (node.hostname !== window.location.hostname) {
                 return;
             }
 
-            const language = link.getAttribute("hreflang");
+            const language = node.getAttribute("hreflang");
 
             if (language) {
-                languages.add(language.toLocaleLowerCase());
+                languages.add(language.toLowerCase());
             }
         });
-
-        languages.add(currentLanguage);
 
         return [ ...languages ];
     }
@@ -167,16 +179,20 @@ module __Vision__ {
     }
 
     // Collect the information necessary to represent part of the scrape descriptor.
-    // TODO: Collect information before load, after load and after lazy load, in a Set.
     export async function getScrapeDescriptor () {
-        // Wait for the page to load before collecting the information.
-        await __Vision__.waitLoadEvent();
+        await waitDOMContentLoadedEvent();
 
-        /*
+        const linksBeforeLoad = getAllLinks();
+        const imagesBeforeLoad = getAllImagesSources();
+
+        await waitLoadEvent();
+
+        const linksAfterLoad = getAllLinks();
+        const imagesAfterLoad = getAllImagesSources();
+
         scrollMaxY();
 
-        await new Promise((resolve) => setTimeout(resolve, 3141));
-        //*/
+        await new Promise((resolve) => setTimeout(resolve, 2000));
 
         return {
             loadedContent: getDocumentOuterHTML(),
@@ -192,8 +208,8 @@ module __Vision__ {
             metas: getMetas(),
             cookies: getCookies(),
             localStorage: getLocalStorage(),
-            links: getAllLinks(),
-            images: getAllImagesSources(),
+            links: [ ...(new Set([ ...linksBeforeLoad, ...linksAfterLoad ])) ],
+            images: [ ...(new Set([ ...imagesBeforeLoad, ...imagesAfterLoad ])) ],
             frames: getAllFramesSources(),
         };
     }

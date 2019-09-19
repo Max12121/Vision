@@ -7,7 +7,7 @@ import { VisionScrapeDescriptor } from "./VisionScrapeDescriptor";
 import { VisionScraperOptions } from "./VisionScraperOptions";
 
 export const defaultOptions: VisionScraperOptions = {
-    userAgent: "Vision Engine",
+    userAgent: "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
 };
 
 export class VisionScraper {
@@ -41,6 +41,7 @@ export class VisionScraper {
         await window.setUserAgent(this._options.userAgent);
 
         const httpResponse: IVisionHTTPResponse = await window.goto(uri);
+        const timestamp: Date = new Date();
 
         await window.evaluate(VisionScraper.VISION_HELPER);
 
@@ -49,6 +50,7 @@ export class VisionScraper {
         return {
             hostname: await window.evaluate(VisionScraper.EXPRESSION_HOSTNAME),
             uri,
+            date: timestamp.toString(),
             response: httpResponse,
             ...localDescriptor,
             window,

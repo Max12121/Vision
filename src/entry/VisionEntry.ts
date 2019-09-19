@@ -3,6 +3,11 @@ import { VisionEntryFingerprint } from "./VisionEntryFingerprint";
 
 // Represents a technology or service, generically referred as entry.
 export type VisionEntry = {
+    /*
+     * Important: before adding a new field take in mind that the following field name is reserved: "extra". The
+     * consequence will be that the value of your field will be overridden.
+    */
+
     // Used as entry name.
     readonly name: string;
 
@@ -36,10 +41,10 @@ export type VisionEntry = {
     // The presence of this entry implies the non-presence of the entries defined in this list.
     // readonly excludes: Set<string>;
     /*
-     * This is not implemented because of the large amount of negative points.
+     * The previous definition is not implemented because of the large amount of negative points.
      * 1. Requires to be constantly updated: for instance Apache excludes Nginx and the others web servers,
      * when a new web server is released, the excluded list of Apache needs to be updated with the name of the new one.
      * 2. It's not really necessary to exclude a entry: if a entry is really excluded, it will not be matched.
-     * 3. Ambiguity case, if a entry is matched but it's also excluded by another entry, what we should do?
+     * 3. Contradiction case, if a entry is matched but it's also excluded by another entry, what we should do?
     */
 };

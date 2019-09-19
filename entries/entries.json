@@ -4,7 +4,7 @@
         "iubenda": {
             "description": "A SaaS accomplishing law requirements through software.",
             "categories": [
-                "Law", "Privacy", "Freemium", "SaaS"
+                "Law", "Privacy", "Services", "Freemium", "SaaS"
             ],
             "uri": "https://www.iubenda.com",
             "creationYear": "2011",
@@ -47,6 +47,23 @@
             "implies": [
                 "iubenda",
                 "iubenda Privacy Policy"
+            ]
+        },
+        "iubenda Cookie Solution": {
+            "description": "A cookie and consent solution that complies with the EU requirements.",
+            "categories": [
+                "Law", "Privacy", "Freemium", "SaaS"
+            ],
+            "uri": "https://www.iubenda.com",
+            "creationYear": "2015",
+            "fingerprint": {
+                "customEvaluation": {
+                    "match": "!!(window._iub && window._iub.cs)",
+                    "version": "window._iub.cs.VERSION"
+                }
+            },
+            "implies": [
+                "iubenda"
             ]
         },
 
@@ -94,6 +111,19 @@
             "implies": [
                 "Twitter for Websites"
             ]
+        },
+
+
+        "Facebook Like Button": {
+            "description": "",
+            "categories": [
+
+            ],
+            "fingerprint": {
+                "frames": [
+                    "^//www\\.facebook.com/.*/plugins/like\\.php"
+                ]
+            }
         },
 
 
@@ -205,7 +235,7 @@
         "Cookiebot": {
             "description": "A cookie and online tracking consent solution that complies with the EU consent and information requirements.",
             "categories": [
-                "Law", "Privacy", "SaaS"
+                "Law", "Privacy", "Services", "SaaS"
             ]
         },
         "Cookiebot Banner": {
@@ -289,6 +319,30 @@
             "implies": [
                 "PHP"
             ]
+        },
+
+
+        "Phaser": {
+            "description": "A free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.",
+            "categories": [
+                "Game Engines", "Web Game Engines", "Game Frameworks", "Web Frameworks", "2D", "WebGL", "Canvas"
+            ],
+            "uri": "http://phaser.io",
+            "license": "MIT",
+            "creationYear": "2013",
+            "fingerprint": {
+                "scripts": {
+                    "sources": [
+                        "^//cdn.jsdelivr.net/npm/phaser@.*/dist/phaser\\.min\\.js$"
+                    ],
+                    "globalDeclarations": [
+                        "^Phaser$"
+                    ]
+                },
+                "customEvaluation": {
+                    "version": "window.Phaser.VERSION"
+                }
+            }
         }
     }
 }

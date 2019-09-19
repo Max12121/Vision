@@ -7,6 +7,9 @@ export type VisionScrapeDescriptor = {
 
     // Used as requested URI.
     readonly uri: string;
+    
+    // Used as date.
+    readonly date: string;
 
     // Used as HTTP response.
     readonly response: IVisionHTTPResponse;
@@ -70,12 +73,9 @@ export type VisionScrapeDescriptor = {
     // populated after the "load" event is fired.
     readonly frames: string[];
 
-    // Used as page language.
-    readonly language: string;
-
-    // Used as languages the scraped website is available.
+    // Used as languages the scraped document is available.
     readonly languages: string[];
 
     // Used as browser window reference.
-    readonly window?: IVisionWindow;
+    readonly window: IVisionWindow;
 };

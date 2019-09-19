@@ -59,7 +59,12 @@ export class VisionParser {
             if (Array.isArray(entry.implies)) {
                 for (const impliedEntryName of entry.implies) {
                     if (!matchedEntries.has(impliedEntryName)) {
-                        await addEntry(this._entries.get(impliedEntryName), null, entry);
+                        const impliedEntry: VisionEntry = this._entries.get(impliedEntryName);
+
+                        // TODO: Log a message in case impliedEntry is null.
+                        if (impliedEntry) {
+                            await addEntry(this._entries.get(impliedEntryName), null, entry);
+                        }
                     }
                 }
             }
@@ -343,11 +348,12 @@ VisionParser.matchers.add({
         const localStoragePatterns: VisionParserDictionary = entryFingerprint.localStorage;
         const descriptorLocalStorage: VisionParserDictionary = scrapeDescriptor.localStorage;
 
-        if (typeof localStoragePatterns !== "object" || typeof descriptorLocalStorage !== "object") {
-            return false;
-        }
-
-        if (Object.keys(localStoragePatterns).length === 0 || Object.keys(descriptorLocalStorage).length === 0) {
+        if (
+            typeof localStoragePatterns !== "object" ||
+            typeof descriptorLocalStorage !== "object" ||
+            Object.keys(localStoragePatterns).length === 0 ||
+            Object.keys(descriptorLocalStorage).length === 0
+        ) {
             return false;
         }
 
