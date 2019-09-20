@@ -16,7 +16,7 @@ export module Vision {
         const scraper: VisionScraper = new VisionScraper(browser);
         const scrape: VisionScrapeDescriptor = await scraper.scrape(uri);
 
-        console.log(scrape);
+        //console.log(scrape);
 
         const parser: VisionParser = new VisionParser(entries);
         const matchedEntries: VisionParserMatchSet = await parser.match(scrape);

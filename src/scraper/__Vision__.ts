@@ -185,14 +185,12 @@ module __Vision__ {
         const linksBeforeLoad = getAllLinks();
         const imagesBeforeLoad = getAllImagesSources();
 
+        scrollMaxY();
+
         await waitLoadEvent();
 
         const linksAfterLoad = getAllLinks();
         const imagesAfterLoad = getAllImagesSources();
-
-        scrollMaxY();
-
-        await new Promise((resolve) => setTimeout(resolve, 2000));
 
         return {
             loadedContent: getDocumentOuterHTML(),
@@ -211,6 +209,7 @@ module __Vision__ {
             links: [ ...(new Set([ ...linksBeforeLoad, ...linksAfterLoad ])) ],
             images: [ ...(new Set([ ...imagesBeforeLoad, ...imagesAfterLoad ])) ],
             frames: getAllFramesSources(),
+            languages: getDocumentLanguages(),
         };
     }
 }

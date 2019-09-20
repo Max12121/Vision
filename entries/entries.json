@@ -114,6 +114,76 @@
         },
 
 
+        "Freshchat": {
+            "fingerprint": {
+                "scripts": {
+                    "sources": [
+                        "^https://wchat\\.freshchat\\.com/js/widget\\.js$"
+                    ],
+                    "globalDeclarations": [
+                        "^fcWidget$"
+                    ]
+                }
+            }
+        },
+
+
+        "Typekit": {
+            "fingerprint": {
+                "styles": {
+                    "sources": [
+                        "^https://use\\.typekit\\.net/"
+                    ]
+                }
+            }
+        },
+
+
+        "Headway": {
+            "fingerprint": {
+                "selectors": [
+                    "#HW_badge"
+                ],
+                "scripts": {
+                    "globalDeclarations": [
+                        "^Headway$"
+                    ]
+                }
+            }
+        },
+
+
+        "Modernizr": {
+            "fingerprint": {
+                "scripts": {
+                    "globalDeclarations": [
+                        "^Modernizr$"
+                    ]
+                }
+            }
+        },
+
+
+        "Sentry": {
+
+        },
+        "Raven": {
+            "fingerprint": {
+                "scripts": {
+                    "globalDeclarations": [
+                        "^Raven$"
+                    ]
+                },
+                "customEvaluation": {
+                    "version": "window.Raven.VERSION"
+                }
+            },
+            "implies": [
+                "Sentry"
+            ]
+        },
+
+
         "Facebook Like Button": {
             "description": "",
             "categories": [
@@ -204,6 +274,17 @@
             "implies": [
                 "jQuery"
             ]
+        },
+
+
+        "Underscore": {
+            "fingerprint": {
+                "scripts": {
+                    "globalDeclarations": [
+                        "^_$"
+                    ]
+                }
+            }
         },
 
 
@@ -342,6 +423,15 @@
                 "customEvaluation": {
                     "version": "window.Phaser.VERSION"
                 }
+            }
+        },
+
+
+        "YouTube Embedded Player": {
+            "fingerprint": {
+                "frames": [
+                    "^https://www\\.youtube\\.com/embed/"
+                ]
             }
         }
     }
