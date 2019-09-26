@@ -7,5 +7,5 @@ export type VisionParserMatcher = {
     readonly name: string;
 
     // Used as matcher procedure.
-    matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean|Promise<boolean>;
+    matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean | Promise<boolean>;
 };

@@ -2,12 +2,12 @@ import { VisionEntrySet } from "./entry/VisionEntrySet";
 import { VisionScraper } from "./scraper/VisionScraper";
 import { VisionScrapeDescriptor } from "./scraper/VisionScrapeDescriptor";
 import { VisionParser } from "./parser/VisionParser";
-import { VisionParserMatch } from "./parser/VisionParserMatch";
 import { VisionParserMatchSet } from "./parser/VisionParserMatchSet";
+import { VisionDescriptor } from "./VisionDescriptor";
 import { PuppeteerBrowser } from "./utilities/browsers/puppeteer/PuppeteerBrowser";
 
 export module Vision {
-    export async function cast (uri: string): Promise<any> {
+    export async function castOnURI (uri: string): Promise<VisionDescriptor> {
         const browser: PuppeteerBrowser = new PuppeteerBrowser();
         const entries: VisionEntrySet = VisionEntrySet.fromJSON("entries/entries.json");
 
@@ -23,7 +23,25 @@ export module Vision {
 
         await scrape.window.close();
         await browser.close();
-        
-        return matchedEntries.valuesToArray().map((item: VisionParserMatch): any => [ item.entry.name, item.entryVersion ]);
+
+        return {
+            hostname: scrape.hostname,
+            // @ts-ignore
+            entries: [
+                ...matchedEntries.valuesToArray(),
+            ],
+            uris: [
+                uri
+            ],
+            date: null,
+            meta: {
+                languages: scrape.languages
+            }
+        };
+    }
+
+    export async function castOnDescriptor (): Promise<VisionDescriptor> {
+        return null;
+        // Should be called by castOnURI.
     }
 }

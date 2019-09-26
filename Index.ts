@@ -1,11 +1,11 @@
 import { Vision } from "./src/Vision";
 
-export class Index {
+abstract class Index {
     public static async main (): Promise<void> {
-        console.log(await Vision.cast(""));
+        console.log(await Vision.castOnURI("https://www.iubenda.com"));
     }
 }
 
-void (async function (): Promise<void> {
+void (async (): Promise<void> => {
     await Index.main();
-}());
+})();

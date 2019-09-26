@@ -3,11 +3,6 @@ import { VisionEntryFingerprint } from "./VisionEntryFingerprint";
 
 // Represents a technology or service, generically referred as entry.
 export type VisionEntry = {
-    /*
-     * Important: before adding a new field take in mind that the following field name is reserved: "extra". The
-     * consequence will be that the value of your field will be overridden.
-    */
-
     // Used as entry name.
     readonly name: string;
 

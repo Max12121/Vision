@@ -61,7 +61,7 @@ export class VisionParser {
                     if (!matchedEntries.has(impliedEntryName)) {
                         const impliedEntry: VisionEntry = this._entries.get(impliedEntryName);
 
-                        // TODO: Log a message in case impliedEntry is null.
+                        // TODO: log a message in case impliedEntry is null.
                         if (impliedEntry) {
                             await addEntry(this._entries.get(impliedEntryName), null, entry);
                         }
@@ -204,11 +204,11 @@ VisionParser.matchers.add({
         const selector: string = selectors.join(",");
 
         try {
-            const selectorMatchesElement: string|boolean = await scrapeDescriptor.window.evaluate(`
+            const selectorMatchesElement: boolean | string = await scrapeDescriptor.window.evaluate(`
                 window.document.querySelectorAll("${selector}").length !== 0
             `);
 
-            return selectorMatchesElement === "true" || selectorMatchesElement === true;
+            return selectorMatchesElement === true || selectorMatchesElement === "true";
         }
         catch (error) {
             return false;
@@ -417,9 +417,9 @@ VisionParser.matchers.add({
         const matchEvaluation: string = entryFingerprint.customEvaluation.match;
 
         try {
-            const matched: string|boolean = await scrapeDescriptor.window.evaluate(matchEvaluation);
+            const matched: boolean | string = await scrapeDescriptor.window.evaluate(matchEvaluation);
 
-            return matched === "true" || matched === true;
+            return matched === true || matched === "true";
         }
         catch (error) {
             return false;
