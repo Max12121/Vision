@@ -10,7 +10,7 @@ import { VisionParserOptions } from "./VisionParserOptions";
 
 export const defaultOptions: VisionParserOptions = {
     evaluateEntryVersion: true,
-    evaluateEntryExtra: true,
+    evaluateEntryExtraInformation: true,
 };
 
 export class VisionParser {
@@ -42,18 +42,20 @@ export class VisionParser {
             const entryVersion: string = (
                 this._options.evaluateEntryVersion ?  await evaluateEntryVersion(entry.fingerprint, scrapeDescriptor) : ""
             );
-            const entryExtra: {} = (
-                this._options.evaluateEntryExtra ? await evaluateEntryExtra(entry.fingerprint, scrapeDescriptor) : {}
+            const entryExtraInformation: {} = (
+                this._options.evaluateEntryExtraInformation ? await evaluateEntryExtraInformation(entry.fingerprint, scrapeDescriptor) : {}
             );
 
             matchedEntries.add({
                 parser: this,
                 scrapeDescriptor,
-                entry,
+                matchedEntry: {
+                    ...entry,
+                    version: entryVersion,
+                    extraInformation: entryExtraInformation,
+                },
                 entryMatcher: matcher,
-                entryImpliedBy: impliedBy,
-                entryVersion,
-                entryExtra,
+                entryImpliedBy: impliedBy
             });
 
             if (Array.isArray(entry.implies)) {
@@ -114,17 +116,17 @@ export async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerp
     }
 }
 
-export async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<{}> {
+export async function evaluateEntryExtraInformation (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<{}> {
     if (
         typeof entryFingerprint !== "object" ||
         typeof entryFingerprint.customEvaluation !== "object" ||
-        typeof entryFingerprint.customEvaluation.extra !== "string" ||
+        typeof entryFingerprint.customEvaluation.extraInformation !== "string" ||
         typeof scrapeDescriptor.window !== "object"
     ) {
         return {};
     }
 
-    const extraEvaluation: string = entryFingerprint.customEvaluation.extra;
+    const extraEvaluation: string = entryFingerprint.customEvaluation.extraInformation;
 
     try {
         return {
@@ -155,7 +157,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesDictionary(headersPatterns, descriptorHeaders);
+        return patternsMatchesDictionary(headersPatterns, descriptorHeaders);
     },
 });
 
@@ -174,7 +176,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesList(initialContentPatterns, [ descriptorInitialContent ]);
+        return patternsMatchesList(initialContentPatterns, [ descriptorInitialContent ]);
     },
 });
 
@@ -188,7 +190,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesList(loadedContentPatterns, [ descriptorLoadedContent ]);
+        return patternsMatchesList(loadedContentPatterns, [ descriptorLoadedContent ]);
     },
 });
 
@@ -230,7 +232,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesList(scriptsSourcesPatterns, descriptorScriptsSources);
+        return patternsMatchesList(scriptsSourcesPatterns, descriptorScriptsSources);
    },
 });
 
@@ -248,7 +250,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesList(scriptsContentsPatterns, descriptorScriptsContents);
+        return patternsMatchesList(scriptsContentsPatterns, descriptorScriptsContents);
     },
 });
 
@@ -266,7 +268,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesList(scriptsGlobalsPatterns, descriptorScriptsGlobals);
+        return patternsMatchesList(scriptsGlobalsPatterns, descriptorScriptsGlobals);
     },
 });
 
@@ -284,7 +286,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesList(stylesSourcesPatterns, descriptorStylesSources);
+        return patternsMatchesList(stylesSourcesPatterns, descriptorStylesSources);
     },
 });
 
@@ -302,7 +304,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesList(stylesContentsPatterns, descriptorStylesContents);
+        return patternsMatchesList(stylesContentsPatterns, descriptorStylesContents);
     },
 });
 
@@ -320,7 +322,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesDictionary(metasPatterns, descriptorMetas);
+        return patternsMatchesDictionary(metasPatterns, descriptorMetas);
     },
 });
 
@@ -338,7 +340,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesDictionary(cookiesPatterns, descriptorCookies);
+        return patternsMatchesDictionary(cookiesPatterns, descriptorCookies);
     },
 });
 
@@ -357,7 +359,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesDictionary(localStoragePatterns, descriptorLocalStorage);
+        return patternsMatchesDictionary(localStoragePatterns, descriptorLocalStorage);
     },
 });
 
@@ -371,7 +373,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesList(linksPatterns, descriptorLinks);
+        return patternsMatchesList(linksPatterns, descriptorLinks);
     },
 });
 
@@ -385,7 +387,7 @@ VisionParser.matchers.add({
             return false;
         }
         
-        return patternMatchesList(imagesPatterns, descriptorImages);
+        return patternsMatchesList(imagesPatterns, descriptorImages);
     },
 });
 
@@ -399,7 +401,7 @@ VisionParser.matchers.add({
             return false;
         }
 
-        return patternMatchesList(framesPatterns, descriptorFrames);
+        return patternsMatchesList(framesPatterns, descriptorFrames);
     },
 });
 
@@ -427,12 +429,12 @@ VisionParser.matchers.add({
     },
 });
 
-function patternMatchesList (patterns: string[], haystack: string[]): boolean {
+function patternsMatchesList (patterns: string[], list: string[]): boolean {
     for (const pattern of patterns) {
         const patternRegExp: RegExp = new RegExp(pattern);
 
-        for (const hay of haystack) {
-            if (patternRegExp.test(hay)) {
+        for (const item of list) {
+            if (patternRegExp.test(item)) {
                 return true;
             }
         }
@@ -441,15 +443,15 @@ function patternMatchesList (patterns: string[], haystack: string[]): boolean {
     return false;
 }
 
-function patternMatchesDictionary (patterns: VisionParserDictionary, haystack: VisionParserDictionary): boolean {
+function patternsMatchesDictionary (patterns: VisionParserDictionary, dictionary: VisionParserDictionary): boolean {
     for (const patternKey in patterns) {
         const patternKeyRegExp: RegExp = new RegExp(patternKey);
         const patternValueRegExp: RegExp = new RegExp(patterns[patternKey]);
 
-        for (const hayKey in haystack) {
-            const hayValue: string = haystack[hayKey];
+        for (const key in dictionary) {
+            const value: string = dictionary[key];
 
-            if (patternKeyRegExp.test(hayKey) && patternValueRegExp.test(hayValue)) {
+            if (patternKeyRegExp.test(key) && patternValueRegExp.test(value)) {
                 return true;
             }
         }

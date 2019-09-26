@@ -76,6 +76,6 @@ export type VisionEntryFingerprint = {
         readonly version?: string;
 
         // Used as custom code evaluated on the document when the entry is matched for retrieving extra information regarding the entry.
-        readonly extra?: string;
+        readonly extraInformation?: string;
     };
 };

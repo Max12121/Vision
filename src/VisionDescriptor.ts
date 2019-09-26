@@ -1,15 +1,11 @@
-import { VisionEntry } from "./entry/VisionEntry";
+import { MatchedVisionEntry } from "./entry/MatchedVisionEntry";
 
 export type VisionDescriptor = {
     // Used as hostname of the visited website.
     readonly hostname: string;
 
     // Used as matched entries.
-    readonly entries: ReadonlyArray<VisionEntry & {
-        readonly extra: {
-            readonly [name: string]: string;
-        };
-    }>;
+    readonly entries: MatchedVisionEntry[];
 
     // Used as list of visited uris.
     readonly uris: string[];

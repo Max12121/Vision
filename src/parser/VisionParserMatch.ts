@@ -1,4 +1,5 @@
 import { VisionEntry } from "../entry/VisionEntry";
+import { MatchedVisionEntry } from "../entry/MatchedVisionEntry";
 import { VisionScrapeDescriptor } from "../scraper/VisionScrapeDescriptor";
 import { VisionParser } from "./VisionParser";
 import { VisionParserMatcher } from "./VisionParserMatcher";
@@ -12,7 +13,7 @@ export type VisionParserMatch = {
     readonly scrapeDescriptor: VisionScrapeDescriptor;
 
     // Used as reference to the matched entry.
-    readonly entry: VisionEntry;
+    readonly matchedEntry: MatchedVisionEntry;
 
     // Used as reference to the matcher that matched the entry.
     // In case the value is "null" then the entry has been implied.
@@ -21,12 +22,4 @@ export type VisionParserMatch = {
     // Used as reference to the entry that implied the matched entry.
     // In case the value is "null" then the entry has been matched by a matcher.
     readonly entryImpliedBy: VisionEntry;
-
-    // Used as matched entry version.
-    readonly entryVersion: string;
-
-    // Used as extra information regarding the matched entry.
-    readonly entryExtra: {
-        [name: string]: string;
-    };
 };

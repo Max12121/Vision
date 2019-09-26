@@ -7,25 +7,23 @@ import { VisionDescriptor } from "./VisionDescriptor";
 import { PuppeteerBrowser } from "./utilities/browsers/puppeteer/PuppeteerBrowser";
 
 export module Vision {
-    export async function castOnURI (uri: string): Promise<VisionDescriptor> {
+    export async function cast (uri: string): Promise<VisionDescriptor> {
         const browser: PuppeteerBrowser = new PuppeteerBrowser();
         const entries: VisionEntrySet = VisionEntrySet.fromJSON("entries/entries.json");
 
         await browser.open();
 
         const scraper: VisionScraper = new VisionScraper(browser);
-        const scrape: VisionScrapeDescriptor = await scraper.scrape(uri);
-
-        //console.log(scrape);
+        const scrapeDescriptor: VisionScrapeDescriptor = await scraper.scrape(uri);
 
         const parser: VisionParser = new VisionParser(entries);
-        const matchedEntries: VisionParserMatchSet = await parser.match(scrape);
+        const matchedEntries: VisionParserMatchSet = await parser.match(scrapeDescriptor);
 
-        await scrape.window.close();
+        await scrapeDescriptor.window.close();
         await browser.close();
 
         return {
-            hostname: scrape.hostname,
+            hostname: scrapeDescriptor.hostname,
             // @ts-ignore
             entries: [
                 ...matchedEntries.valuesToArray(),
@@ -35,13 +33,8 @@ export module Vision {
             ],
             date: null,
             meta: {
-                languages: scrape.languages
+                languages: scrapeDescriptor.languages
             }
         };
-    }
-
-    export async function castOnDescriptor (): Promise<VisionDescriptor> {
-        return null;
-        // Should be called by castOnURI.
     }
 }
