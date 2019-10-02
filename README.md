@@ -33,47 +33,51 @@ entries. All entries
 A fingerprint is a pattern composed by a set of inner patterns used as models
 to detect a technology or service in a website.
 
-### `headers`
+#### `headers`
 A key-value pair set used to match headers in a HTTP response.
 In case at least one key-value pair is matched then the entry is matched.
 
-### `initialContent`
+<details>
+  <summary>Usage Example</summary>
+  
+  ```javascript
+    function foo () {
+        return null;
+    }
+  ```
+</details>
+
+#### `initialContent`
 List of regular expressions used to match the website source code (the HTTP response body). In case at least one regular expression is matched then the entry is matched.
 
-### `loadedContent`
+#### `loadedContent`
 List of regular expressions used to match the website source code after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
-### `selectors`
+#### `selectors`
 List of CSS selectors, the selectors are queried after the "load" event. In case at least one queried selector returns at least one element then the entry is matched.
 
-### `scripts`
-Collection of regular expressions used to match scripts in the website.
-
-#### `sources`
+#### `scripts/sources`
 List of regular expressions used to match the value of the "src" attribute of all script elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
-#### `contents`
+#### `scripts/contents`
 List of regular expressions used to match the inner value of all script elements without the "src" attribute. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
-#### `globalDeclarations`
+#### `scripts/globalDeclarations`
 List of regular expressions used to match the keys created by scripts in the window object. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched. Note that only properties of the window object can be matched, and not, for example, a property of a property of the window object (if you need to do this please refer to the `customEvaluation/match` pattern model).
 
-### `styles`
-Collection of regular expressions used to match style sheets in the website.
- 
-#### `sources`
+#### `styles/sources`
 List of regular expressions used to match the value of the "href" attribute of all style sheet links. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
-#### `contents`
+#### `styles/contents`
 List of regular expressions used to match the inner value of all style elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
-### `metas`
+#### `metas`
 Set of regular expressions used to match meta elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
-### `cookies`
+#### `cookies`
 A key-value pair set used to match cookies created in the website.
 In case at least one key-value pair is matched then the entry is matched.
 
-### `localStorage`
+#### `localStorage`
 A key-value pair set used to match local storage created in the website.
 In case at least one key-value pair is matched then the entry is matched.
