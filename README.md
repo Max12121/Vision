@@ -31,14 +31,14 @@ entries. All entries
 
 ## Fingerprint
 A fingerprint is a pattern composed by a set of inner patterns used as models
-to detect a technology or service in a website.
+to detect a technology or service in a website. Below the models you can use to compose a fingerprint.
 
 #### `headers`
 A key-value pair set used to match headers in a HTTP response.
 In case at least one key-value pair is matched then the entry is matched.
 
 <details>
-  <summary>Usage Example</summary>
+  <summary>Usage Example<br><br></summary>
   
   ```javascript
     function foo () {
