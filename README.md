@@ -38,13 +38,13 @@ A key-value pair set used to match headers in a HTTP response.
 In case at least one key-value pair is matched then the entry is matched.
 
 <details>
-  <summary>Usage Example<br><br></summary>
+    <summary>Usage Example</summary>
   
-  ```javascript
-    function foo () {
-        return null;
-    }
-  ```
+    ```javascript
+        function foo () {
+            return null;
+        }
+    ```
 </details>
 
 #### `initialContent`
