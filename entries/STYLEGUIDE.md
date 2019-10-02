@@ -1,2 +1,0 @@
-# Vision Entries Styleguide
-pass.

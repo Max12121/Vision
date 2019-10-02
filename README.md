@@ -30,6 +30,8 @@ All technologies and services that can be identified by Vision are defined as
 entries. All entries
 
 ## Fingerprint
+A fingerprint is a pattern composed by a set of inner patterns used as models
+to detect a technology or service in a website.
 
 ### `headers`
 A key-value pair set used to match headers in a HTTP response.
@@ -47,22 +49,22 @@ List of CSS selectors, the selectors are queried after the "load" event. In case
 ### `scripts`
 Collection of regular expressions used to match scripts in the website.
 
-##### `sources`
+#### `sources`
 List of regular expressions used to match the value of the "src" attribute of all script elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
-##### `contents`
+#### `contents`
 List of regular expressions used to match the inner value of all script elements without the "src" attribute. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
-##### `globalDeclarations`
+#### `globalDeclarations`
 List of regular expressions used to match the keys created by scripts in the window object. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched. Note that only properties of the window object can be matched, and not, for example, a property of a property of the window object (if you need to do this please refer to the `customEvaluation/match` pattern model).
 
 ### `styles`
 Collection of regular expressions used to match style sheets in the website.
  
-##### `sources`
+#### `sources`
 List of regular expressions used to match the value of the "href" attribute of all style sheet links. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
-##### `contents`
+#### `contents`
 List of regular expressions used to match the inner value of all style elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
 ### `metas`

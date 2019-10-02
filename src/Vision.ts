@@ -1,15 +1,16 @@
+import { IVisionBrowser } from "./browser/IVisionBrowser";
 import { VisionEntrySet } from "./entry/VisionEntrySet";
 import { VisionScraper } from "./scraper/VisionScraper";
 import { VisionScrapeDescriptor } from "./scraper/VisionScrapeDescriptor";
 import { VisionParser } from "./parser/VisionParser";
 import { VisionParserMatchSet } from "./parser/VisionParserMatchSet";
-import { VisionDescriptor } from "./VisionDescriptor";
 import { PuppeteerBrowser } from "./utilities/browsers/puppeteer/PuppeteerBrowser";
+import { VisionDescriptor } from "./VisionDescriptor";
 
-export module Vision {
+export namespace Vision {
     export async function cast (uri: string): Promise<VisionDescriptor> {
-        const browser: PuppeteerBrowser = new PuppeteerBrowser();
-        const entries: VisionEntrySet = VisionEntrySet.fromJSON("entries/entries.json");
+        const browser: IVisionBrowser = new PuppeteerBrowser();
+        const entries: VisionEntrySet = new VisionEntrySet();
 
         await browser.open();
 
@@ -17,24 +18,21 @@ export module Vision {
         const scrapeDescriptor: VisionScrapeDescriptor = await scraper.scrape(uri);
 
         const parser: VisionParser = new VisionParser(entries);
-        const matchedEntries: VisionParserMatchSet = await parser.match(scrapeDescriptor);
+        const matched: VisionParserMatchSet = await parser.match(scrapeDescriptor);
 
         await scrapeDescriptor.window.close();
         await browser.close();
 
         return {
             hostname: scrapeDescriptor.hostname,
-            // @ts-ignore
-            entries: [
-                ...matchedEntries.valuesToArray(),
-            ],
+            entries: matched.matchedEntriesToArray(),
             uris: [
-                uri
+                uri,
             ],
-            date: null,
+            date: new Date().toString(),
             meta: {
-                languages: scrapeDescriptor.languages
-            }
+                languages: scrapeDescriptor.languages,
+            },
         };
     }
 }

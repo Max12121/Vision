@@ -7,7 +7,7 @@ import { VisionScrapeDescriptor } from "./VisionScrapeDescriptor";
 import { VisionScraperOptions } from "./VisionScraperOptions";
 
 export const defaultOptions: VisionScraperOptions = {
-    userAgent: "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+    userAgent: "Mozilla/5.0 (compatible; Googlebot/2.1; Vision/0.1.0; +http://www.google.com/bot.html)",
 };
 
 export class VisionScraper {

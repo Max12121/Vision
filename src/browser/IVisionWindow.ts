@@ -4,7 +4,7 @@ import { IVisionHTTPResponse } from "./IVisionHTTPResponse";
 // Represents a page used by Vision to load and manipulate websites.
 export interface IVisionWindow {
     // Used as reference to the browser that created the window.
-    readonly browser: IVisionBrowser;
+    browser: IVisionBrowser;
 
     // Used to set the user agent of the window.
     setUserAgent (userAgent: string): Promise<void>;

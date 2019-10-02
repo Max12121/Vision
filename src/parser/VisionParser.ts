@@ -1,4 +1,4 @@
-import { VisionEntry } from "../entry/VisionEntry";
+import { VisionEntry, copyEntry } from "../entry/VisionEntry";
 import { VisionEntryFingerprint } from "../entry/VisionEntryFingerprint";
 import { VisionEntrySet } from "../entry/VisionEntrySet";
 import { VisionScrapeDescriptor } from "../scraper/VisionScrapeDescriptor";
@@ -50,7 +50,7 @@ export class VisionParser {
                 parser: this,
                 scrapeDescriptor,
                 matchedEntry: {
-                    ...entry,
+                    ...copyEntry(entry),
                     version: entryVersion,
                     extraInformation: entryExtraInformation,
                 },

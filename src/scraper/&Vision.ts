@@ -1,5 +1,5 @@
 // tslint:disable
-module __Vision__ {
+namespace __Vision__ {
     // Returns the whole source of the document.
     export function getDocumentOuterHTML () {
         return window.document.documentElement.outerHTML;
@@ -126,8 +126,8 @@ module __Vision__ {
 
     export function getDocumentLanguage () {
         const language = window.document.documentElement.lang;
-
-        return (language && language !== "zxx") ? language : null;
+        
+        return language && language !== "zxx" ? language : null;
     }
 
     export function getInternalLinks () {

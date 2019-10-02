@@ -1,120 +1,131 @@
-{
-    "version": "2019.1.0",
-    "entries": {
-        "iubenda": {
-            "description": "A SaaS accomplishing law requirements through software.",
-            "categories": [
-                "Law", "Privacy", "Services", "Freemium", "SaaS"
+// @ts-nocheck
+/* tslint:disable */
+// @ts-nocheck
+export const VisionEntryList = {
+    version: "2019.1.0",
+    entries: [
+        {
+            name: "iubenda",
+            description: "A SaaS accomplishing law requirements through software.",
+            categories: [
+                "Law", "Privacy", "Services", "Freemium", "SaaS",
             ],
-            "uri": "https://www.iubenda.com",
-            "creationYear": "2011",
-            "fingerprint": {
-                "scripts": {
-                    "globalDeclarations": [
-                        "^_iub$"
-                    ]
-                }
-            }
+            uri: "https://www.iubenda.com",
+            creationYear: "2011",
+            fingerprint: {
+                scripts: {
+                    globalDeclarations: [
+                        "^_iub$",
+                    ],
+                },
+            },
         },
-        "iubenda Privacy Policy": {
+        {
+            name: "iubenda Privacy Policy",
             "description": "A privacy policy generated through iubenda.",
             "categories": [
-                "Law", "Privacy", "Freemium", "SaaS"
+                "Law", "Privacy", "Freemium", "SaaS",
             ],
             "uri": "https://www.iubenda.com",
             "creationYear": "2011",
             "fingerprint": {
                 "links": [
-                    "^https://www.iubenda.com/privacy-policy/[0-9]+"
-                ]
+                    "^https://www.iubenda.com/privacy-policy/[0-9]+",
+                ],
             },
             "implies": [
-                "iubenda"
-            ]
+                "iubenda",
+            ],
         },
-        "iubenda Cookie Policy": {
+        {
+            name: "iubenda Cookie Policy",
             "description": "A cookie policy generated through iubenda.",
             "categories": [
-                "Law", "Privacy", "Freemium", "SaaS"
+                "Law", "Privacy", "Freemium", "SaaS",
             ],
             "uri": "https://www.iubenda.com",
             "creationYear": "2015",
             "fingerprint": {
                 "links": [
-                    "^https://www.iubenda.com/privacy-policy/[0-9]+/cookie-policy"
-                ]
+                    "^https://www.iubenda.com/privacy-policy/[0-9]+/cookie-policy",
+                ],
             },
             "implies": [
                 "iubenda",
-                "iubenda Privacy Policy"
-            ]
+                "iubenda Privacy Policy",
+            ],
         },
-        "iubenda Cookie Solution": {
+        {
+            name: "iubenda Cookie Solution",
             "description": "A cookie and consent solution that complies with the EU requirements.",
             "categories": [
-                "Law", "Privacy", "Freemium", "SaaS"
+                "Law", "Privacy", "Freemium", "SaaS",
             ],
             "uri": "https://www.iubenda.com",
             "creationYear": "2015",
             "fingerprint": {
                 "customEvaluation": {
                     "match": "!!(window._iub && window._iub.cs)",
-                    "version": "window._iub.cs.VERSION"
+                    "version": "window._iub.cs.VERSION",
                 }
             },
             "implies": [
-                "iubenda"
-            ]
+                "iubenda",
+            ],
         },
 
 
-        "Twitter for Websites": {
+        {
+            name: "Twitter for Websites",
             "description": "",
             "categories": [
-                "Widgets", "Social Networks"
+                "Widgets", "Social Networks",
             ],
             "uri": "https://developer.twitter.com/en/docs/twitter-for-websites/overview",
             "fingerprint": {
                 "scripts": {
                     "sources": [
-                        "^https://platform.twitter.com/widgets.js$"
-                    ]
-                }
-            }
+                        "^https://platform.twitter.com/widgets.js$",
+                    ],
+                },
+            },
         },
-        "Twitter Follow Button": {
+        {
+            name: "Twitter Follow Button",
             "description": "A button exposed for following a user on Twitter.",
             "categories": [
-                "Widgets", "Social Networks"
+                "Widgets", "Social Networks",
             ],
             "uri": "https://developer.twitter.com/en/docs/twitter-for-websites/follow-button/overview.html",
             "fingerprint": {
                 "frames": [
-                    "^https://platform.twitter.com/widgets/follow_button"
-                ]
+                    "^https://platform.twitter.com/widgets/follow_button",
+                ],
             },
             "implies": [
-                "Twitter for Websites"
-            ]
+                "Twitter for Websites",
+            ],
         },
-        "Twitter Tweet Button": {
+        {
+            name: "Twitter Tweet Button",
             "description": "A button exposed for sharing content on Twitter.",
             "categories": [
-                "Widgets", "Social Networks"
+                "Widgets", "Social Networks",
             ],
             "uri": "https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview.html",
             "fingerprint": {
                 "frames": [
-                    "^https://platform.twitter.com/widgets/tweet_button"
-                ]
+                    "^https://platform.twitter.com/widgets/tweet_button",
+                ],
             },
             "implies": [
-                "Twitter for Websites"
-            ]
+                "Twitter for Websites",
+            ],
         },
 
 
-        "Freshchat": {
+        {
+            name: "Freshchat",
             "fingerprint": {
                 "scripts": {
                     "sources": [
@@ -128,7 +139,8 @@
         },
 
 
-        "Typekit": {
+        {
+            name: "Typekit",
             "fingerprint": {
                 "styles": {
                     "sources": [
@@ -139,7 +151,8 @@
         },
 
 
-        "Headway": {
+        {
+            name: "Headway",
             "fingerprint": {
                 "selectors": [
                     "#HW_badge"
@@ -153,7 +166,8 @@
         },
 
 
-        "Modernizr": {
+        {
+            name: "Modernizr",
             "fingerprint": {
                 "scripts": {
                     "globalDeclarations": [
@@ -164,10 +178,11 @@
         },
 
 
-        "Sentry": {
-
+        {
+            name: "Sentry",
         },
-        "Raven": {
+        {
+            name: "Raven",
             "fingerprint": {
                 "scripts": {
                     "globalDeclarations": [
@@ -184,10 +199,11 @@
         },
 
 
-        "Facebook Like Button": {
+        {
+            name: "Facebook Like Button",
             "description": "",
             "categories": [
-
+                ""
             ],
             "fingerprint": {
                 "frames": [
@@ -197,14 +213,16 @@
         },
 
 
-        "Capterra": {
+        {
+            name: "Capterra",
             "description": "A service for software peer review.",
             "categories": [
                 "Review Sites"
             ],
             "uri": "https://www.capterra.com"
         },
-        "Capterra Reviews Badge": {
+        {
+            name: "Capterra Reviews Badge",
             "description": "A badge showing the Capterra reviews of a software.",
             "categories": [
                 "Review Sites", "Widgets", "Badges"
@@ -220,7 +238,8 @@
         },
 
 
-        "Pickr": {
+        {
+            name: "Pickr",
             "description": "A color picker library.",
             "categories": [
                 "JavaScript", "JavaScript Libraries", "CSS"
@@ -238,7 +257,8 @@
         },
 
 
-        "jQuery": {
+        {
+            name: "jQuery",
             "description": "A JavaScript library designed to simplify HTML DOM tree traversal, manipulation and event handling.",
             "categories": [
                 "JavaScript", "JavaScript Libraries"
@@ -257,7 +277,8 @@
                 }
             }
         },
-        "jQuery UI": {
+        {
+            name: "jQuery UI",
             "description": "A curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library.",
             "categories": [
                 "JavaScript", "JavaScript Libraries", "UI", "CSS"
@@ -277,7 +298,8 @@
         },
 
 
-        "Underscore": {
+        {
+            name: "Underscore",
             "fingerprint": {
                 "scripts": {
                     "globalDeclarations": [
@@ -288,7 +310,8 @@
         },
 
 
-        "Google Analytics": {
+        {
+            name: "Google Analytics",
             "categories": [
                 "Analytics"
             ],
@@ -302,7 +325,8 @@
         },
 
 
-        "Bootstrap": {
+        {
+            name: "Bootstrap",
             "description": "An open source development toolkit for HTML, CSS, and JavaScript.",
             "categories": [
                 "HTML", "CSS", "JavaScript", "Web Frameworks"
@@ -313,13 +337,15 @@
         },
 
 
-        "Cookiebot": {
+        {
+            name: "Cookiebot",
             "description": "A cookie and online tracking consent solution that complies with the EU consent and information requirements.",
             "categories": [
                 "Law", "Privacy", "Services", "SaaS"
             ]
         },
-        "Cookiebot Banner": {
+        {
+            name: "Cookiebot Banner",
             "categories": [
                 "Law", "Privacy", "SaaS"
             ],
@@ -337,7 +363,8 @@
         },
 
 
-        "Yoast SEO": {
+        {
+            name: "Yoast SEO",
             "description": "A plugin making websites as search-engine-friendly as possible.",
             "categories": [
                 "Web Plugins", "SEO", "Freemium"
@@ -352,7 +379,8 @@
         },
 
 
-        "Prism": {
+        {
+            name: "Prism",
             "description": "A lightweight, extensible syntax highlighter, built with modern web standards in mind.",
             "fingerprint": {
                 "scripts": {
@@ -364,13 +392,15 @@
         },
 
 
-        "PHP": {
+        {
+            name: "PHP",
             "description": "A popular general-purpose scripting language that is especially suited to web servers.",
             "creationYear": "1995"
         },
 
 
-        "WordPress": {
+        {
+            name: "WordPress",
             "fingerprint": {
                 "selectors": [
                     "link#wp-block-library-css"
@@ -391,7 +421,8 @@
         },
 
 
-        "Joomla!": {
+        {
+            name: "Joomla!",
             "fingerprint": {
                 "metas": {
                     "^generator$": "^Joomla!"
@@ -403,36 +434,40 @@
         },
 
 
-        "Phaser": {
-            "description": "A free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.",
-            "categories": [
+        {
+            name: "Phaser",
+            description: "A free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.",
+            categories: [
                 "Game Engines", "Web Game Engines", "Game Frameworks", "Web Frameworks", "2D", "WebGL", "Canvas"
             ],
-            "uri": "http://phaser.io",
-            "license": "MIT",
-            "creationYear": "2013",
-            "fingerprint": {
-                "scripts": {
-                    "sources": [
+            uri: "http://phaser.io",
+            license: "MIT",
+            creationYear: "2013",
+            fingerprint: {
+                scripts: {
+                    sources: [
                         "^//cdn.jsdelivr.net/npm/phaser@.*/dist/phaser\\.min\\.js$"
                     ],
-                    "globalDeclarations": [
+                    globalDeclarations: [
                         "^Phaser$"
                     ]
                 },
-                "customEvaluation": {
-                    "version": "window.Phaser.VERSION"
+                customEvaluation: {
+                    version: () => {
+                        return window.Phaser.VERSION;
+                    },
                 }
             }
         },
 
 
-        "YouTube Embedded Player": {
-            "fingerprint": {
-                "frames": [
-                    "^https://www\\.youtube\\.com/embed/"
-                ]
-            }
-        }
-    }
-}
+        {
+            name: "YouTube Embedded Player",
+            fingerprint: {
+                frames: [
+                    "^https://www\\.youtube\\.com/embed/",
+                ],
+            },
+        },
+    ],
+};

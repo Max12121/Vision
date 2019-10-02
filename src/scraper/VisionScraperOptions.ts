@@ -1,3 +1,3 @@
 export type VisionScraperOptions = {
-    readonly userAgent?: string;
+    userAgent?: string;
 };
