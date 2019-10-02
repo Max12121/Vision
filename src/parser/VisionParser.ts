@@ -37,7 +37,7 @@ export class VisionParser {
 
     public async match (scrapeDescriptor: VisionScrapeDescriptor): Promise<VisionParserMatchSet> {
         const matchers: VisionParserMatcher[] = VisionParser.matchers.valuesToArray();
-        const matchedEntries: VisionParserMatchSet = new VisionParserMatchSet();
+        const matched: VisionParserMatchSet = new VisionParserMatchSet();
         const addEntry: Function = async (entry: VisionEntry, matcher: VisionParserMatcher, impliedBy: VisionEntry): Promise<void> => {
             const entryVersion: string = (
                 this._options.evaluateEntryVersion ?  await evaluateEntryVersion(entry.fingerprint, scrapeDescriptor) : ""
@@ -46,7 +46,7 @@ export class VisionParser {
                 this._options.evaluateEntryExtraInformation ? await evaluateEntryExtraInformation(entry.fingerprint, scrapeDescriptor) : {}
             );
 
-            matchedEntries.add({
+            matched.add({
                 parser: this,
                 scrapeDescriptor,
                 matchedEntry: {
@@ -60,7 +60,7 @@ export class VisionParser {
 
             if (Array.isArray(entry.implies)) {
                 for (const impliedEntryName of entry.implies) {
-                    if (!matchedEntries.has(impliedEntryName)) {
+                    if (!matched.has(impliedEntryName)) {
                         const impliedEntry: VisionEntry = this._entries.get(impliedEntryName);
 
                         // TODO: log a message in case impliedEntry is null.
@@ -73,7 +73,7 @@ export class VisionParser {
         };
 
         for (const entry of this._entries.valuesToArray()) {
-            if (typeof entry.fingerprint !== "object" || matchedEntries.has(entry.name)) {
+            if (typeof entry.fingerprint !== "object" || matched.has(entry.name)) {
                 continue;
             }
 
@@ -88,7 +88,7 @@ export class VisionParser {
             }
         }
 
-        return matchedEntries;
+        return matched;
     }
 
     public static get matchers (): VisionParserMatcherSet {

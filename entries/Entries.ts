@@ -1,7 +1,6 @@
-// @ts-nocheck
-/* tslint:disable */
-// @ts-nocheck
-export const VisionEntryList = {
+import { VersionedVisionEntryList } from "./VersionedVisionEntryList";
+
+export const versionedEntries: VersionedVisionEntryList = {
     version: "2019.1.0",
     entries: [
         {
@@ -122,8 +121,6 @@ export const VisionEntryList = {
                 "Twitter for Websites",
             ],
         },
-
-
         {
             name: "Freshchat",
             "fingerprint": {
@@ -137,8 +134,6 @@ export const VisionEntryList = {
                 }
             }
         },
-
-
         {
             name: "Typekit",
             "fingerprint": {
@@ -149,8 +144,6 @@ export const VisionEntryList = {
                 }
             }
         },
-
-
         {
             name: "Headway",
             "fingerprint": {
@@ -164,8 +157,6 @@ export const VisionEntryList = {
                 }
             }
         },
-
-
         {
             name: "Modernizr",
             "fingerprint": {
@@ -176,8 +167,6 @@ export const VisionEntryList = {
                 }
             }
         },
-
-
         {
             name: "Sentry",
         },
@@ -197,8 +186,6 @@ export const VisionEntryList = {
                 "Sentry"
             ]
         },
-
-
         {
             name: "Facebook Like Button",
             "description": "",
@@ -211,8 +198,6 @@ export const VisionEntryList = {
                 ]
             }
         },
-
-
         {
             name: "Capterra",
             "description": "A service for software peer review.",
@@ -236,8 +221,6 @@ export const VisionEntryList = {
                 "Capterra"
             ]
         },
-
-
         {
             name: "Pickr",
             "description": "A color picker library.",
@@ -255,8 +238,6 @@ export const VisionEntryList = {
                 }
             }
         },
-
-
         {
             name: "jQuery",
             "description": "A JavaScript library designed to simplify HTML DOM tree traversal, manipulation and event handling.",
@@ -296,8 +277,6 @@ export const VisionEntryList = {
                 "jQuery"
             ]
         },
-
-
         {
             name: "Underscore",
             "fingerprint": {
@@ -308,8 +287,6 @@ export const VisionEntryList = {
                 }
             }
         },
-
-
         {
             name: "Google Analytics",
             "categories": [
@@ -323,8 +300,6 @@ export const VisionEntryList = {
                 }
             }
         },
-
-
         {
             name: "Bootstrap",
             "description": "An open source development toolkit for HTML, CSS, and JavaScript.",
@@ -335,8 +310,6 @@ export const VisionEntryList = {
             "license": "MIT",
             "creationYear": "2011"
         },
-
-
         {
             name: "Cookiebot",
             "description": "A cookie and online tracking consent solution that complies with the EU consent and information requirements.",
@@ -361,8 +334,6 @@ export const VisionEntryList = {
                 "Cookiebot"
             ]
         },
-
-
         {
             name: "Yoast SEO",
             "description": "A plugin making websites as search-engine-friendly as possible.",
@@ -377,8 +348,6 @@ export const VisionEntryList = {
                 ]
             }
         },
-
-
         {
             name: "Prism",
             "description": "A lightweight, extensible syntax highlighter, built with modern web standards in mind.",
@@ -390,15 +359,11 @@ export const VisionEntryList = {
                 }
             }
         },
-
-
         {
             name: "PHP",
             "description": "A popular general-purpose scripting language that is especially suited to web servers.",
             "creationYear": "1995"
         },
-
-
         {
             name: "WordPress",
             "fingerprint": {
@@ -419,8 +384,6 @@ export const VisionEntryList = {
                 "MySQL"
             ]
         },
-
-
         {
             name: "Joomla!",
             "fingerprint": {
@@ -432,8 +395,6 @@ export const VisionEntryList = {
                 "PHP"
             ]
         },
-
-
         {
             name: "Phaser",
             description: "A free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.",
@@ -452,15 +413,13 @@ export const VisionEntryList = {
                         "^Phaser$"
                     ]
                 },
-                customEvaluation: {
+                customEvaluation: {/*
                     version: () => {
                         return window.Phaser.VERSION;
-                    },
+                    },*/
                 }
             }
         },
-
-
         {
             name: "YouTube Embedded Player",
             fingerprint: {

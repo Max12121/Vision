@@ -10,24 +10,23 @@ e-commerce platforms, analytics software and more.
 
 Through Vision you can:
 -   **Reliably detect technologies and services used in websites**
-thanks to a list of patterns constantly updated and maintained.
--   **Define new technologies and services easily without
-advanced technical knowledge**, for instance you can detect
+through a list of patterns constantly updated and maintained.
+-   **Define new technologies and services easily without technical knowledge**, for instance you can detect
 a JavaScript library by just adding its file name.
 -   **Have maximum flexibility for defining how technologies and
 services are detected**: from a wide range of intuitive
 predefined patterns to custom JavaScript code.
 -   **Have specific information for each technology or service detected**:
 for instance if Vision finds `Google Analytics` you can get the tracking ID of
-that specific user, or for example if Vision finds `Twitter Follow Button`
+the specific user, or for example if Vision finds `Twitter Follow Button`
 you can get the username of the specific user to follow.
 -   **Have atomic definitions**, for instance `Facebook Like Button`
 and `Facebook Share Button` are clearly distinguished and not superficially
 defined as just `Facebook`.
 
 ## Entries
-All technologies and services that can be identified by Vision are defined as
-entries. All entries
+All technologies and services identified by Vision are defined as
+entries.
 
 ## Fingerprint
 A fingerprint is a pattern composed by a set of inner patterns used as models
@@ -44,13 +43,13 @@ In case at least one key-value pair is matched then the entry is matched.
 ```javascript
 {
     name: "Entry Example",
-    description: "This entry is used for usage examples!",
+    description: "This entry is used for fingerprint usage examples.",
     fingerprint: {
         headers: {
-            "[header-name]": "[header-value]",
+            "header-name-regex": "header-value-regex",
         }   
     },
-}
+},
 ```
 </details>
 
@@ -79,7 +78,7 @@ List of regular expressions used to match the value of the "href" attribute of a
 List of regular expressions used to match the inner value of all style elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
 #### `metas`
-Set of regular expressions used to match meta elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
+List of regular expressions used to match meta elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
 #### `cookies`
 A key-value pair set used to match cookies created in the website.
