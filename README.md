@@ -39,12 +39,13 @@ In case at least one key-value pair is matched then the entry is matched.
 
 <details>
     <summary>Usage Example</summary>
-  
-    ```javascript
-        function foo () {
-            return null;
-        }
-    ```
+    <br>
+
+```javascript
+    function foo () {
+        return null;
+    }
+```
 </details>
 
 #### `initialContent`
