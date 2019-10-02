@@ -42,9 +42,15 @@ In case at least one key-value pair is matched then the entry is matched.
     <br>
 
 ```javascript
-    function foo () {
-        return null;
-    }
+{
+    name: "Entry Example",
+    description: "This entry is used for usage examples!",
+    fingerprint: {
+        headers: {
+            "[header-name]": "[header-value]",
+        }   
+    },
+}
 ```
 </details>
 
