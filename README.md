@@ -47,7 +47,9 @@ In case at least one key-value pair is matched then the entry is matched.
     fingerprint: {
         headers: {
             "header-name-regex": "header-value-regex",
-        }   
+            "header-name-regex": "header-value-regex",
+            // ...
+        },
     },
 },
 ```
@@ -56,8 +58,46 @@ In case at least one key-value pair is matched then the entry is matched.
 #### `initialContent`
 List of regular expressions used to match the website source code (the HTTP response body). In case at least one regular expression is matched then the entry is matched.
 
+<details>
+    <summary>Usage Example</summary>
+    <br>
+
+```javascript
+{
+    name: "Entry Example",
+    description: "This entry is used for fingerprint usage examples.",
+    fingerprint: {
+        initialContent: [
+            "regex",
+            "regex",
+            // ...
+        ],
+    },
+},
+```
+</details>
+
 #### `loadedContent`
 List of regular expressions used to match the website source code after the "load" event. In case at least one regular expression is matched then the entry is matched.
+
+<details>
+    <summary>Usage Example</summary>
+    <br>
+
+```javascript
+{
+    name: "Entry Example",
+    description: "This entry is used for fingerprint usage examples.",
+    fingerprint: {
+        initialContent: [
+            "regex",
+            "regex",
+            // ...
+        ],
+    },
+},
+```
+</details>
 
 #### `selectors`
 List of CSS selectors, the selectors are queried after the "load" event. In case at least one queried selector returns at least one element then the entry is matched.
