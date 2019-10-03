@@ -40,10 +40,10 @@ export class VisionParser {
         const matched: VisionParserMatchSet = new VisionParserMatchSet();
         const addEntry: Function = async (entry: VisionEntry, matcher: VisionParserMatcher, impliedBy: VisionEntry): Promise<void> => {
             const entryVersion: string = (
-                this._options.evaluateEntryVersion ?  await evaluateEntryVersion(entry.fingerprint, scrapeDescriptor) : ""
+                this._options.evaluateEntryVersion ?  await evaluateEntryVersion(entry.fingerprint, scrapeDescriptor) : null
             );
             const entryExtraInformation: {} = (
-                this._options.evaluateEntryExtraInformation ? await evaluateEntryExtraInformation(entry.fingerprint, scrapeDescriptor) : {}
+                this._options.evaluateEntryExtraInformation ? await evaluateEntryExtraInformation(entry.fingerprint, scrapeDescriptor) : null
             );
 
             matched.add({
@@ -55,7 +55,7 @@ export class VisionParser {
                     extraInformation: entryExtraInformation,
                 },
                 entryMatcher: matcher,
-                entryImpliedBy: impliedBy
+                entryImpliedBy: impliedBy,
             });
 
             if (Array.isArray(entry.implies)) {
@@ -112,7 +112,7 @@ export async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerp
         return "" + await scrapeDescriptor.window.evaluate(versionEvaluation);
     }
     catch (error) {
-        return "";
+        return null;
     }
 }
 
@@ -134,7 +134,7 @@ export async function evaluateEntryExtraInformation (entryFingerprint: VisionEnt
         };
     }
     catch (error) {
-        return {};
+        return null;
     }
 }
 
