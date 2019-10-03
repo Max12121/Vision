@@ -89,7 +89,7 @@ List of regular expressions used to match the website source code after the "loa
     name: "Entry Example",
     description: "This entry is used for fingerprint usage examples.",
     fingerprint: {
-        initialContent: [
+        loadedContent: [
             "regex",
             "regex",
             // ...
@@ -101,6 +101,26 @@ List of regular expressions used to match the website source code after the "loa
 
 #### `selectors`
 List of CSS selectors, the selectors are queried after the "load" event. In case at least one queried selector returns at least one element then the entry is matched.
+
+<details>
+    <summary>Usage Example</summary>
+    <br>
+
+```javascript
+{
+    name: "Entry Example",
+    description: "This entry is used for fingerprint usage examples.",
+    fingerprint: {
+        selectors: [
+            ".selector",
+            "#selector",
+            "a.complex[selector]"
+            // ...
+        ],
+    },
+},
+```
+</details>
 
 #### `scripts/sources`
 List of regular expressions used to match the value of the "src" attribute of all script elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
