@@ -114,7 +114,7 @@ List of CSS selectors, the selectors are queried after the "load" event. In case
         selectors: [
             ".selector",
             "#selector",
-            "a.complex[selector]"
+            "a.complex[selector]",
             // ...
         ],
     },
@@ -125,11 +125,88 @@ List of CSS selectors, the selectors are queried after the "load" event. In case
 #### `scripts/sources`
 List of regular expressions used to match the value of the "src" attribute of all script elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
+<details>
+    <summary>Usage Example</summary>
+    <br>
+
+```javascript
+{
+    name: "Entry Example",
+    description: "This entry is used for fingerprint usage examples.",
+    fingerprint: {
+        scripts: {
+            sources: [
+                "regex",
+                "regex",
+                // ...
+            ],
+        },
+    },
+},
+```
+</details>
+
 #### `scripts/contents`
 List of regular expressions used to match the inner value of all script elements without the "src" attribute. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
+<details>
+    <summary>Usage Example</summary>
+    <br>
+
+```javascript
+{
+    name: "Entry Example",
+    description: "This entry is used for fingerprint usage examples.",
+    fingerprint: {
+        scripts: {
+            contents: [
+                "regex",
+                "regex",
+                // ...
+            ],
+        },
+    },
+},
+```
+</details>
+
 #### `scripts/globalDeclarations`
 List of regular expressions used to match the keys created by scripts in the window object. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched. Note that only properties of the window object can be matched, and not, for example, a property of a property of the window object (if you need to do this please refer to the `customEvaluation/match` pattern model).
+
+<details>
+    <summary>Usage Example</summary>
+    <br>
+
+```javascript
+{
+    name: "Entry Example",
+    description: "This entry is used for fingerprint usage examples.",
+    fingerprint: {
+        scripts: {
+            globalDeclarations: [
+                "global-name-regex",
+                "global-name-regex",
+                // ...
+            ],
+        },
+    },
+},
+```
+
+```javascript
+{
+    name: "jQuery",
+    description: "",
+    fingerprint: {
+        scripts: {
+            globalDeclarations: [
+                "^jQuery$",
+            ],
+        },
+    },
+},
+```
+</details>
 
 #### `styles/sources`
 List of regular expressions used to match the value of the "href" attribute of all style sheet links. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
