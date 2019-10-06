@@ -162,7 +162,7 @@ List of regular expressions used to match the value of the "src" attribute of al
 
 ---
 
-#### `scripts/contents`
+#### `scripts::contents`
 List of regular expressions used to match the inner value of all script elements without the "src" attribute. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
 <details>
@@ -188,7 +188,7 @@ List of regular expressions used to match the inner value of all script elements
 
 ---
 
-#### `scripts/globalDeclarations`
+#### `scripts::globalDeclarations`
 List of regular expressions used to match the keys created by scripts in the window object. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched. Note that only properties of the window object can be matched, and not, for example, a property of a property of the window object (if you need to do this please refer to the `customEvaluation/match` pattern model).
 
 <details>
@@ -230,7 +230,7 @@ The ``^`` and ``$`` are RegExp operators used to make sure the matched key is ex
 
 ---
 
-#### `styles/sources`
+#### `styles::sources`
 List of regular expressions used to match the value of the "href" attribute of all style sheet links. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
 <details>
@@ -256,7 +256,7 @@ List of regular expressions used to match the value of the "href" attribute of a
 
 ---
 
-#### `styles/contents`
+#### `styles::contents`
 List of regular expressions used to match the inner value of all style elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
 <details>
@@ -427,3 +427,41 @@ List of regular expressions used to match the value of the "src" attribute of al
 </details>
 
 ---
+
+#### `customEvaluation::match`
+A custom JavaScript function evaluated on the visited website. In case the function returns ``true` then the entry is matched.
+Useful in case the predefined patterns are not enough.
+
+<details>
+    <summary>Usage Example</summary>
+    <br>
+
+```javascript
+{
+    name: "Entry Example",
+    description: "This entry is used for fingerprint usage examples.",
+    fingerprint: {
+        customEvaluation: {
+            match: () => {
+                // Custom Code...
+            },
+        },
+    },
+},
+```
+
+Below a custom way for detecting ``jQuery``.
+```javascript
+{
+    name: "Entry Example",
+    description: "This entry is used for fingerprint usage examples.",
+    fingerprint: {
+        customEvaluation: {
+            match: () => {
+                return typeof window.jQuery === "function";
+            },
+        },
+    },
+},
+```
+</details>
