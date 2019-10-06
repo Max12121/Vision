@@ -21,18 +21,18 @@ export const versionedEntries: VersionedVisionEntryList = {
         },
         {
             name: "iubenda Privacy Policy",
-            "description": "A privacy policy generated through iubenda.",
-            "categories": [
+            description: "A privacy policy generated through iubenda.",
+            categories: [
                 "Law", "Privacy", "Freemium", "SaaS",
             ],
-            "uri": "https://www.iubenda.com",
-            "creationYear": "2011",
-            "fingerprint": {
-                "links": [
+            uri: "https://www.iubenda.com",
+            creationYear: "2011",
+            fingerprint: {
+                links: [
                     "^https://www.iubenda.com/privacy-policy/[0-9]+",
                 ],
             },
-            "implies": [
+            implies: [
                 "iubenda",
             ],
         },

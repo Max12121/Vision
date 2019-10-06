@@ -1,12 +1,12 @@
 import { VisionEntryAuthor } from "./VisionEntryAuthor";
 import { VisionEntryFingerprint } from "./VisionEntryFingerprint";
 
-// Represents a technology or service.
+// Represents a technology or service, generically named entry.
 export type VisionEntry = {
-    // Used as entry name.
+    // Represents the entry name.
     name: string;
 
-    // Used as entry description.
+    // Represents the entry description.
     description?: string;
 
     // The categories the entry belongs.

@@ -1,11 +1,12 @@
 import { VisionEntry } from "./VisionEntry";
 
+// Represents a matched entry.
 export type MatchedVisionEntry = VisionEntry & {
-    // Used as entry version.
+    // Represents the version of the matched entry.
     version?: string;
 
-    // Used as extra information.
-    extraInformation?: {
+    // Represents extra information related to the matched entry.
+    extra?: {
         [name: string]: string;
     };
 };

@@ -10,7 +10,7 @@ import { VisionParserOptions } from "./VisionParserOptions";
 
 export const defaultOptions: VisionParserOptions = {
     evaluateEntryVersion: true,
-    evaluateEntryExtraInformation: true,
+    evaluateEntryExtra: true,
 };
 
 export class VisionParser {
@@ -43,7 +43,7 @@ export class VisionParser {
                 this._options.evaluateEntryVersion ?  await evaluateEntryVersion(entry.fingerprint, scrapeDescriptor) : null
             );
             const entryExtraInformation: {} = (
-                this._options.evaluateEntryExtraInformation ? await evaluateEntryExtraInformation(entry.fingerprint, scrapeDescriptor) : null
+                this._options.evaluateEntryExtra ? await evaluateEntryExtra(entry.fingerprint, scrapeDescriptor) : null
             );
 
             matched.add({
@@ -52,7 +52,7 @@ export class VisionParser {
                 matchedEntry: {
                     ...copyEntry(entry),
                     version: entryVersion,
-                    extraInformation: entryExtraInformation,
+                    extra: entryExtraInformation,
                 },
                 entryMatcher: matcher,
                 entryImpliedBy: impliedBy,
@@ -116,17 +116,17 @@ export async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerp
     }
 }
 
-export async function evaluateEntryExtraInformation (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<{}> {
+export async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<{}> {
     if (
         typeof entryFingerprint !== "object" ||
         typeof entryFingerprint.customEvaluation !== "object" ||
-        typeof entryFingerprint.customEvaluation.extraInformation !== "string" ||
+        typeof entryFingerprint.customEvaluation.extra !== "string" ||
         typeof scrapeDescriptor.window !== "object"
     ) {
         return {};
     }
 
-    const extraEvaluation: string = entryFingerprint.customEvaluation.extraInformation;
+    const extraEvaluation: string = entryFingerprint.customEvaluation.extra;
 
     try {
         return {
