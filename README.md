@@ -57,13 +57,13 @@ async function myApplication (): Promise<void> {
 }
 ```
 
-## I/O
+### What happens inside
 <p align="center">
-    <img src="images/io.png" alt="" width="90%">
+    <img src="images/io.png" alt="" width="95%">
 </p>
 
 ## Entries
-A technology or service identified by Vision is called entry. Vision relies on a
+**A entry is a technology or service that can be identified by Vision**. Vision relies on a
 list of entries updated and maintained by the community and the author. You may also define
 and detect your custom entries.
 
