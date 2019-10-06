@@ -136,7 +136,7 @@ List of CSS selectors, the selectors are queried after the "load" event. In case
 
 ---
 
-#### `scripts.sources`
+#### `scripts::sources`
 List of regular expressions used to match the value of the "src" attribute of all script elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
 <details>
