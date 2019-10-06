@@ -1,7 +1,7 @@
 import { VisionEntryAuthor } from "./VisionEntryAuthor";
 import { VisionEntryFingerprint } from "./VisionEntryFingerprint";
 
-// Represents a technology or service, generically named entry.
+// Represents a technology or service, generically referred as entry.
 export type VisionEntry = {
     // Represents the entry name.
     name: string;
@@ -15,19 +15,19 @@ export type VisionEntry = {
     // The entry authors.
     authors?: VisionEntryAuthor[];
 
-    // Used as entry URI.
+    // Represents a URI related to the entry.
     uri?: string;
 
-    // Used as entry license, can be a common name or a URI to the license.
+    // Represents the entry license, can be a common name or a URI to the license.
     license?: string;
 
-    // Used as entry creation year.
+    // Represents the entry creation year.
     creationYear?: string;
 
-    // Used as entry discontinuation year.
+    // Represents the entry discontinuation year.
     discontinuationYear?: string;
 
-    // Used as entry fingerprint.
+    // Represents a reference to the entry fingerprint.
     fingerprint?: VisionEntryFingerprint;
 
     // The presence of this entry implies the presence of the entries defined in this list.
@@ -36,7 +36,7 @@ export type VisionEntry = {
     // The presence of this entry implies the non-presence of the entries defined in this list.
     // readonly excludes?: string[];
     /*
-     * The previous definition is not implemented because of the large amount of negative points.
+     * The previous definition is not implemented because of the large amount of negative points:
      * 1. Requires to be constantly updated: for instance Apache excludes Nginx and the others web servers,
      * when a new web server is released, the excluded list of Apache needs to be updated with the name of the new one.
      * 2. It's not really necessary to exclude a entry: if a entry is really excluded, it will not be matched.

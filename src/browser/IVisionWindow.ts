@@ -1,9 +1,9 @@
 import { IVisionBrowser } from "./IVisionBrowser";
 import { IVisionHTTPResponse } from "./IVisionHTTPResponse";
 
-// Represents a page used by Vision to load and manipulate websites.
+// Represents a window used by Vision to load and manipulate websites.
 export interface IVisionWindow {
-    // Used as reference to the browser that created the window.
+    // Represents a reference to the browser that created the window.
     browser: IVisionBrowser;
 
     // Used to set the user agent of the window.
@@ -12,7 +12,7 @@ export interface IVisionWindow {
     // Used to request and load a webpage.
     goto (uri: string): Promise<IVisionHTTPResponse>;
 
-    // Used to evaluate JavaScript code in the webpage.
+    // Used to evaluate JavaScript code in the active webpage.
     evaluate (text: string): Promise<any>;
 
     // Used to close the window.

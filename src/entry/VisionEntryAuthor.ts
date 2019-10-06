@@ -2,7 +2,7 @@
 export type VisionEntryAuthor = {
     // Represents the author name.
     name?: string;
-
+    
     // Represents the author email.
     email?: string;
 

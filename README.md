@@ -24,6 +24,41 @@ you can get the username of the specific user to follow.
 and `Facebook Share Button` are clearly distinguished and not superficially
 defined as just `Facebook`.
 
+## Usage
+A list of Vision usage examples.
+
+```javascript
+const Vision = require("vision");
+
+Vision.cast("https://www.example.com").then((descriptor) => {
+    console.log(descriptor);
+});
+```
+
+or
+
+```javascript
+import { Vision } from "vision";
+
+async function myApplication () {
+    const descriptor = await Vision.cast("https://www.example.com");
+
+    console.log(descriptor);
+}
+```
+
+or if you are using TypeScript
+
+```typescript
+import { Vision, VisionDescriptor } from "vision";
+
+async function myApplication (): void {
+    const descriptor: VisionDescriptor  = await Vision.cast("https://www.example.com");
+
+    console.log(descriptor);
+}
+```
+
 ## Entries
 A technology or service identified by Vision is called entry. Vision relies on a
 list of entries updated and maintained by the community and the author. You may also define
@@ -429,7 +464,7 @@ List of regular expressions used to match the value of the "src" attribute of al
 ---
 
 #### `customEvaluation::match`
-A custom JavaScript function evaluated on the visited website. In case the function returns ``true` then the entry is matched.
+A custom JavaScript function evaluated on the visited website. In case the function returns ``true`` then the entry is matched.
 Useful in case the predefined patterns are not enough.
 
 <details>

@@ -11,7 +11,7 @@ export const defaultOptions: VisionScraperOptions = {
 };
 
 export class VisionScraper {
-    private static readonly VISION_HELPER: string = FileSystem.readFileSync(Path.resolve(__dirname, "__Vision__.js")).toString();
+    private static readonly VISION_HELPER: string = FileSystem.readFileSync(Path.resolve(__dirname, "__Vision.js")).toString();
 
     private static readonly EXPRESSION_HOSTNAME: string = "window.location.hostname";
     private static readonly EXPRESSION_LOCAL_SCRAPE_DESCRIPTOR: string = "__Vision__.getScrapeDescriptor()";

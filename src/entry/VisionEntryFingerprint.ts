@@ -5,16 +5,17 @@ export type VisionEntryFingerprint = {
         [name: string]: string;
     };
 
-    // List of regular expressions used to match the response body.
+    // List of regular expressions used to match the website HTTP response body.
     initialContent?: string[];
 
-    // List of regular expressions used to match the body of the document after the "load" event is fired.
+    // List of regular expressions used to match the source of the website after the "load" event.
     loadedContent?: string[];
 
     // TODO: list of regular expressions used to match the URI of a web request.
     // readonly webRequests?: string[];
 
     // List of CSS selectors, if at least one matches at least one element then the entry is matched.
+    // The selectors are queried after the "load" event.
     selectors?: string[];
 
     // Collection of regular expressions used to match scripts in the website.
@@ -22,7 +23,7 @@ export type VisionEntryFingerprint = {
         // List of regular expressions used to match the value of the "src" attribute of all script elements.
         sources?: string[];
 
-        // List of regular expressions used to match the inner value of all script elements without the "src" attribute.
+        // List of regular expressions used to match the inner value of all script elements (without the "src" attribute).
         contents?: string[];
 
         // List of regular expressions used to match the keys created by scripts in the window object.
@@ -70,7 +71,8 @@ export type VisionEntryFingerprint = {
         // Used as custom code evaluated on the document when the entry is matched for retrieving the version of the entry.
         version?: string;
 
-        // Used as custom code evaluated on the document when the entry is matched for retrieving extra information regarding the entry.
+        // Used as custom code evaluated on the document when the entry is matched for retrieving extra information
+        // related to the matched entry.
         extra?: string;
     };
 };
