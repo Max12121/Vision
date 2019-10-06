@@ -29,6 +29,9 @@ A technology or service identified by Vision is called entry. Vision relies on a
 list of entries updated and maintained by the community and the author. You may also define
 and detect your custom entries.
 
+### How to add a new Entry
+TBD.
+
 ## Fingerprint
 A fingerprint is a pattern composed by a set of inner patterns used as models
 to detect a technology or service in a website. Below the models you can use to compose a fingerprint.
@@ -133,7 +136,7 @@ List of CSS selectors, the selectors are queried after the "load" event. In case
 
 ---
 
-#### `scripts/sources`
+#### `scripts.sources`
 List of regular expressions used to match the value of the "src" attribute of all script elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
 
 <details>
