@@ -25,6 +25,7 @@ and `Facebook Share Button` are clearly distinguished and not superficially
 defined as just `Facebook`.
 
 ## Usage
+Using NodeJS with ES5
 ```javascript
 const Vision = require("vision");
 
@@ -33,8 +34,7 @@ Vision.cast("https://www.example.com").then((descriptor) => {
 });
 ```
 
-or
-
+Using NodeJS with ES6
 ```javascript
 import { Vision } from "vision";
 
@@ -45,8 +45,7 @@ async function myApplication () {
 }
 ```
 
-or if you are using TypeScript
-
+Using NodeJS with TypeScript
 ```typescript
 import { Vision, VisionDescriptor } from "vision";
 
