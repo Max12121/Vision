@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="vision.svg" alt="" width="210px">
+    <img src="images/vision.svg" alt="" width="210px">
 </p>
 
 # Vision
@@ -56,6 +56,11 @@ async function myApplication (): Promise<void> {
     console.log(descriptor);
 }
 ```
+
+## I/O
+<p align="center">
+    <img src="images/io.png" alt="" width="70%">
+</p>
 
 ## Entries
 A technology or service identified by Vision is called entry. Vision relies on a
@@ -498,3 +503,9 @@ Below a custom way for detecting ``jQuery``.
 },
 ```
 </details>
+
+## Changelog
+The changelog.
+
+#### 0.1.0
+Vision.
