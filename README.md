@@ -78,6 +78,7 @@ List of regular expressions used to match the website source code (the HTTP resp
 },
 ```
 </details>
+
 ---
 
 #### `loadedContent`
