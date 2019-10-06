@@ -74,8 +74,6 @@ TBD.
 A fingerprint is a pattern composed by a set of inner patterns used as models
 to detect a technology or service in a website (a entry). Below the models you can use to compose a fingerprint.
 
----
-
 #### `headers`
 A key-value pair set used to match headers in the HTTP response of the website request.
 In case at least one key-value pair is matched then the entry is matched.
@@ -263,7 +261,7 @@ The following is how Vision detects jQuery.
     },
 },
 ```
-The ``^`` and ``$`` are RegExp operators used to make sure the matched key is exactly "jQuery" and not for instance "aaajQuerybbb".
+The `^` and `$` are regular expression operators used to make sure the matched key is exactly "jQuery" and not for instance "aaajQuerybbb".
 </details>
 
 ---
@@ -467,7 +465,7 @@ List of regular expressions used to match the value of the "src" attribute of al
 ---
 
 #### `customEvaluation::match`
-A custom JavaScript function evaluated on the visited website. In case the function returns ``true`` then the entry is matched.
+A custom JavaScript function evaluated on the visited website. In case the function returns `true` then the entry is matched.
 Useful in case the predefined patterns are not enough.
 
 <details>
@@ -488,7 +486,7 @@ Useful in case the predefined patterns are not enough.
 },
 ```
 
-Below a custom way for detecting ``jQuery``.
+Below a custom way for detecting `jQuery`.
 ```javascript
 {
     name: "Entry Example",
