@@ -4,7 +4,7 @@ import { VisionParserMatch } from "./VisionParserMatch";
 
 export class VisionParserMatchSet extends VisionSet<VisionParserMatch> {
     public constructor () {
-        super((match: VisionParserMatch) => {
+        super((match: VisionParserMatch): string => {
             return match.matchedEntry.name;
         });
     }
