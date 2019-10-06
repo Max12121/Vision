@@ -66,13 +66,21 @@ export type VisionEntryFingerprint = {
     // Represents custom code evaluated on the document.
     customEvaluation?: {
         // Used as custom code evaluated on the document for matching the entry: if returns "true" then the entry will be matched.
-        match?: string;
+        match?: MatchAction | string;
 
         // Used as custom code evaluated on the document when the entry is matched for retrieving the version of the entry.
-        version?: string;
+        version?: VersionAction | string;
 
         // Used as custom code evaluated on the document when the entry is matched for retrieving extra information
         // related to the matched entry.
-        extra?: string;
+        extra?: ExtraAction | string;
     };
+};
+
+export type MatchAction = () => boolean;
+
+export type VersionAction = () => string;
+
+export type ExtraAction = () => {
+    [hash: string]: string;
 };

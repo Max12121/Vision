@@ -1,4 +1,4 @@
-import { versionedEntries } from "../entries/Entries";
+import { VisionEntries } from "../entries/VisionEntries";
 import { IVisionBrowser } from "./browser/IVisionBrowser";
 import { VisionEntry } from "./entry/VisionEntry";
 import { VisionEntrySet } from "./entry/VisionEntrySet";
@@ -21,7 +21,7 @@ export namespace Vision {
         const browser: IVisionBrowser = new PuppeteerBrowser();
         const entries: VisionEntrySet = new VisionEntrySet();
 
-        versionedEntries.entries.forEach((entry: VisionEntry) => {
+        VisionEntries.entries.forEach((entry: VisionEntry) => {
             entries.add(entry);
         });
 

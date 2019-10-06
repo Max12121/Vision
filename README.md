@@ -25,8 +25,6 @@ and `Facebook Share Button` are clearly distinguished and not superficially
 defined as just `Facebook`.
 
 ## Usage
-A list of Vision usage examples.
-
 ```javascript
 const Vision = require("vision");
 
@@ -52,7 +50,7 @@ or if you are using TypeScript
 ```typescript
 import { Vision, VisionDescriptor } from "vision";
 
-async function myApplication (): void {
+async function myApplication (): Promise<void> {
     const descriptor: VisionDescriptor  = await Vision.cast("https://www.example.com");
 
     console.log(descriptor);
