@@ -33,6 +33,8 @@ and detect your custom entries.
 A fingerprint is a pattern composed by a set of inner patterns used as models
 to detect a technology or service in a website. Below the models you can use to compose a fingerprint.
 
+---
+
 #### `headers`
 A key-value pair set used to match headers in the HTTP response of the website request.
 In case at least one key-value pair is matched then the entry is matched.
@@ -55,6 +57,7 @@ In case at least one key-value pair is matched then the entry is matched.
 },
 ```
 </details>
+
 ---
 
 #### `initialContent`
@@ -102,6 +105,7 @@ List of regular expressions used to match the website source code after the "loa
 },
 ```
 </details>
+
 ---
 
 #### `selectors`
@@ -126,6 +130,7 @@ List of CSS selectors, the selectors are queried after the "load" event. In case
 },
 ```
 </details>
+
 ---
 
 #### `scripts/sources`
@@ -151,6 +156,7 @@ List of regular expressions used to match the value of the "src" attribute of al
 },
 ```
 </details>
+
 ---
 
 #### `scripts/contents`
@@ -176,6 +182,7 @@ List of regular expressions used to match the inner value of all script elements
 },
 ```
 </details>
+
 ---
 
 #### `scripts/globalDeclarations`
@@ -217,6 +224,7 @@ The following is how Vision detects jQuery.
 ```
 The ``^`` and ``$`` are RegExp operators used to make sure the matched key is exactly "jQuery" and not for instance "aaajQuerybbb".
 </details>
+
 ---
 
 #### `styles/sources`
@@ -242,6 +250,7 @@ List of regular expressions used to match the value of the "href" attribute of a
 },
 ```
 </details>
+
 ---
 
 #### `styles/contents`
@@ -267,6 +276,7 @@ List of regular expressions used to match the inner value of all style elements.
 },
 ```
 </details>
+
 ---
 
 #### `metas`
@@ -290,6 +300,7 @@ List of regular expressions used to match meta elements. The regular expressions
 },
 ```
 </details>
+
 ---
 
 #### `cookies`
@@ -314,6 +325,7 @@ In case at least one key-value pair is matched then the entry is matched.
 },
 ```
 </details>
+
 ---
 
 #### `localStorage`
@@ -338,6 +350,7 @@ In case at least one key-value pair is matched then the entry is matched.
 },
 ```
 </details>
+
 ---
 
 #### `links`
@@ -361,6 +374,7 @@ List of regular expressions used to match the value of the "href" attribute of a
 },
 ```
 </details>
+
 ---
 
 #### `images`
@@ -384,6 +398,7 @@ List of regular expressions used to match the value of the "src" attribute of al
 },
 ```
 </details>
+
 ---
 
 #### `frames`
@@ -407,4 +422,5 @@ List of regular expressions used to match the value of the "src" attribute of al
 },
 ```
 </details>
+
 ---
