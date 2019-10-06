@@ -59,7 +59,7 @@ async function myApplication (): Promise<void> {
 
 ## I/O
 <p align="center">
-    <img src="images/io.png" alt="" width="70%">
+    <img src="images/io.png" alt="" width="90%">
 </p>
 
 ## Entries
