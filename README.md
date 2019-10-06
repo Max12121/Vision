@@ -55,6 +55,7 @@ In case at least one key-value pair is matched then the entry is matched.
 },
 ```
 </details>
+---
 
 #### `initialContent`
 List of regular expressions used to match the website source code (the HTTP response body). In case at least one regular expression is matched then the entry is matched.
@@ -77,6 +78,7 @@ List of regular expressions used to match the website source code (the HTTP resp
 },
 ```
 </details>
+---
 
 #### `loadedContent`
 List of regular expressions used to match the website source code after the "load" event. In case at least one regular expression is matched then the entry is matched.
@@ -99,6 +101,7 @@ List of regular expressions used to match the website source code after the "loa
 },
 ```
 </details>
+---
 
 #### `selectors`
 List of CSS selectors, the selectors are queried after the "load" event. In case at least one queried selector returns at least one element then the entry is matched.
@@ -122,6 +125,7 @@ List of CSS selectors, the selectors are queried after the "load" event. In case
 },
 ```
 </details>
+---
 
 #### `scripts/sources`
 List of regular expressions used to match the value of the "src" attribute of all script elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
@@ -146,6 +150,7 @@ List of regular expressions used to match the value of the "src" attribute of al
 },
 ```
 </details>
+---
 
 #### `scripts/contents`
 List of regular expressions used to match the inner value of all script elements without the "src" attribute. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
@@ -170,6 +175,7 @@ List of regular expressions used to match the inner value of all script elements
 },
 ```
 </details>
+---
 
 #### `scripts/globalDeclarations`
 List of regular expressions used to match the keys created by scripts in the window object. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched. Note that only properties of the window object can be matched, and not, for example, a property of a property of the window object (if you need to do this please refer to the `customEvaluation/match` pattern model).
@@ -210,6 +216,7 @@ The following is how Vision detects jQuery.
 ```
 The ``^`` and ``$`` are RegExp operators used to make sure the matched key is exactly "jQuery" and not for instance "aaajQuerybbb".
 </details>
+---
 
 #### `styles/sources`
 List of regular expressions used to match the value of the "href" attribute of all style sheet links. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
@@ -234,6 +241,7 @@ List of regular expressions used to match the value of the "href" attribute of a
 },
 ```
 </details>
+---
 
 #### `styles/contents`
 List of regular expressions used to match the inner value of all style elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
@@ -258,6 +266,7 @@ List of regular expressions used to match the inner value of all style elements.
 },
 ```
 </details>
+---
 
 #### `metas`
 List of regular expressions used to match meta elements. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
@@ -280,6 +289,7 @@ List of regular expressions used to match meta elements. The regular expressions
 },
 ```
 </details>
+---
 
 #### `cookies`
 A key-value pair set used to match cookies created in the website.
@@ -303,6 +313,7 @@ In case at least one key-value pair is matched then the entry is matched.
 },
 ```
 </details>
+---
 
 #### `localStorage`
 A key-value pair set used to match local storage created in the website.
@@ -326,6 +337,7 @@ In case at least one key-value pair is matched then the entry is matched.
 },
 ```
 </details>
+---
 
 #### `links`
 List of regular expressions used to match the value of the "href" attribute of all links (<a>). In case at least one regular expression is matched then the entry is matched.
@@ -348,6 +360,7 @@ List of regular expressions used to match the value of the "href" attribute of a
 },
 ```
 </details>
+---
 
 #### `images`
 List of regular expressions used to match the value of the "src" attribute of all images (<img>). In case at least one regular expression is matched then the entry is matched.
@@ -370,6 +383,7 @@ List of regular expressions used to match the value of the "src" attribute of al
 },
 ```
 </details>
+---
 
 #### `frames`
 List of regular expressions used to match the value of the "src" attribute of all frames (<iframe>). In case at least one regular expression is matched then the entry is matched.
@@ -392,3 +406,4 @@ List of regular expressions used to match the value of the "src" attribute of al
 },
 ```
 </details>
+---
