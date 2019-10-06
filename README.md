@@ -63,16 +63,16 @@ async function myApplication (): Promise<void> {
 </p>
 
 ## Entries
-**A entry is a technology or service that can be identified by Vision**. Vision relies on a
+**A entry is a technology or service that can be identified by Vision**. This software relies on a
 list of entries updated and maintained by the community and the author. You may also define
 and detect your custom entries.
 
-### How to add a new Entry
+### How to add a new entry
 TBD.
 
 ## Fingerprint
 A fingerprint is a pattern composed by a set of inner patterns used as models
-to detect a technology or service in a website. Below the models you can use to compose a fingerprint.
+to detect a technology or service in a website (a entry). Below the models you can use to compose a fingerprint.
 
 ---
 
@@ -505,7 +505,6 @@ Below a custom way for detecting ``jQuery``.
 </details>
 
 ## Changelog
-The changelog.
 
 #### 0.1.0
 Vision.
