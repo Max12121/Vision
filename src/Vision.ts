@@ -1,4 +1,3 @@
-import { VisionEntries } from "../entries/VisionEntries";
 import { IVisionBrowser } from "./browser/IVisionBrowser";
 import { VisionEntry } from "./entry/VisionEntry";
 import { VisionEntrySet } from "./entry/VisionEntrySet";
@@ -9,21 +8,20 @@ import { VisionParserMatchSet } from "./parser/VisionParserMatchSet";
 import { PuppeteerBrowser } from "./utilities/browsers/puppeteer/PuppeteerBrowser";
 import { VisionDescriptor } from "./VisionDescriptor";
 import { VisionOptions } from "./VisionOptions";
+import { Entries } from "../entries/Entries";
 
 export const defaultOptions: VisionOptions = {
     matchedEntryExcludedProperties: [
         "fingerprint",
     ],
+    entries: Entries.map((entry: VisionEntry) => entry),
+    additionalEntries: [],
 };
 
 export namespace Vision {
     export async function cast (uri: string): Promise<VisionDescriptor> {
         const browser: IVisionBrowser = new PuppeteerBrowser();
         const entries: VisionEntrySet = new VisionEntrySet();
-
-        VisionEntries.entries.forEach((entry: VisionEntry) => {
-            entries.add(entry);
-        });
 
         await browser.open();
 

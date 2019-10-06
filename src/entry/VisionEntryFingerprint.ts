@@ -20,7 +20,7 @@ export type VisionEntryFingerprint = {
 
     // Collection of regular expressions used to match scripts in the website.
     scripts?: {
-        // List of regular expressions used to match the value of the "src" attribute of all script elements.
+        // List of regular expressions used to match the value of the "src" attribute of all script elements (<script>).
         sources?: string[];
 
         // List of regular expressions used to match the inner value of all script elements (without the "src" attribute).
@@ -32,10 +32,10 @@ export type VisionEntryFingerprint = {
 
     // Collection of regular expressions used to match style sheets in the website.
     styles?: {
-        // List of regular expressions used to match the value of the "href" attribute of all style sheet links.
+        // List of regular expressions used to match the value of the "href" attribute of all style sheet links (<link>).
         sources?: string[];
 
-        // List of regular expressions used to match the inner value of all style elements.
+        // List of regular expressions used to match the inner value of all style elements (<style>).
         contents?: string[];
     };
 
@@ -77,10 +77,13 @@ export type VisionEntryFingerprint = {
     };
 };
 
+// Used to match a entry.
 export type MatchAction = () => boolean;
 
+// Used to retrieve the version of a entry.
 export type VersionAction = () => string;
 
+// Used to retrieve extra information related to a entry.
 export type ExtraAction = () => {
     [hash: string]: string;
 };

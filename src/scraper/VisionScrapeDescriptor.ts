@@ -1,6 +1,7 @@
 import { IVisionWindow } from "../browser/IVisionWindow";
 import { IVisionHTTPResponse } from "../browser/IVisionHTTPResponse";
 
+// Represents the Vision scraper output of a scraped webpage.
 export type VisionScrapeDescriptor = {
     // Used as hostname.
     hostname?: string;
@@ -79,3 +80,8 @@ export type VisionScrapeDescriptor = {
     // Used as browser window reference.
     window?: IVisionWindow;
 };
+
+// Used to free a scrape descriptor.
+export async function freeScrapeDescriptor (scrapeDescriptor: VisionScrapeDescriptor): Promise<void> {
+    await scrapeDescriptor.window.close();
+}

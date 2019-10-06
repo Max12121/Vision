@@ -1,20 +1,22 @@
 import { MatchedVisionEntry } from "./entry/MatchedVisionEntry";
 
+// Represents the Vision cast output.
 export type VisionDescriptor = {
-    // Used as hostname of the visited website.
+    // Represents the hostname of the visited website.
     hostname: string;
 
-    // The matched entries.
+    // List containing the matched entries.
     entries: MatchedVisionEntry[];
 
-    // List of visited uris.
+    // List containing the visited uris.
     uris: string[];
 
-    // Descriptor creation date.
+    // Represents the descriptor creation date.
     date: string;
 
-    // Used as meta regarding the visited website.
+    // Represents meta related to the visited website.
     meta: {
+        // List of languages the visited website is available.
         languages: string[];
     };
 };
