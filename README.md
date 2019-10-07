@@ -63,7 +63,7 @@ async function myApplication (): Promise<void> {
 
 ## Entries
 **A entry is a technology or service that can be identified by Vision**. This software relies on a
-list of entries updated and maintained by the community and the author. You may also define
+list of entries updated and maintained by the community and the author. You can also define
 and detect your custom entries.
 
 ### How to add a new entry
@@ -71,7 +71,9 @@ TBD.
 
 ## Fingerprint
 A fingerprint is a pattern composed by a set of inner patterns used as models
-to detect a technology or service in a website (a entry). Below the models you can use to compose a fingerprint.
+to detect a technology or service in a website, a fingerprint is usually associated to a entry and
+the matching of a fingerprint means the matching of the associated entry.
+Below the models you can use to compose a fingerprint.
 
 #### `headers`
 A key-value pair set used to match headers in the HTTP response of the website request.
@@ -246,7 +248,7 @@ List of regular expressions used to match the keys created by scripts in the win
 },
 ```
 
-The following is how Vision detects jQuery.
+How to detect `jQuery`.
 ```javascript
 {
     name: "jQuery",
@@ -260,7 +262,7 @@ The following is how Vision detects jQuery.
     },
 },
 ```
-The `^` and `$` are regular expression operators used to make sure the matched key is exactly "jQuery" and not for instance "aaajQuerybbb".
+The `^` and `$` symbols are regular expression operators used to make sure the matched key is exactly "jQuery" and not for instance "aaajQuerybbb".
 </details>
 
 ---
@@ -459,6 +461,24 @@ List of regular expressions used to match the value of the "src" attribute of al
     },
 },
 ```
+
+How to detect `Twitter Follow Button`.
+```javascript
+{
+    name: "Twitter Tweet Button",
+    description: "A button exposed for sharing content on Twitter.",
+    categories: [
+        "Widgets", "Social Networks",
+    ],
+    uri: "https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview.html",
+    fingerprint: {
+        frames: [
+            "^https://platform.twitter.com/widgets/tweet_button",
+        ],
+    },
+},
+```
+The `^` symbol is a regular expression operator used to make sure the source of the iframe starts with the specified link.
 </details>
 
 ---
@@ -485,7 +505,7 @@ Useful in case the predefined patterns are not enough.
 },
 ```
 
-Below a custom way for detecting `jQuery`.
+How to detect `jQuery`.
 ```javascript
 {
     name: "Entry Example",
