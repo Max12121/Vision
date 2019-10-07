@@ -103,7 +103,7 @@ export async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerp
         typeof entryFingerprint.customEvaluation.version !== "string" ||
         typeof scrapeDescriptor.window !== "object"
     ) {
-        return "";
+        return null;
     }
 
     const versionEvaluation: string = entryFingerprint.customEvaluation.version;
@@ -116,14 +116,14 @@ export async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerp
     }
 }
 
-export async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<{}> {
+export async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<any> {
     if (
         typeof entryFingerprint !== "object" ||
         typeof entryFingerprint.customEvaluation !== "object" ||
         typeof entryFingerprint.customEvaluation.extra !== "string" ||
         typeof scrapeDescriptor.window !== "object"
     ) {
-        return {};
+        return null;
     }
 
     const extraEvaluation: string = entryFingerprint.customEvaluation.extra;
@@ -219,7 +219,7 @@ VisionParser.matchers.add({
 });
 
 VisionParser.matchers.add({
-    name: "scripts/sources",
+    name: "scripts::sources",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
         if (typeof entryFingerprint.scripts !== "object" || typeof scrapeDescriptor.scripts !== "object") {
             return false;
@@ -237,7 +237,7 @@ VisionParser.matchers.add({
 });
 
 VisionParser.matchers.add({
-    name: "scripts/contents",
+    name: "scripts::contents",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
         if (typeof entryFingerprint.scripts !== "object" || typeof scrapeDescriptor.scripts !== "object") {
             return false;
@@ -255,7 +255,7 @@ VisionParser.matchers.add({
 });
 
 VisionParser.matchers.add({
-    name: "scripts/globalDeclarations",
+    name: "scripts::globalDeclarations",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
         if (typeof entryFingerprint.scripts !== "object" || typeof scrapeDescriptor.scripts !== "object") {
             return false;
@@ -273,7 +273,7 @@ VisionParser.matchers.add({
 });
 
 VisionParser.matchers.add({
-    name: "styles/sources",
+    name: "styles::sources",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
         if (typeof entryFingerprint.styles !== "object" || typeof scrapeDescriptor.styles !== "object") {
             return false;
@@ -291,7 +291,7 @@ VisionParser.matchers.add({
 });
 
 VisionParser.matchers.add({
-    name: "styles/contents",
+    name: "styles::contents",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
         if (typeof entryFingerprint.styles !== "object" || typeof scrapeDescriptor.styles !== "object") {
             return false;
@@ -406,7 +406,7 @@ VisionParser.matchers.add({
 });
 
 VisionParser.matchers.add({
-    name: "customEvaluation/match",
+    name: "customEvaluation::match",
     async matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<boolean> {
         if (
             typeof entryFingerprint.customEvaluation !== "object" ||

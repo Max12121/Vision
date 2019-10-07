@@ -2,7 +2,7 @@ import { IVisionBrowser } from "./browser/IVisionBrowser";
 import { VisionEntry } from "./entry/VisionEntry";
 import { VisionEntrySet } from "./entry/VisionEntrySet";
 import { VisionScraper } from "./scraper/VisionScraper";
-import { VisionScrapeDescriptor } from "./scraper/VisionScrapeDescriptor";
+import { VisionScrapeDescriptor, freeScrapeDescriptor } from "./scraper/VisionScrapeDescriptor";
 import { VisionParser } from "./parser/VisionParser";
 import { VisionParserMatchSet } from "./parser/VisionParserMatchSet";
 import { PuppeteerBrowser } from "./utilities/browsers/puppeteer/PuppeteerBrowser";
@@ -31,7 +31,7 @@ export namespace Vision {
         const parser: VisionParser = new VisionParser(entries);
         const matched: VisionParserMatchSet = await parser.match(scrapeDescriptor);
 
-        await scrapeDescriptor.window.close();
+        await freeScrapeDescriptor(scrapeDescriptor);
         await browser.close();
 
         return {

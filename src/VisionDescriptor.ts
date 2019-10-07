@@ -5,10 +5,10 @@ export type VisionDescriptor = {
     // Represents the hostname of the visited website.
     hostname: string;
 
-    // List containing the matched entries.
+    // Represents a list containing the matched entries.
     entries: MatchedVisionEntry[];
 
-    // List containing the visited uris.
+    // Represents a list containing the visited uris.
     uris: string[];
 
     // Represents the descriptor creation date.
@@ -16,7 +16,7 @@ export type VisionDescriptor = {
 
     // Represents meta related to the visited website.
     meta: {
-        // List of languages the visited website is available.
+        // Represents a list containing the languages the visited website is available.
         languages: string[];
     };
 };
