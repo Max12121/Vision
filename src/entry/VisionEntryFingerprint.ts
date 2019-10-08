@@ -1,89 +1,87 @@
 // Represents a entry fingerprint: a set of patterns used to match a entry.
 export type VisionEntryFingerprint = {
-    // Set of regular expressions used to match the response headers.
+    // Represents a set of regular expressions used to match the response headers.
     headers?: {
         [name: string]: string;
     };
 
-    // List of regular expressions used to match the website HTTP response body.
+    // Represents a list of regular expressions used to match the HTTP response body of a website.
     initialContent?: string[];
 
-    // List of regular expressions used to match the source of the website after the "load" event.
+    // Represents a list of regular expressions used to match the source of a website after the "load" event.
     loadedContent?: string[];
 
-    // TODO: list of regular expressions used to match the URI of a web request.
-    // readonly webRequests?: string[];
-
-    // List of CSS selectors, if at least one matches at least one element then the entry is matched.
+    // Represents a list of CSS selectors, if at least one matches at least one element then the entry is matched.
     // The selectors are queried after the "load" event.
     selectors?: string[];
 
-    // Collection of regular expressions used to match scripts in the website.
+    // Represents a collection of regular expressions used to match scripts in a website.
     scripts?: {
-        // List of regular expressions used to match the value of the "src" attribute of all script elements (<script>).
+        // Represents a list of regular expressions used to match the
+        // value of the "src" attribute of all script elements (<script>).
         sources?: string[];
 
-        // List of regular expressions used to match the inner value of all script elements (without the "src" attribute).
+        // Represents a list of regular expressions used to match the
+        // inner value of all script elements (without the "src" attribute).
         contents?: string[];
 
-        // List of regular expressions used to match the keys created by scripts in the window object.
+        // Represents a list of regular expressions used to match the
+        // keys created by scripts in the window object (the global declarations).
         globalDeclarations?: string[];
     };
 
-    // Collection of regular expressions used to match style sheets in the website.
+    // Represents a collection of regular expressions used to match style sheets in the website.
     styles?: {
-        // List of regular expressions used to match the value of the "href" attribute of all style sheet links (<link>).
+        // Represents a list of regular expressions used to match the
+        // value of the "href" attribute of all style sheet links (<link>).
         sources?: string[];
 
-        // List of regular expressions used to match the inner value of all style elements (<style>).
+        // Represents a list of regular expressions used to match the
+        // inner value of all style elements (<style>).
         contents?: string[];
     };
 
-    // Set of regular expressions used to match meta elements.
+    // Represents a set of regular expressions used to match meta elements.
     metas?: {
         [name: string]: string;
     };
 
-    // Set of regular expressions used to match cookies.
+    // Represents a set of regular expressions used to match cookies.
     cookies?: {
         [name: string]: string;
     };
 
-    // Set of regular expressions used to match local storage.
+    // Represents a set of regular expressions used to match local storage.
     localStorage?: {
         [name: string]: string;
     };
 
-    // List of regular expressions used to match the value of the "href" attribute of all links (<a>).
+    // Represents a list of regular expressions used to match the
+    // value of the "href" attribute of all links (<a>).
     links?: string[];
 
-    // List of regular expressions used to match the value of the "src" attribute of all images (<img>).
+    // Represents a list of regular expressions used to match the
+    // value of the "src" attribute of all images (<img>).
     images?: string[];
 
-    // List of regular expressions used to match the value of the "src" attribute of all frames (<iframe>).
+    // Represents a list of regular expressions used to match the
+    // value of the "src" attribute of all frames (<iframe>).
     frames?: string[];
 
-    // Represents custom code evaluated on the document.
+    // Represents custom code snippets evaluated on the document.
     customEvaluation?: {
-        // Used as custom code evaluated on the document for matching the entry: if returns "true" then the entry will be matched.
-        match?: MatchAction | string;
+        // Represents a custom code evaluated on the document for matching
+        // the entry: if the custom code returns "true" then the entry will be matched.
+        match?: string;
 
-        // Used as custom code evaluated on the document when the entry is matched for retrieving the version of the entry.
-        version?: VersionAction | string;
+        // Represents a custom code evaluated on the document if the entry is matched,
+        // for retrieving the version of the entry.
+        // The custom code must return a string containing the version.
+        version?: string;
 
-        // Used as custom code evaluated on the document when the entry is matched for retrieving extra information
-        // related to the matched entry.
-        extra?: ExtraAction | string;
+        // Represents a custom code evaluated on the document if the entry is matched,
+        // for retrieving extra information related to the matched entry.
+        // The custom code must return an object containing the extra information.
+        extra?: string;
     };
-};
-
-// Used to match a entry.
-export type MatchAction = () => boolean;
-
-// Used to retrieve the version of a entry.
-export type VersionAction = () => string;
-
-// Used to retrieve extra information related to a entry.
-export type ExtraAction = () => {
-    [hash: string]: string;
 };

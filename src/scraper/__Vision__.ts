@@ -1,6 +1,6 @@
 // tslint:disable
+// This code is executed in a web browser.
 namespace __Vision__ {
-    // Returns the whole source of the document.
     export function getDocumentOuterHTML () {
         return window.document.documentElement.outerHTML;
     }
@@ -47,8 +47,6 @@ namespace __Vision__ {
         return cookies;
     }
 
-    // Returns information representing the cookies: a dictionary
-    // containing the name of the entry as key and the content as value.
     export function getLocalStorage () {
         const storage = {};
 
@@ -60,8 +58,6 @@ namespace __Vision__ {
         return storage;
     }
 
-    // Returns information representing the meta nodes in the document: a dictionary
-    // containing the name of the meta as key and the content as value.
     export function getMetas () {
         const selectorText = "meta[name][content]";
         const metaNodes = [ ...window.document.querySelectorAll(selectorText) ];
@@ -75,7 +71,6 @@ namespace __Vision__ {
         return metas;
     }
 
-    // Returns the keys defined in the window object.
     export function getWindowKeys () {
         return Object.keys(window);
     }
@@ -98,7 +93,7 @@ namespace __Vision__ {
         });
     }
 
-    // Returns a Promise resolved when the "load" event is fired.
+    // Used to get a Promise resolved when the "load" event is fired.
     // In case the "load" event is already fired then the Promise is immediately resolved.
     export function waitLoadEvent () {
         return new Promise((resolve) => {
@@ -111,7 +106,7 @@ namespace __Vision__ {
         });
     }
 
-    // Returns a Promise resolved when the "DOMContentLoaded" event is fired.
+    // Used to get a Promise resolved when the "DOMContentLoaded" event is fired.
     // In case the "DOMContentLoaded" event is already fired then the Promise is immediately resolved.
     export function waitDOMContentLoadedEvent () {
         return new Promise((resolve) => {
@@ -178,7 +173,6 @@ namespace __Vision__ {
         window.scrollTo(0, 314159265);
     }
 
-    // Collect the information necessary to represent part of the scrape descriptor.
     export async function getScrapeDescriptor () {
         await waitDOMContentLoadedEvent();
 

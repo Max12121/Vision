@@ -2,6 +2,7 @@ import * as Puppeteer from "puppeteer";
 import { IVisionBrowser } from "../../../browser/IVisionBrowser";
 import { IVisionWindow } from "../../../browser/IVisionWindow";
 import { IVisionHTTPResponse } from "../../../browser/IVisionHTTPResponse";
+import { VisionError } from "../../../errors/VisionError";
 import { PuppeteerBrowser } from "./PuppeteerBrowser";
 
 export class PuppeteerWindow implements IVisionWindow {
@@ -22,7 +23,12 @@ export class PuppeteerWindow implements IVisionWindow {
     }
 
     public async goto (uri: string): Promise<IVisionHTTPResponse> {
-        const response: Puppeteer.Response = await this._puppeteerPage.goto(uri);
+        const response: Puppeteer.Response | null = await this._puppeteerPage.goto(uri);
+
+        if (!response) {
+            // TODO: TODO.
+            throw new VisionError();
+        }
 
         return {
             status: response.status(),

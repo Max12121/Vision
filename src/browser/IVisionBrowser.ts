@@ -1,6 +1,6 @@
 import { IVisionWindow } from "./IVisionWindow";
 
-// Represents a browser used by Vision to navigate websites.
+// Represents a web browser (used by Vision to navigate websites).
 export interface IVisionBrowser {
     // Used to open the browser.
     open (): Promise<void>;

@@ -1,8 +1,8 @@
 import { VisionEntry } from "../src/entry/VisionEntry";
 
-// This file contains the definitions of all the entries passed to Vision for detection.
-// The entries in this collection are meant to be static and read-only,
-// each new entry should be manually defined and added to this list.
+// This file contains the definitions of all entries passed to Vision for detection.
+// The entries in this collection are meant to be static and read-only: each new entry should be
+// manually defined and added to this list.
 
 export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
     {
@@ -66,9 +66,9 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         creationYear: "2015",
         fingerprint: {
             customEvaluation: {
-                match: "!!(window._iub && window._iub.cs)",
-                version: "window._iub.cs.VERSION",
-            }
+                match: "!!(window._iub && window._iub.cs);",
+                version: "window._iub.cs.VERSION;",
+            },
         },
         implies: [
             "iubenda",
@@ -84,7 +84,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         fingerprint: {
             scripts: {
                 sources: [
-                    "^https://platform.twitter.com/widgets.js$",
+                    "^https://platform\\.twitter\\.com/widgets\\.js$",
                 ],
             },
         },
@@ -98,7 +98,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         uri: "https://developer.twitter.com/en/docs/twitter-for-websites/follow-button/overview.html",
         fingerprint: {
             frames: [
-                "^https://platform.twitter.com/widgets/follow_button",
+                "^https://platform\\.twitter\\.com/widgets/follow_button",
             ],
         },
         implies: [
@@ -114,7 +114,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         uri: "https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview.html",
         fingerprint: {
             frames: [
-                "^https://platform.twitter.com/widgets/tweet_button",
+                "^https://platform\\.twitter\\.com/widgets/tweet_button",
             ],
         },
         implies: [
@@ -126,46 +126,46 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         fingerprint: {
             scripts: {
                 sources: [
-                    "^https://wchat\\.freshchat\\.com/js/widget\\.js$"
+                    "^https://wchat\\.freshchat\\.com/js/widget\\.js$",
                 ],
                 globalDeclarations: [
-                    "^fcWidget$"
-                ]
-            }
-        }
+                    "^fcWidget$",
+                ],
+            },
+        },
     },
     {
         name: "Typekit",
         fingerprint: {
             styles: {
                 sources: [
-                    "^https://use\\.typekit\\.net/"
-                ]
-            }
-        }
+                    "^https://use\\.typekit\\.net/",
+                ],
+            },
+        },
     },
     {
         name: "Headway",
         fingerprint: {
             selectors: [
-                "#HW_badge"
+                "#HW_badge",
             ],
             scripts: {
                 globalDeclarations: [
-                    "^Headway$"
-                ]
-            }
-        }
+                    "^Headway$",
+                ],
+            },
+        },
     },
     {
         name: "Modernizr",
         fingerprint: {
             scripts: {
                 globalDeclarations: [
-                    "^Modernizr$"
-                ]
-            }
-        }
+                    "^Modernizr$",
+                ],
+            },
+        },
     },
     {
         name: "Sentry",
@@ -175,57 +175,57 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         fingerprint: {
             scripts: {
                 globalDeclarations: [
-                    "^Raven$"
-                ]
+                    "^Raven$",
+                ],
             },
             customEvaluation: {
-                version: "window.Raven.VERSION"
-            }
+                version: "window.Raven.VERSION;",
+            },
         },
         implies: [
-            "Sentry"
-        ]
+            "Sentry",
+        ],
     },
     {
         name: "Facebook Like Button",
         description: "",
         categories: [
-            ""
+            "",
         ],
         fingerprint: {
             frames: [
-                "^//www\\.facebook.com/.*/plugins/like\\.php"
-            ]
-        }
+                "^//www\\.facebook.com/.*/plugins/like\\.php",
+            ],
+        },
     },
     {
         name: "Capterra",
         description: "A service for software peer review.",
         categories: [
-            "Review Sites"
+            "Review Sites",
         ],
-        uri: "https://www.capterra.com"
+        uri: "https://www.capterra.com",
     },
     {
         name: "Capterra Reviews Badge",
         description: "A badge showing the Capterra reviews of a software.",
         categories: [
-            "Review Sites", "Widgets", "Badges"
+            "Review Sites", "Widgets", "Badges",
         ],
         fingerprint: {
             images: [
-                "^https://assets.capterra.com/badge/"
-            ]
+                "^https://assets\\.capterra\\.com/badge/",
+            ],
         },
         implies: [
-            "Capterra"
-        ]
+            "Capterra",
+        ],
     },
     {
         name: "Pickr",
         description: "A color picker library.",
         categories: [
-            "JavaScript", "JavaScript Libraries", "CSS"
+            "JavaScript", "JavaScript Libraries", "CSS",
         ],
         uri: "https://github.com/Simonwep/pickr",
         license: "MIT",
@@ -233,16 +233,16 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         fingerprint: {
             scripts: {
                 globalDeclarations: [
-                    "^Pickr$"
-                ]
-            }
-        }
+                    "^Pickr$",
+                ],
+            },
+        },
     },
     {
         name: "jQuery",
         description: "A JavaScript library designed to simplify HTML DOM tree traversal, manipulation and event handling.",
         categories: [
-            "JavaScript", "JavaScript Libraries"
+            "JavaScript", "JavaScript Libraries",
         ],
         uri: "https://jquery.com",
         license: "MIT",
@@ -250,103 +250,103 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         fingerprint: {
             scripts: {
                 globalDeclarations: [
-                    "^jQuery$"
-                ]
+                    "^jQuery$",
+                ],
             },
             customEvaluation: {
-                version: "window.jQuery.fn.jquery"
-            }
-        }
+                version: "window.jQuery.fn.jquery;",
+            },
+        },
     },
     {
         name: "jQuery UI",
         description: "A curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library.",
         categories: [
-            "JavaScript", "JavaScript Libraries", "UI", "CSS"
+            "JavaScript", "JavaScript Libraries", "UI", "CSS",
         ],
         uri: "https://jqueryui.com/",
         license: "https://github.com/jquery/jquery-ui/blob/master/LICENSE.txt",
         creationYear: "2007",
         fingerprint: {
             customEvaluation: {
-                match: "!!(window.jQuery && window.jQuery.ui)",
-                version: "window.jQuery.ui.version"
-            }
+                match: "!!(window.jQuery && window.jQuery.ui);",
+                version: "window.jQuery.ui.version;",
+            },
         },
         implies: [
-            "jQuery"
-        ]
+            "jQuery",
+        ],
     },
     {
         name: "Underscore",
         fingerprint: {
             scripts: {
                 globalDeclarations: [
-                    "^_$"
-                ]
-            }
-        }
+                    "^_$",
+                ],
+            },
+        },
     },
     {
         name: "Google Analytics",
         categories: [
-            "Analytics"
+            "Analytics",
         ],
         fingerprint: {
             scripts: {
                 globalDeclarations: [
-                    "^GoogleAnalyticsObject$"
-                ]
-            }
-        }
+                    "^GoogleAnalyticsObject$",
+                ],
+            },
+        },
     },
     {
         name: "Bootstrap",
         description: "An open source development toolkit for HTML, CSS, and JavaScript.",
         categories: [
-            "HTML", "CSS", "JavaScript", "Web Frameworks"
+            "HTML", "CSS", "JavaScript", "Web Frameworks",
         ],
         uri: "https://getbootstrap.com",
         license: "MIT",
-        creationYear: "2011"
+        creationYear: "2011",
     },
     {
         name: "Cookiebot",
         description: "A cookie and online tracking consent solution that complies with the EU consent and information requirements.",
         categories: [
-            "Law", "Privacy", "Services", "SaaS"
-        ]
+            "Law", "Privacy", "Services", "SaaS",
+        ],
     },
     {
         name: "Cookiebot Banner",
         categories: [
-            "Law", "Privacy", "SaaS"
+            "Law", "Privacy", "SaaS",
         ],
         fingerprint: {
             scripts: {
                 globalDeclarations: [
                     "^Cookiebot$",
-                    "^CookiebotDialog$"
-                ]
-            }
+                    "^CookiebotDialog$",
+                ],
+            },
         },
         implies: [
-            "Cookiebot"
-        ]
+            "Cookiebot",
+        ],
     },
     {
         name: "Yoast SEO",
         description: "A plugin making websites as search-engine-friendly as possible.",
         categories: [
-            "Web Plugins", "SEO", "Freemium"
+            "Web Plugins", "SEO", "Freemium",
         ],
         uri: "https://yoast.com",
         creationYear: "2010",
         fingerprint: {
             selectors: [
-                "script.yoast-schema-graph"
-            ]
-        }
+                "script.yoast-schema-graph",
+            ],
+        },
     },
     {
         name: "Prism",
@@ -354,52 +354,52 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         fingerprint: {
             scripts: {
                 globalDeclarations: [
-                    "^Prism$"
-                ]
-            }
-        }
+                    "^Prism$",
+                ],
+            },
+        },
     },
     {
         name: "PHP",
         description: "A popular general-purpose scripting language that is especially suited to web servers.",
-        creationYear: "1995"
+        creationYear: "1995",
     },
     {
         name: "WordPress",
         fingerprint: {
             selectors: [
-                "link#wp-block-library-css"
+                "link#wp-block-library-css",
             ],
             scripts: {
                 globalDeclarations: [
-                    "^_wpemojiSettings$"
-                ]
+                    "^_wpemojiSettings$",
+                ],
             },
             metas: {
-                "^generator$": "^WordPress"
-            }
+                "^generator$": "^WordPress",
+            },
         },
         implies: [
             "PHP",
-            "MySQL"
-        ]
+            "MySQL",
+        ],
     },
     {
         name: "Joomla!",
         fingerprint: {
             metas: {
-                "^generator$": "^Joomla!"
-            }
+                "^generator$": "^Joomla!",
+            },
         },
         implies: [
-            "PHP"
-        ]
+            "PHP",
+        ],
     },
     {
         name: "Phaser",
         description: "A free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.",
         categories: [
-            "Game Engines", "Web Game Engines", "Game Frameworks", "Web Frameworks", "2D", "WebGL", "Canvas"
+            "Game Engines", "Web Game Engines", "Game Frameworks", "Web Frameworks", "2D", "WebGL", "Canvas",
         ],
         uri: "http://phaser.io",
         license: "MIT",
@@ -407,18 +407,16 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         fingerprint: {
             scripts: {
                 sources: [
-                    "^//cdn.jsdelivr.net/npm/phaser@.*/dist/phaser\\.min\\.js$"
+                    "^//cdn\\.jsdelivr\\.net/npm/phaser@.*/dist/phaser\\.min\\.js$",
                 ],
                 globalDeclarations: [
-                    "^Phaser$"
-                ]
+                    "^Phaser$",
+                ],
             },
-            customEvaluation: {/*
-                    version: () => {
-                        return window.Phaser.VERSION;
-                    },*/
-            }
-        }
+            customEvaluation: {
+                version: "window.Phaser.VERSION;",
+            },
+        },
     },
     {
         name: "YouTube Embedded Player",

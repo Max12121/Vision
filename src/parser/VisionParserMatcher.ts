@@ -3,7 +3,7 @@ import { VisionScrapeDescriptor } from "../scraper/VisionScrapeDescriptor";
 
 // Represents a entry matcher.
 export type VisionParserMatcher = {
-    // Used as matcher name.
+    // Represents the matcher name.
     name: string;
 
     // Used as matcher procedure.

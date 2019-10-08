@@ -14,20 +14,25 @@ export const defaultOptions: VisionOptions = {
     matchedEntryExcludedProperties: [
         "fingerprint",
     ],
-    entries: Entries.map((entry: VisionEntry) => entry),
+    entries: Entries.map((entry: VisionEntry) => {
+        return entry;
+    }),
     additionalEntries: [],
 };
 
 export namespace Vision {
-    export async function cast (uri: string): Promise<VisionDescriptor> {
+    export async function cast (uri: string, options: VisionOptions = {}): Promise<VisionDescriptor> {
         const browser: IVisionBrowser = new PuppeteerBrowser();
-        const entries: VisionEntrySet = new VisionEntrySet();
+        const entries: VisionEntrySet = new VisionEntrySet(options.entries || defaultOptions.entries || []);
+
+        (options.additionalEntries || defaultOptions.additionalEntries || []).forEach((entry: VisionEntry): void => {
+            entries.add(entry);
+        });
 
         await browser.open();
 
         const scraper: VisionScraper = new VisionScraper(browser);
         const scrapeDescriptor: VisionScrapeDescriptor = await scraper.scrape(uri);
-
         const parser: VisionParser = new VisionParser(entries);
         const matched: VisionParserMatchSet = await parser.match(scrapeDescriptor);
 
@@ -42,7 +47,7 @@ export namespace Vision {
             ],
             date: new Date().toString(),
             meta: {
-                languages: scrapeDescriptor.languages,
+                languages: scrapeDescriptor.languages || [],
             },
         };
     }

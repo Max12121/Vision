@@ -10,3 +10,8 @@ export type MatchedVisionEntry = VisionEntry & {
         [name: string]: string;
     };
 };
+
+// Returns a copy of a given matched entry.
+export function copyMatchedEntry (matchedEntry: MatchedVisionEntry): MatchedVisionEntry {
+    return JSON.parse(JSON.stringify(matchedEntry));
+}

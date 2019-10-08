@@ -1,11 +1,15 @@
 import { VisionSet } from "../utilities/collections/VisionSet";
 import { VisionEntry } from "./VisionEntry";
 
-// Represents a set of entries based on their name.
+// Represents a set of entries (based on their name).
 export class VisionEntrySet extends VisionSet<VisionEntry> {
-    public constructor () {
+    public constructor (entries: VisionEntry[] = []) {
         super((entry: VisionEntry): string => {
             return entry.name;
+        });
+
+        entries.forEach((entry: VisionEntry): void => {
+            this.add(entry);
         });
     }
 
@@ -14,7 +18,7 @@ export class VisionEntrySet extends VisionSet<VisionEntry> {
         const entries: VisionEntrySet = new VisionEntrySet();
 
         for (const entry of this.valuesToArray()) {
-            if (entry.categories.includes(category)) {
+            if (entry.categories && entry.categories.includes(category)) {
                 entries.add(entry);
             }
         }

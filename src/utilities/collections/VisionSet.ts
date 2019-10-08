@@ -17,7 +17,7 @@ export class VisionSet<T> {
         this._elements[this._toHash(element)] = element;
     }
 
-    public get (hash: string): T {
+    public get (hash: string): T | null {
         return this._elements[hash] || null;
     }
 

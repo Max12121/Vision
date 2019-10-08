@@ -1,7 +1,7 @@
 import { IVisionBrowser } from "./IVisionBrowser";
 import { IVisionHTTPResponse } from "./IVisionHTTPResponse";
 
-// Represents a window used by Vision to load and manipulate websites.
+// Represents a browser window (used by Vision to load and manipulate webpages).
 export interface IVisionWindow {
     // Represents a reference to the browser that created the window.
     browser: IVisionBrowser;

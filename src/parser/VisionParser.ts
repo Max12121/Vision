@@ -1,3 +1,4 @@
+import { MatchedVisionEntry } from "../entry/MatchedVisionEntry";
 import { VisionEntry, copyEntry } from "../entry/VisionEntry";
 import { VisionEntryFingerprint } from "../entry/VisionEntryFingerprint";
 import { VisionEntrySet } from "../entry/VisionEntrySet";
@@ -21,10 +22,7 @@ export class VisionParser {
 
     public constructor (entries: VisionEntrySet = new VisionEntrySet(), options: VisionParserOptions = {}) {
         this._entries = entries;
-        this._options = {
-            ...defaultOptions,
-            ...options,
-        };
+        this._options = options;
     }
 
     public get entries (): VisionEntrySet {
@@ -38,34 +36,47 @@ export class VisionParser {
     public async match (scrapeDescriptor: VisionScrapeDescriptor): Promise<VisionParserMatchSet> {
         const matchers: VisionParserMatcher[] = VisionParser.matchers.valuesToArray();
         const matched: VisionParserMatchSet = new VisionParserMatchSet();
-        const addEntry: Function = async (entry: VisionEntry, matcher: VisionParserMatcher, impliedBy: VisionEntry): Promise<void> => {
-            const entryVersion: string = (
-                this._options.evaluateEntryVersion ?  await evaluateEntryVersion(entry.fingerprint, scrapeDescriptor) : null
-            );
-            const entryExtraInformation: {} = (
-                this._options.evaluateEntryExtra ? await evaluateEntryExtra(entry.fingerprint, scrapeDescriptor) : null
-            );
+        const addMatch: Function = async (entry: VisionEntry, matcher: VisionParserMatcher | null, impliedBy: VisionEntry | null): Promise<void> => {
+            const matchedEntry: MatchedVisionEntry = copyEntry(entry);
+            let matchedEntryVersion: string | null;
+            let matchedEntryExtra: {
+                [name: string]: string;
+            } | null;
+
+            if (entry.fingerprint) {
+                if (this._options.evaluateEntryVersion || defaultOptions.evaluateEntryVersion) {
+                    matchedEntryVersion = await evaluateEntryVersion(entry.fingerprint, scrapeDescriptor);
+
+                    if (matchedEntryVersion) {
+                        matchedEntry.version = matchedEntryVersion;
+                    }
+                }
+
+                if (this._options.evaluateEntryExtra || defaultOptions.evaluateEntryExtra) {
+                    matchedEntryExtra = await evaluateEntryExtra(entry.fingerprint, scrapeDescriptor);
+
+                    if (matchedEntryExtra) {
+                        matchedEntry.extra = matchedEntryExtra;
+                    }
+                }
+            }
 
             matched.add({
                 parser: this,
                 scrapeDescriptor,
-                matchedEntry: {
-                    ...copyEntry(entry),
-                    version: entryVersion,
-                    extra: entryExtraInformation,
-                },
+                matchedEntry,
                 entryMatcher: matcher,
                 entryImpliedBy: impliedBy,
             });
 
-            if (Array.isArray(entry.implies)) {
+            if (entry.implies) {
                 for (const impliedEntryName of entry.implies) {
                     if (!matched.has(impliedEntryName)) {
-                        const impliedEntry: VisionEntry = this._entries.get(impliedEntryName);
+                        const impliedEntry: VisionEntry | null = this._entries.get(impliedEntryName);
 
                         // TODO: log a message in case impliedEntry is null.
                         if (impliedEntry) {
-                            await addEntry(this._entries.get(impliedEntryName), null, entry);
+                            await addMatch(this._entries.get(impliedEntryName), null, entry);
                         }
                     }
                 }
@@ -73,7 +84,7 @@ export class VisionParser {
         };
 
         for (const entry of this._entries.valuesToArray()) {
-            if (typeof entry.fingerprint !== "object" || matched.has(entry.name)) {
+            if (!entry.fingerprint || matched.has(entry.name)) {
                 continue;
             }
 
@@ -81,7 +92,7 @@ export class VisionParser {
                 const matched: boolean = await matcher.matches(entry.fingerprint, scrapeDescriptor);
 
                 if (matched) {
-                    await addEntry(entry, matcher, null);
+                    await addMatch(entry, matcher, null);
 
                     break;
                 }
@@ -96,12 +107,11 @@ export class VisionParser {
     }
 }
 
-export async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<string> {
+export async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<string | null> {
     if (
-        typeof entryFingerprint !== "object" ||
-        typeof entryFingerprint.customEvaluation !== "object" ||
-        typeof entryFingerprint.customEvaluation.version !== "string" ||
-        typeof scrapeDescriptor.window !== "object"
+        !entryFingerprint.customEvaluation ||
+        !entryFingerprint.customEvaluation.version ||
+        !scrapeDescriptor.window
     ) {
         return null;
     }
@@ -116,12 +126,13 @@ export async function evaluateEntryVersion (entryFingerprint: VisionEntryFingerp
     }
 }
 
-export async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<any> {
+export async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<{
+    [name: string]: string;
+} | null> {
     if (
-        typeof entryFingerprint !== "object" ||
-        typeof entryFingerprint.customEvaluation !== "object" ||
-        typeof entryFingerprint.customEvaluation.extra !== "string" ||
-        typeof scrapeDescriptor.window !== "object"
+        !entryFingerprint.customEvaluation ||
+        !entryFingerprint.customEvaluation.extra ||
+        !scrapeDescriptor.window
     ) {
         return null;
     }
@@ -141,21 +152,16 @@ export async function evaluateEntryExtra (entryFingerprint: VisionEntryFingerpri
 VisionParser.matchers.add({
     name: "headers",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
+        if (
+            !entryFingerprint.headers ||
+            !scrapeDescriptor.response ||
+            !scrapeDescriptor.response.headers
+        ) {
+            return false;
+        }
+
         const headersPatterns: VisionParserDictionary = entryFingerprint.headers;
-
-        if (typeof headersPatterns !== "object" || typeof scrapeDescriptor.response !== "object") {
-            return false;
-        }
-
-        if (typeof scrapeDescriptor.response.headers !== "object") {
-            return false;
-        }
-
         const descriptorHeaders: VisionParserDictionary = scrapeDescriptor.response.headers;
-
-        if (Object.keys(headersPatterns).length === 0 || Object.keys(descriptorHeaders).length === 0) {
-            return false;
-        }
 
         return patternsMatchesDictionary(headersPatterns, descriptorHeaders);
     },
@@ -164,17 +170,16 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "initialContent",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
+        if (
+            !entryFingerprint.initialContent ||
+            !scrapeDescriptor.response ||
+            !scrapeDescriptor.response.body
+        ) {
+            return false;
+        }
+
         const initialContentPatterns: string[] = entryFingerprint.initialContent;
-
-        if (!Array.isArray(initialContentPatterns) || typeof scrapeDescriptor.response !== "object") {
-            return false;
-        }
-
         const descriptorInitialContent: string = scrapeDescriptor.response.body;
-
-        if (typeof descriptorInitialContent !== "string") {
-            return false;
-        }
 
         return patternsMatchesList(initialContentPatterns, [ descriptorInitialContent ]);
     },
@@ -183,12 +188,15 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "loadedContent",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
-        const loadedContentPatterns: string[] = entryFingerprint.loadedContent;
-        const descriptorLoadedContent: string = scrapeDescriptor.loadedContent;
-
-        if (!Array.isArray(loadedContentPatterns) || typeof descriptorLoadedContent !== "string") {
+        if (
+            !entryFingerprint.loadedContent ||
+            !scrapeDescriptor.loadedContent
+        ) {
             return false;
         }
+
+        const loadedContentPatterns: string[] = entryFingerprint.loadedContent;
+        const descriptorLoadedContent: string = scrapeDescriptor.loadedContent;
 
         return patternsMatchesList(loadedContentPatterns, [ descriptorLoadedContent ]);
     },
@@ -197,18 +205,20 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "selectors",
     async matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<boolean> {
-        const selectors: string[] = entryFingerprint.selectors;
-
-        if (!Array.isArray(selectors) || selectors.length === 0 || typeof scrapeDescriptor.window !== "object") {
+        if (
+            !entryFingerprint.selectors ||
+            !scrapeDescriptor.window
+        ) {
             return false;
         }
 
+        const selectors: string[] = entryFingerprint.selectors;
         const selector: string = selectors.join(",");
 
         try {
-            const selectorMatchesElement: boolean | string = await scrapeDescriptor.window.evaluate(`
-                window.document.querySelectorAll("${selector}").length !== 0
-            `);
+            const selectorMatchesElement: boolean | string = await scrapeDescriptor.window.evaluate(`(function () {
+                return window.document.querySelectorAll("${selector}").length !== 0;
+            })();`);
 
             return selectorMatchesElement === true || selectorMatchesElement === "true";
         }
@@ -221,16 +231,17 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "scripts::sources",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
-        if (typeof entryFingerprint.scripts !== "object" || typeof scrapeDescriptor.scripts !== "object") {
+        if (
+            !entryFingerprint.scripts ||
+            !entryFingerprint.scripts.sources ||
+            !scrapeDescriptor.scripts ||
+            !scrapeDescriptor.scripts.sources
+        ) {
             return false;
         }
 
         const scriptsSourcesPatterns: string[] = entryFingerprint.scripts.sources;
         const descriptorScriptsSources: string[] = scrapeDescriptor.scripts.sources;
-
-        if (!Array.isArray(scriptsSourcesPatterns) || !Array.isArray(descriptorScriptsSources)) {
-            return false;
-        }
 
         return patternsMatchesList(scriptsSourcesPatterns, descriptorScriptsSources);
    },
@@ -239,16 +250,17 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "scripts::contents",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
-        if (typeof entryFingerprint.scripts !== "object" || typeof scrapeDescriptor.scripts !== "object") {
+        if (
+            !entryFingerprint.scripts ||
+            !entryFingerprint.scripts.contents ||
+            !scrapeDescriptor.scripts ||
+            !scrapeDescriptor.scripts.contents
+        ) {
             return false;
         }
 
         const scriptsContentsPatterns: string[] = entryFingerprint.scripts.contents;
         const descriptorScriptsContents: string[] = scrapeDescriptor.scripts.contents;
-
-        if (!Array.isArray(scriptsContentsPatterns) || !Array.isArray(descriptorScriptsContents)) {
-            return false;
-        }
 
         return patternsMatchesList(scriptsContentsPatterns, descriptorScriptsContents);
     },
@@ -257,16 +269,17 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "scripts::globalDeclarations",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
-        if (typeof entryFingerprint.scripts !== "object" || typeof scrapeDescriptor.scripts !== "object") {
+        if (
+            !entryFingerprint.scripts ||
+            !entryFingerprint.scripts.globalDeclarations ||
+            !scrapeDescriptor.scripts ||
+            !scrapeDescriptor.scripts.globalDeclarations
+        ) {
             return false;
         }
 
         const scriptsGlobalsPatterns: string[] = entryFingerprint.scripts.globalDeclarations;
         const descriptorScriptsGlobals: string[] = scrapeDescriptor.scripts.globalDeclarations;
-
-        if (!Array.isArray(scriptsGlobalsPatterns) || !Array.isArray(descriptorScriptsGlobals)) {
-            return false;
-        }
 
         return patternsMatchesList(scriptsGlobalsPatterns, descriptorScriptsGlobals);
     },
@@ -275,16 +288,17 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "styles::sources",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
-        if (typeof entryFingerprint.styles !== "object" || typeof scrapeDescriptor.styles !== "object") {
+        if (
+            !entryFingerprint.styles ||
+            !entryFingerprint.styles.sources ||
+            !scrapeDescriptor.styles ||
+            !scrapeDescriptor.styles.sources
+        ) {
             return false;
         }
 
         const stylesSourcesPatterns: string[] = entryFingerprint.styles.sources;
         const descriptorStylesSources: string[] = scrapeDescriptor.styles.sources;
-
-        if (!Array.isArray(stylesSourcesPatterns) || !Array.isArray(descriptorStylesSources)) {
-            return false;
-        }
 
         return patternsMatchesList(stylesSourcesPatterns, descriptorStylesSources);
     },
@@ -293,16 +307,17 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "styles::contents",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
-        if (typeof entryFingerprint.styles !== "object" || typeof scrapeDescriptor.styles !== "object") {
+        if (
+            !entryFingerprint.styles ||
+            !entryFingerprint.styles.contents ||
+            !scrapeDescriptor.styles ||
+            !scrapeDescriptor.styles.contents
+        ) {
             return false;
         }
 
         const stylesContentsPatterns: string[] = entryFingerprint.styles.contents;
         const descriptorStylesContents: string[] = scrapeDescriptor.styles.contents;
-
-        if (!Array.isArray(stylesContentsPatterns) || !Array.isArray(descriptorStylesContents)) {
-            return false;
-        }
 
         return patternsMatchesList(stylesContentsPatterns, descriptorStylesContents);
     },
@@ -311,16 +326,15 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "metas",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
+        if (
+            !entryFingerprint.metas ||
+            !scrapeDescriptor.metas
+        ) {
+            return false;
+        }
+
         const metasPatterns: VisionParserDictionary = entryFingerprint.metas;
         const descriptorMetas: VisionParserDictionary = scrapeDescriptor.metas;
-
-        if (typeof metasPatterns !== "object" || typeof descriptorMetas !== "object") {
-            return false;
-        }
-
-        if (Object.keys(metasPatterns).length === 0 || Object.keys(descriptorMetas).length === 0) {
-            return false;
-        }
 
         return patternsMatchesDictionary(metasPatterns, descriptorMetas);
     },
@@ -329,16 +343,15 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "cookies",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
+        if (
+            !entryFingerprint.cookies ||
+            !scrapeDescriptor.cookies
+        ) {
+            return false;
+        }
+
         const cookiesPatterns: VisionParserDictionary = entryFingerprint.cookies;
         const descriptorCookies: VisionParserDictionary = scrapeDescriptor.cookies;
-
-        if (typeof cookiesPatterns !== "object" || typeof descriptorCookies !== "object") {
-            return false;
-        }
-
-        if (Object.keys(cookiesPatterns).length === 0 || Object.keys(descriptorCookies).length === 0) {
-            return false;
-        }
 
         return patternsMatchesDictionary(cookiesPatterns, descriptorCookies);
     },
@@ -347,17 +360,15 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "localStorage",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
-        const localStoragePatterns: VisionParserDictionary = entryFingerprint.localStorage;
-        const descriptorLocalStorage: VisionParserDictionary = scrapeDescriptor.localStorage;
-
         if (
-            typeof localStoragePatterns !== "object" ||
-            typeof descriptorLocalStorage !== "object" ||
-            Object.keys(localStoragePatterns).length === 0 ||
-            Object.keys(descriptorLocalStorage).length === 0
+            !entryFingerprint.localStorage ||
+            !scrapeDescriptor.localStorage
         ) {
             return false;
         }
+
+        const localStoragePatterns: VisionParserDictionary = entryFingerprint.localStorage;
+        const descriptorLocalStorage: VisionParserDictionary = scrapeDescriptor.localStorage;
 
         return patternsMatchesDictionary(localStoragePatterns, descriptorLocalStorage);
     },
@@ -366,12 +377,15 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "links",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
-        const linksPatterns: string[] = entryFingerprint.links;
-        const descriptorLinks: string[] = scrapeDescriptor.links;
-
-        if (!Array.isArray(linksPatterns) || !Array.isArray(descriptorLinks)) {
+        if (
+            !entryFingerprint.links ||
+            !scrapeDescriptor.links
+        ) {
             return false;
         }
+
+        const linksPatterns: string[] = entryFingerprint.links;
+        const descriptorLinks: string[] = scrapeDescriptor.links;
 
         return patternsMatchesList(linksPatterns, descriptorLinks);
     },
@@ -380,12 +394,15 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "images",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
-        const imagesPatterns: string[] = entryFingerprint.images;
-        const descriptorImages: string[] = scrapeDescriptor.images;
-
-        if (!Array.isArray(imagesPatterns) || !Array.isArray(descriptorImages)) {
+        if (
+            !entryFingerprint.images ||
+            !scrapeDescriptor.images
+        ) {
             return false;
         }
+
+        const imagesPatterns: string[] = entryFingerprint.images;
+        const descriptorImages: string[] = scrapeDescriptor.images;
         
         return patternsMatchesList(imagesPatterns, descriptorImages);
     },
@@ -394,12 +411,15 @@ VisionParser.matchers.add({
 VisionParser.matchers.add({
     name: "frames",
     matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): boolean {
-        const framesPatterns: string[] = entryFingerprint.frames;
-        const descriptorFrames: string[] = scrapeDescriptor.frames;
-
-        if (!Array.isArray(framesPatterns) || !Array.isArray(descriptorFrames)) {
+        if (
+            !entryFingerprint.frames ||
+            !scrapeDescriptor.frames
+        ) {
             return false;
         }
+
+        const framesPatterns: string[] | undefined = entryFingerprint.frames;
+        const descriptorFrames: string[] | undefined = scrapeDescriptor.frames;
 
         return patternsMatchesList(framesPatterns, descriptorFrames);
     },
@@ -409,9 +429,9 @@ VisionParser.matchers.add({
     name: "customEvaluation::match",
     async matches (entryFingerprint: VisionEntryFingerprint, scrapeDescriptor: VisionScrapeDescriptor): Promise<boolean> {
         if (
-            typeof entryFingerprint.customEvaluation !== "object" ||
-            typeof entryFingerprint.customEvaluation.match !== "string" ||
-            typeof scrapeDescriptor.window !== "object"
+            !entryFingerprint.customEvaluation ||
+            !entryFingerprint.customEvaluation.match ||
+            !scrapeDescriptor.window
         ) {
             return false;
         }

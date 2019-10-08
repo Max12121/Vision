@@ -8,7 +8,8 @@
         "inlineSources": true,
         "removeComments": true,
         "noImplicitAny": true,
-        "noImplicitReturns": true
+        "noImplicitReturns": true,
+        "strictNullChecks": true
     },
     "compileOnSave": true,
     "exclude": [
