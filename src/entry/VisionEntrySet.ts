@@ -3,13 +3,9 @@ import { VisionEntry } from "./VisionEntry";
 
 // Represents a set of entries (based on their name).
 export class VisionEntrySet extends VisionSet<VisionEntry> {
-    public constructor (entries: VisionEntry[] = []) {
+    public constructor () {
         super((entry: VisionEntry): string => {
             return entry.name;
-        });
-
-        entries.forEach((entry: VisionEntry): void => {
-            this.add(entry);
         });
     }
 

@@ -22,7 +22,10 @@ export class VisionParser {
 
     public constructor (entries: VisionEntrySet = new VisionEntrySet(), options: VisionParserOptions = {}) {
         this._entries = entries;
-        this._options = options;
+        this._options = {
+            ...defaultOptions,
+            ...options,
+        };
     }
 
     public get entries (): VisionEntrySet {
@@ -44,7 +47,7 @@ export class VisionParser {
             } | null;
 
             if (entry.fingerprint) {
-                if (this._options.evaluateEntryVersion || defaultOptions.evaluateEntryVersion) {
+                if (this._options.evaluateEntryVersion) {
                     matchedEntryVersion = await evaluateEntryVersion(entry.fingerprint, scrapeDescriptor);
 
                     if (matchedEntryVersion) {
@@ -52,7 +55,7 @@ export class VisionParser {
                     }
                 }
 
-                if (this._options.evaluateEntryExtra || defaultOptions.evaluateEntryExtra) {
+                if (this._options.evaluateEntryExtra) {
                     matchedEntryExtra = await evaluateEntryExtra(entry.fingerprint, scrapeDescriptor);
 
                     if (matchedEntryExtra) {

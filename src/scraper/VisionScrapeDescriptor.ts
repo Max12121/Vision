@@ -9,9 +9,6 @@ export type VisionScrapeDescriptor = {
     // Represents the URI of the scraped webpage.
     uri: string;
 
-    // Represents the date of the scrape.
-    date?: string;
-
     // Represents a reference to the HTTP response to the webpage request.
     response?: IVisionHTTPResponse;
 

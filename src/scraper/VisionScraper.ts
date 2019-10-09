@@ -21,7 +21,10 @@ export class VisionScraper {
 
     public constructor (browser: IVisionBrowser, options: VisionScraperOptions = {}) {
         this._browser = browser;
-        this._options = options;
+        this._options = {
+            ...defaultOptions,
+            ...options,
+        };
     }
 
     public get browser (): IVisionBrowser {
@@ -35,10 +38,9 @@ export class VisionScraper {
     public async scrape (uri: string): Promise<VisionScrapeDescriptor> {
         const window: IVisionWindow = await this._browser.openWindow();
 
-        await window.setUserAgent(this._options.userAgent || defaultOptions.userAgent || "");
+        await window.setUserAgent(this._options.userAgent || "");
 
         const httpResponse: IVisionHTTPResponse = await window.goto(uri);
-        const timestamp: Date = new Date();
 
         await window.evaluate(VisionScraper.VISION_HELPER);
 
@@ -47,7 +49,6 @@ export class VisionScraper {
         return {
             hostname: await window.evaluate(VisionScraper.EXPRESSION_HOSTNAME),
             uri,
-            date: timestamp.toString(),
             response: httpResponse,
             ...localDescriptor,
             window,
