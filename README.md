@@ -57,6 +57,7 @@ async function myApplication (): Promise<void> {
 ```
 
 ### What happens inside
+A brief summary of what happens when you cast Vision.
 <p align="center">
     <img src="images/io.png" alt="" width="95%">
 </p>
@@ -520,6 +521,14 @@ How to detect `jQuery`.
 },
 ```
 </details>
+
+## Contributions
+### Add a new entry
+Contributions related to defining new entries are very appreciated, if you want
+to define new entries (like your own technology or service) you have two options:
+-   Create a issue providing the name and the website of the technology or service you want to
+be defined.
+-   Create a new branch named `entry/entry-name`, define the entry and create a pull request.
 
 ## Changelog
 
