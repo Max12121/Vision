@@ -25,24 +25,13 @@ and `Facebook Share Button` are clearly distinguished and not superficially
 defined as just `Facebook`.
 
 ## Usage
-Using NodeJS with ES5
+Using NodeJS
 ```javascript
-const Vision = require("vision");
+const Vision = require("vision").Vision;
 
 Vision.cast("https://www.example.com").then((descriptor) => {
     console.log(descriptor);
 });
-```
-
-Using NodeJS with ES6
-```javascript
-import { Vision } from "vision";
-
-async function myApplication () {
-    const descriptor = await Vision.cast("https://www.example.com");
-
-    console.log(descriptor);
-}
 ```
 
 Using NodeJS with TypeScript
@@ -66,9 +55,6 @@ A brief summary of what happens when you cast Vision.
 **A entry is a technology or service that can be identified by Vision**. This software relies on a
 list of entries updated and maintained by the community and the author. You can also define
 and detect your custom entries.
-
-### How to add a new entry
-TBD.
 
 ## Fingerprint
 A fingerprint is a pattern composed by a set of inner patterns used as models
@@ -498,24 +484,7 @@ Useful in case the predefined patterns are not enough.
     description: "This entry is used for fingerprint usage examples.",
     fingerprint: {
         customEvaluation: {
-            match: () => {
-                // Custom Code...
-            },
-        },
-    },
-},
-```
-
-How to detect `jQuery`.
-```javascript
-{
-    name: "Entry Example",
-    description: "This entry is used for fingerprint usage examples.",
-    fingerprint: {
-        customEvaluation: {
-            match: () => {
-                return typeof window.jQuery === "function";
-            },
+            match: "JavaScript..."
         },
     },
 },
