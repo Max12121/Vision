@@ -3,16 +3,16 @@
         "target": "es6",
         "module": "commonjs",
         "outDir": "build",
+        "strict": true,
+        "declaration": true,
         "incremental": true,
         "sourceMap": true,
         "inlineSources": true,
-        "removeComments": true,
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "strictNullChecks": true
+        "removeComments": true
     },
     "compileOnSave": true,
     "exclude": [
+        "build",
         "node_modules"
     ]
 }

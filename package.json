@@ -4,8 +4,7 @@
     "version": "0.1.0",
     "main": "build/src/Vision.js",
     "scripts": {
-        "build": "tsc",
-        "start": "tsc && node build/index.js"
+        "build": "tsc"
     },
     "dependencies": {
         "puppeteer": "1.19.0"
