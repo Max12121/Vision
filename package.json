@@ -1,8 +1,11 @@
 {
-    "name": "vision",
+    "name": "@vasile-peste/vision",
     "description": "Vision is the most powerful software detecting technologies and services used on websites like web frameworks, web services, server software, libraries, widgets, content management systems, social platforms, e-commerce platforms, analytics software and more.",
     "version": "0.1.0",
     "main": "build/src/Index.js",
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
     "scripts": {
         "build": "tsc"
     },
