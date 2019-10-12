@@ -3,10 +3,7 @@
 </p>
 
 # Vision
-Vision is the most powerful software detecting technologies and
-services used on websites like web frameworks, web services,
-server software, libraries, widgets, content management systems, social platforms,
-e-commerce platforms, analytics software and more.
+Vision is the most powerful software detecting technologies and services used on websites. This software detects web frameworks, web services, server software, libraries, widgets, content management systems, social platforms, e-commerce platforms, analytics software and more.
 
 Through Vision you can:
 -   **Reliably detect technologies and services used in websites**
