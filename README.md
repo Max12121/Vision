@@ -44,17 +44,19 @@ Using NodeJS with TypeScript
 ```typescript
 import { Vision, VisionDescriptor } from "@malgol/vision";
 
-async function myApplication (): Promise<void> {
-    const descriptor: VisionDescriptor  = await Vision.cast("https://www.example.com");
+async function main (): Promise<void> {
+    const descriptor: VisionDescriptor = await Vision.cast("https://www.example.com");
 
     console.log(descriptor);
 }
+
+main();
 ```
 
 ### What happens inside
 A representation of what happens when you cast Vision.
 <p align="center">
-    <img src="images/io.png" alt="" width="95%">
+    <img src="images/io.png" alt="" width="99%">
 </p>
 
 ## Entries
@@ -63,7 +65,7 @@ list of entries updated and maintained by the community and the author. You can 
 and detect your custom entries.
 
 ## Fingerprint
-A fingerprint is a pattern composed by a set of inner patterns used as models
+A fingerprint is a pattern composed by a set of inner patterns used
 to detect a technology or service in a website, a fingerprint is usually associated to a entry and
 the matching of a fingerprint means the matching of the associated entry.
 Below the models you can use to compose a fingerprint.
@@ -219,7 +221,9 @@ List of regular expressions used to match the inner value of all script elements
 ---
 
 #### `scripts::globalDeclarations`
-List of regular expressions used to match the keys created by scripts in the window object. The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched. Note that only properties of the window object can be matched, and not, for example, a property of a property of the window object (if you need to do this please refer to the `customEvaluation/match` pattern model).
+List of regular expressions used to match the keys created by scripts in the window object (the global declarations). The regular expressions are evaluated after the "load" event. In case at least one regular expression is matched then the entry is matched.
+Note that only properties of the window object can be matched, and not, for example, a property of
+a property of the window object (if you need to do this please refer to the [`customEvaluation::match`](#customevaluationmatch) pattern).
 
 <details>
     <summary>Usage Example</summary>
@@ -495,17 +499,32 @@ Useful in case the predefined patterns are not enough.
     },
 },
 ```
+You can write a simple JavaScript expression for instance "!!window.jQuery;" which will return `true` if jQuery is installed,
+`false` otherwise. In case you need to write more than a simple expression you can use a multiline string and use a
+closure which should return a `boolean` value.
 </details>
 
 ## Contributions
 ### Add a new entry
-Contributions related to defining new entries are very appreciated, if you want
-to define new entries (like your own technology or service) you have two options:
+Contributions related to adding new entries to the database are very appreciated, if you want
+to add new entries (like your own technology or service) you have two options:
 1. Create a issue providing the name and the website of the technology or service you want to
-be defined.
-2. Create a new branch named `entry/entry-name`, define the entry and create a pull request.
+be added.
+2. Create a new branch named `entry/entry-name`, add the entry and create a pull request.
 
 ## Changelog
+#### 0.1.4
+`* Add new entry: Google Fonts.`
+
+#### 0.1.3
+`* Fix publish script, rename it to upload.`
+
+#### 0.1.2
+`* Add a npm publish script for automatically building and publishing the package.`
+
+#### 0.1.1
+`* Package name is now: @malgol/vision.`
+`* Remove GitHub Package Registry references and use npmjs.com.`
 
 #### 0.1.0
-Vision.
+`* Vision.`
