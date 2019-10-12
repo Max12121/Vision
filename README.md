@@ -10,24 +10,30 @@ e-commerce platforms, analytics software and more.
 
 Through Vision you can:
 -   **Reliably detect technologies and services used in websites**
-through a list of patterns constantly updated and maintained.
+through a list of patterns constantly updated and maintained;
 -   **Define new technologies and services easily without technical knowledge**: you can detect
-a JavaScript library by just adding its file name.
+a JavaScript library by just adding its file name;
 -   **Have maximum flexibility for defining how technologies and
 services are detected**: from a wide range of intuitive
-predefined patterns to custom JavaScript code.
+predefined patterns to custom JavaScript code;
 -   **Have specific information for each technology or service detected**:
 for instance if Vision finds `Google Analytics` you can get the tracking ID of
 the specific user, if Vision finds `Twitter Follow Button`
-you can get the username of the specific user to follow.
+you can get the username of the specific user to follow;
 -   **Have atomic definitions**, for instance `Facebook Like Button`
 and `Facebook Share Button` are clearly distinguished and not superficially
 defined as just `Facebook`.
 
+## Installation
+Using NPM
+```console
+npm install @malgol/vision --save
+```
+
 ## Usage
 Using NodeJS
 ```javascript
-const Vision = require("vision").Vision;
+const Vision = require("@malgol/vision");
 
 Vision.cast("https://www.example.com").then((descriptor) => {
     console.log(descriptor);
@@ -36,7 +42,7 @@ Vision.cast("https://www.example.com").then((descriptor) => {
 
 Using NodeJS with TypeScript
 ```typescript
-import { Vision, VisionDescriptor } from "vision";
+import { Vision, VisionDescriptor } from "@malgol/vision";
 
 async function myApplication (): Promise<void> {
     const descriptor: VisionDescriptor  = await Vision.cast("https://www.example.com");
@@ -46,7 +52,7 @@ async function myApplication (): Promise<void> {
 ```
 
 ### What happens inside
-A brief summary of what happens when you cast Vision.
+A representation of what happens when you cast Vision.
 <p align="center">
     <img src="images/io.png" alt="" width="95%">
 </p>
@@ -484,7 +490,7 @@ Useful in case the predefined patterns are not enough.
     description: "This entry is used for fingerprint usage examples.",
     fingerprint: {
         customEvaluation: {
-            match: "JavaScript..."
+            match: "JavaScript...",
         },
     },
 },
@@ -495,9 +501,9 @@ Useful in case the predefined patterns are not enough.
 ### Add a new entry
 Contributions related to defining new entries are very appreciated, if you want
 to define new entries (like your own technology or service) you have two options:
--   Create a issue providing the name and the website of the technology or service you want to
+1. Create a issue providing the name and the website of the technology or service you want to
 be defined.
--   Create a new branch named `entry/entry-name`, define the entry and create a pull request.
+2. Create a new branch named `entry/entry-name`, define the entry and create a pull request.
 
 ## Changelog
 

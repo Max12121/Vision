@@ -1,9 +1,9 @@
-// --- Index --- //
-export { Vision, defaultOptions } from "./Vision";
+import { Vision, defaultOptions } from "./Vision";
+import cast = Vision.cast;
+
+export { Vision, cast, defaultOptions };
 export { VisionDescriptor } from "./VisionDescriptor";
 export { VisionOptions } from "./VisionOptions";
-
-// --- Entry --- //
 export { MatchedVisionEntry } from "./entry/MatchedVisionEntry";
 export { VisionEntry } from "./entry/VisionEntry";
 export { VisionEntryAuthor } from "./entry/VisionEntryAuthor";
