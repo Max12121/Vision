@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="https://github.com/Vasile-Peste/Vision/blob/master/images/vision.svg?raw=true" alt="" width="210px">
+    <img src="https://github.com/Vasile-Peste/Vision/raw/ce0c17853e520163545355c3f6f4178ea1af1981/images/vision.svg?sanitize=true" alt="" width="210px">
 </p>
 
 # Vision
@@ -54,7 +54,7 @@ async function myApplication (): Promise<void> {
 ### What happens inside
 A representation of what happens when you cast Vision.
 <p align="center">
-    <img src="https://github.com/Vasile-Peste/Vision/blob/master/images/io.png?raw=true" alt="" width="95%">
+    <img src="https://github.com/Vasile-Peste/Vision/raw/ce0c17853e520163545355c3f6f4178ea1af1981/images/io.png" alt="" width="95%">
 </p>
 
 ## Entries
