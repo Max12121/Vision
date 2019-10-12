@@ -1,5 +1,5 @@
 <p align="center"> 
-    <img src="images/vision.svg" alt="" width="210px">
+    <img src="https://raw.githubusercontent.com/Vasile-Peste/Vision/master/images/vision.svg" alt="" width="210px">
 </p>
 
 # Vision
@@ -54,7 +54,7 @@ async function myApplication (): Promise<void> {
 ### What happens inside
 A representation of what happens when you cast Vision.
 <p align="center">
-    <img src="images/io.png" alt="" width="95%">
+    <img src="https://raw.githubusercontent.com/Vasile-Peste/Vision/master/images/io.png" alt="" width="95%">
 </p>
 
 ## Entries
