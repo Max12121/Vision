@@ -524,6 +524,7 @@ be added.
 
 #### 0.1.1
 `* Package name is now: @malgol/vision.`
+
 `* Remove GitHub Package Registry references and use npmjs.com.`
 
 #### 0.1.0
