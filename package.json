@@ -1,11 +1,12 @@
 {
     "name": "@malgol/vision",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "license": "GPL-3.0",
     "description": "Vision is the most powerful software detecting technologies and services used on websites like web frameworks, web services, server software, libraries, widgets, content management systems, social platforms, e-commerce platforms, analytics software and more.",
     "main": "build/src/Index.js",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "publish": "tsc && npm publish --access public"
     },
     "dependencies": {
         "puppeteer": "1.19.0"
