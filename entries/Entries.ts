@@ -426,4 +426,20 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             ],
         },
     },
+    {
+        name: "Google Fonts",
+        description: "A collection of free licensed fonts offered by Google.",
+        categories: [
+            "Fonts", "Web Fonts", "Font Library", "CSS",
+        ],
+        uri: "https://fonts.google.com",
+        creationYear: "2010",
+        fingerprint: {
+            styles: {
+                sources: [
+                    "^https://fonts\\.googleapis\\.com/css?family",
+                ],
+            },
+        },
+    },
 ];
