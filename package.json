@@ -6,7 +6,7 @@
     "main": "build/src/Index.js",
     "scripts": {
         "build": "tsc",
-        "upload": "tsc && npm publish --access public"
+        "upload": "npm run build && npm publish --access public"
     },
     "dependencies": {
         "puppeteer": "1.19.0"
