@@ -68,6 +68,11 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             customEvaluation: {
                 match: "!!(window._iub && window._iub.cs);",
                 version: "window._iub.cs.VERSION;",
+                extra: `(() => {
+                    return {
+                        cookiePolicyID: _iub.cs.options.cookiePolicyId,
+                    };
+                })();`,
             },
         },
         implies: [
