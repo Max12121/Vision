@@ -425,11 +425,33 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
     },
     {
         name: "YouTube Embedded Player",
+        description: "An iframe used to embed a YouTube video player on websites.",
+        categories: [
+            "Videos", "Web Players", "Video Players", "YouTube",
+        ],
+        uri: "https://developers.google.com/youtube/player_parameters",
         fingerprint: {
             frames: [
                 "^https://www\\.youtube\\.com/embed/",
             ],
+            customEvaluation: {
+                extra: `(() => {
+                    const embeddedRegExp = new RegExp("^https://www\\.youtube\\.com/embed/");
+                    const embeddedVideos = [ ...window.document.getElementsByTagName("iframe") ].filter((iframe) => {
+                        return embeddedRegExp.test(iframe.src);
+                    }).map((iframe) => {
+                        return iframe.src.split("?")[0];
+                    });
+                    
+                    return {
+                        embeddedVideos,
+                    };
+                })();`,
+            },
         },
+        implies: [
+            "YouTube",
+        ],
     },
     {
         name: "Google Fonts",
