@@ -3,13 +3,13 @@
     "version": "0.1.4",
     "license": "GPL-3.0",
     "description": "Vision is the most powerful software detecting technologies and services used on websites like web frameworks, web services, server software, libraries, widgets, content management systems, social platforms, e-commerce platforms, analytics software and more.",
-    "main": "build/VisionExport.js",
+    "main": "build/src/Vision.js",
     "scripts": {
         "build": "tsc",
         "upload": "npm run build && npm publish --access public"
     },
     "bin": {
-        "vision": "build/VisionCommandLine.js"
+        "vision": "build/cli/VisionCommandLine.js"
     },
     "dependencies": {
         "puppeteer": "1.19.0"

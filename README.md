@@ -510,6 +510,8 @@ be added.
 2. Create a new branch named `entry/entry-name`, add the entry and create a pull request.
 
 ## Changelog
+`* Vision can be used through CLI: use "vision URI" for a semplified output. Use "vision URI --json" for a full JSON output.`
+
 #### 0.1.4
 `* Add new entry: Google Fonts.`
 

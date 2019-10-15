@@ -12,6 +12,14 @@ import { VisionDescriptor } from "./VisionDescriptor";
 import { VisionOptions } from "./VisionOptions";
 import { Entries } from "../entries/Entries";
 
+export { VisionDescriptor } from "./VisionDescriptor";
+export { VisionOptions } from "./VisionOptions";
+export { MatchedVisionEntry } from "./entry/MatchedVisionEntry";
+export { VisionEntry } from "./entry/VisionEntry";
+export { VisionEntryAuthor } from "./entry/VisionEntryAuthor";
+export { VisionEntryFingerprint } from "./entry/VisionEntryFingerprint";
+export { VisionEntrySet } from "./entry/VisionEntrySet";
+
 export const defaultOptions: VisionOptions = {
     matchedEntryExcludedProperties: [
         "fingerprint",
@@ -82,3 +90,7 @@ export namespace Vision {
         return options.matchedEntryExcludedProperties || defaultOptions.matchedEntryExcludedProperties || [];
     }
 }
+
+import cast = Vision.cast;
+
+export { cast };

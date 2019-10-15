@@ -4,13 +4,13 @@ import {
     Vision,
     VisionDescriptor,
     MatchedVisionEntry
-} from "./VisionExport";
+} from "../src/Vision";
 
 const log: any = console.log;
 
-void (async (): Promise<void> => {
-    const URI: string = process.argv[2];
-    const isJSON: boolean = process.argv.includes("--json");
+async function command (parameters: string[]): Promise<void> {
+    const URI: string = parameters[2];
+    const isJSON: boolean = parameters.includes("--json");
 
     if (!URI || URI.length === 0) {
         log("Vision requires a URI to proceed.");
@@ -51,7 +51,11 @@ void (async (): Promise<void> => {
                 }
             }
 
-            log("-------------------------");
+            log("------------------------");
         });
     }
+}
+
+void (async (): Promise<void> => {
+    await command(process.argv);
 })();
