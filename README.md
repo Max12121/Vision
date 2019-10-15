@@ -73,7 +73,8 @@ the parser. You can also tell Vision to use a different browser for scraping by 
 ## Entries
 **A entry is a technology or service that can be identified by Vision**. This software relies on a
 list of entries updated and maintained by the community and the author. You can also define
-and detect your custom entries.
+and detect your custom entries. You can contribute to this project by suggesting missing entries.
+All entries passed by default to Vision are defined in [`Entries.ts`](entries/Entries.ts).
 
 ## Fingerprint
 A fingerprint is a pattern composed by a set of inner patterns used
