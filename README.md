@@ -530,7 +530,6 @@ be added.
 <details>
     <summary>Earlier Versions</summary>
     <br>
-
 #### 0.1.4
 `* Add new entry: Google Fonts.`
 
