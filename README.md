@@ -493,7 +493,7 @@ The `^` symbol is a regular expression operator used to make sure the source of 
 ---
 
 #### `customEvaluation::match`
-A custom JavaScript function evaluated on the visited website. In case the function returns `true` then the entry is matched.
+A custom JavaScript code evaluated on the visited website. In case the function returns `true` then the entry is matched.
 Useful in case the predefined patterns are not enough.
 
 <details>
@@ -514,6 +514,57 @@ Useful in case the predefined patterns are not enough.
 You can write a simple JavaScript expression for instance "!!window.jQuery;" which will return `true` if jQuery is installed,
 `false` otherwise. In case you need to write more than a simple expression you can use a multiline string and use a
 closure which should return a `boolean` value.
+</details>
+
+---
+
+#### `customEvaluation::version`
+A custom JavaScript code evaluated on the visited website if the entry is matched.
+The JavaScript code defined in this field should be used for returning the version of the matched entry.
+In case the entry is matched and this field has content, the content of this field will be evaluated on the visited
+webpage and it should return the version of the matched entry.
+
+<details>
+    <summary>Usage Example</summary>
+    <br>
+
+```javascript
+{
+    name: "Entry Example",
+    description: "This entry is used for fingerprint usage examples.",
+    fingerprint: {
+        customEvaluation: {
+            version: "JavaScript...",
+        },
+    },
+},
+```
+</details>
+
+---
+
+#### `customEvaluation::extra`
+A custom JavaScript code evaluated on the visited website if the entry is matched.
+The JavaScript code defined in this field should be used for returning extra information related to the matched entry.
+In case the entry is matched and this field has content, the content of this field will be evaluated on the visited
+webpage and it should return extra information regarding the matched entry. For instance this is used by the `YouTube Embedded Player`
+entry to return the links to the embedded videos in the specific website the player has been detected.
+
+<details>
+    <summary>Usage Example</summary>
+    <br>
+
+```javascript
+{
+    name: "Entry Example",
+    description: "This entry is used for fingerprint usage examples.",
+    fingerprint: {
+        customEvaluation: {
+            extra: "JavaScript...",
+        },
+    },
+},
+```
 </details>
 
 ## Contributions
