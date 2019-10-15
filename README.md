@@ -518,7 +518,14 @@ be added.
 2. Create a new branch named `entry/entry-name`, add the entry and create a pull request.
 
 ## Changelog
-`* Vision can be used through command line, read the README.md for more information.`
+#### 0.1.5
+`* Vision can be used through command line, read the README.md for usage.`
+
+`* Underscore has more details and version evaluation.`
+
+`* YouTube Embedded Player has the embedded videos as extra information.`
+
+`* iubenda Cookie Solution has the associated cookie policy id as extra information.`
 
 #### 0.1.4
 `* Add new entry: Google Fonts.`
