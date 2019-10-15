@@ -284,11 +284,21 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
     },
     {
         name: "Underscore",
+        description: "A JavaScript library that provides useful functional programming helpers without extending any built-in objects.",
+        categories: [
+            "JavaScript", "JavaScript Libraries", "Functional Programming",
+        ],
+        uri: "https://underscorejs.org/",
+        license: "MIT",
+        creationYear: "2009",
         fingerprint: {
             scripts: {
                 globalDeclarations: [
                     "^_$",
                 ],
+            },
+            customEvaluation: {
+                version: "window._.VERSION;",
             },
         },
     },
