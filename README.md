@@ -527,6 +527,10 @@ be added.
 
 `* iubenda Cookie Solution has the associated cookie policy id as extra information.`
 
+<details>
+    <summary>Earlier Versions</summary>
+    <br>
+
 #### 0.1.4
 `* Add new entry: Google Fonts.`
 
@@ -543,3 +547,4 @@ be added.
 
 #### 0.1.0
 `* Vision.`
+</details>
