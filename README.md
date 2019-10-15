@@ -50,6 +50,14 @@ async function main (): Promise<void> {
 main();
 ```
 
+Using CLI
+```console
+vision URI
+```
+```console
+vision URI --json
+```
+
 ### What happens inside
 A representation of what happens when you cast Vision.
 <p align="center">
@@ -510,7 +518,7 @@ be added.
 2. Create a new branch named `entry/entry-name`, add the entry and create a pull request.
 
 ## Changelog
-`* Vision can be used through CLI: use "vision URI" for a semplified output. Use "vision URI --json" for a full JSON output.`
+`* Now Vision can be used through command line, read the README.md for more information.`
 
 #### 0.1.4
 `* Add new entry: Google Fonts.`
