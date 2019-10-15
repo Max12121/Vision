@@ -518,7 +518,7 @@ be added.
 2. Create a new branch named `entry/entry-name`, add the entry and create a pull request.
 
 ## Changelog
-`* Now Vision can be used through command line, read the README.md for more information.`
+`* Vision can be used through command line, read the README.md for more information.`
 
 #### 0.1.4
 `* Add new entry: Google Fonts.`
