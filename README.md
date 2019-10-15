@@ -58,11 +58,17 @@ vision URI
 vision URI --json
 ```
 
-### What happens inside
-A representation of what happens when you cast Vision.
+## Flow
+A representation of what happens when you cast Vision. You pass the URI of a website and the scraper uses the instance of a
+headless browser to visit it as a normal user, it waits for the website to load and then
+collects data like links, iframes, scripts sources, global declarations made by scripts,
+stylesheets, images...
 <p align="center">
     <img src="images/io.png" alt="" width="99%">
 </p>
+The collected data is passed to a parser which performs an analysis searching for services and applications.
+This software tries to be as modular as possible: if you want you can skip the scraping process and directly pass data collected by your own to
+the parser. You can also tell Vision to use a different browser for scraping by just implementing few interfaces.
 
 ## Entries
 **A entry is a technology or service that can be identified by Vision**. This software relies on a
