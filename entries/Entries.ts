@@ -251,6 +251,9 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
                     "^Pickr$",
                 ],
             },
+            customEvaluation: {
+                version: "window.Pickr.version;",
+            },
         },
     },
     {
