@@ -8,7 +8,7 @@ import {
 
 const log: any = console.log;
 
-async function command (parameters: string[]): Promise<void> {
+async function request (parameters: string[]): Promise<void> {
     const URI: string = parameters[2];
     const isJSON: boolean = parameters.includes("--json");
 
@@ -30,32 +30,42 @@ async function command (parameters: string[]): Promise<void> {
         return;
     }
 
-    log(`The matched entries for ${URI}`);
-    log("-------------------------");
+    log("");
+    log(`${URI}`);
 
     if (isJSON) {
         log(JSON.stringify(descriptor, null, 4));
     }
     else {
         descriptor.entries.forEach((matchedEntry: MatchedVisionEntry): void => {
-            log("| " + matchedEntry.name);
-            log("|-- " + matchedEntry.description);
+            log("  |");
+            log("  |-- " + matchedEntry.name);
+
+            if (matchedEntry.description) {
+                log("  |    |--- " + matchedEntry.description);
+            }
+            else {
+                log("  |    |--- " + "No description.");
+            }
 
             if (matchedEntry.version) {
-                log("|----- " + matchedEntry.version);
+                log("  |    |------- " + matchedEntry.version);
             }
 
             if (matchedEntry.extra) {
                 for (const name in matchedEntry.extra) {
-                    log("|---------- " + name + " => " + matchedEntry.extra[name]);
+                    log("  |    |----------- " + name + " = " + matchedEntry.extra[name]);
                 }
             }
-
-            log("------------------------");
         });
+
+        log("  |");
+        log(" ---");
     }
+
+    log("");
 }
 
 void (async (): Promise<void> => {
-    await command(process.argv);
+    await request(process.argv);
 })();
