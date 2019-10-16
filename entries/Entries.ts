@@ -164,11 +164,21 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
     },
     {
         name: "Modernizr",
+        description: "A library used to know what HTML, CSS and JavaScript features are supported by the user's browser.",
+        categories: [
+            "JavaScript", "JavaScript Libraries",
+        ],
+        uri: "https://modernizr.com/",
+        license: "MIT",
+        creationYear: "2009",
         fingerprint: {
             scripts: {
                 globalDeclarations: [
                     "^Modernizr$",
                 ],
+            },
+            customEvaluation: {
+                version: "window.Modernizr._version;",
             },
         },
     },
