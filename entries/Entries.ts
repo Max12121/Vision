@@ -361,6 +361,14 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             selectors: [
                 "script.yoast-schema-graph",
             ],
+            customEvaluation: {
+                version: `(() => {
+                    const yoastVersionRegExp = "<!-- This site is optimized with the Yoast SEO plugin v(.*) - https://yoast\\.com/wordpress/plugins/seo/";
+                    const yoastVersion = window.document.documentElement.outerHTML.match(new RegExp(yoastVersionRegExp));
+                    
+                    return yoastVersion ? yoastVersion[1] : "";
+                })();`,
+            },
         },
     },
     {
