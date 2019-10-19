@@ -503,4 +503,21 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             },
         },
     },
+    {
+        name: "webpack",
+        description: "A module bundler for the web.",
+        categories: [
+            "Module Bundlers", "Development Tools",
+        ],
+        uri: "https://webpack.js.org",
+        license: "MIT",
+        creationYear: "2012",
+        fingerprint: {
+            scripts: {
+                globalDeclarations: [
+                    "^webpackJsonp$",
+                ],
+            },
+        },
+    },
 ];
