@@ -524,7 +524,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         name: "Ruby on Rails",
         description: "A backend framework that includes everything needed to create web applications.",
         categories: [
-            "Web Frameworks", "Backend Frameworks", "Ruby",
+            "Web Frameworks", "Backend Frameworks", "Ruby", "MVC",
         ],
         uri: "https://rubyonrails.org",
         license: "MIT",
