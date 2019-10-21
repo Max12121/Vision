@@ -1,15 +1,17 @@
 import { VisionEntry } from "../src/entry/VisionEntry";
 
-// This file contains the definitions of all entries passed to Vision for detection.
-// The entries in this collection are meant to be static and read-only: each new entry should be
-// manually defined and added to this list.
+/*
+ * This file contains the definitions of all entries passed by default to Vision.
+ * The entries in this collection are meant to be static and read-only. Each new entry should be
+ * manually added to this list.
+*/
 
 export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
     {
-        name: "iubenda",
-        description: "A SaaS accomplishing law requirements through software.",
+        name: "iubenda s.r.l.",
+        description: "A SaaS company accomplishing law requirements through software.",
         categories: [
-            "Law", "Privacy", "Services", "Freemium", "SaaS",
+            "Law", "Privacy", "Services", "Freemium", "SaaS", "Companies", "Italian Companies", "Startups", "iubenda",
         ],
         uri: "https://www.iubenda.com",
         creationYear: "2011",
@@ -25,7 +27,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         name: "iubenda Privacy Policy",
         description: "A privacy policy generated through iubenda.",
         categories: [
-            "Law", "Privacy", "Freemium", "SaaS",
+            "Law", "Privacy", "Freemium", "SaaS", "Widgets", "Services", "iubenda",
         ],
         uri: "https://www.iubenda.com",
         creationYear: "2011",
@@ -35,14 +37,14 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             ],
         },
         implies: [
-            "iubenda",
+            "iubenda s.r.l.",
         ],
     },
     {
         name: "iubenda Cookie Policy",
         description: "A cookie policy generated through iubenda.",
         categories: [
-            "Law", "Privacy", "Freemium", "SaaS",
+            "Law", "Privacy", "Freemium", "SaaS", "Widgets", "Services", "iubenda",
         ],
         uri: "https://www.iubenda.com",
         creationYear: "2015",
@@ -52,7 +54,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             ],
         },
         implies: [
-            "iubenda",
+            "iubenda s.r.l.",
             "iubenda Privacy Policy",
         ],
     },
@@ -60,7 +62,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         name: "iubenda Cookie Solution",
         description: "A cookie and consent solution that complies with the EU requirements.",
         categories: [
-            "Law", "Privacy", "Freemium", "SaaS",
+            "Law", "Privacy", "Freemium", "SaaS", "Widgets", "Services", "iubenda",
         ],
         uri: "https://www.iubenda.com",
         creationYear: "2015",
@@ -69,21 +71,32 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
                 match: "!!(window._iub && window._iub.cs);",
                 version: "window._iub.cs.VERSION;",
                 extra: `(() => {
+                    const cookiePolicyID = _iub.cs.options.cookiePolicyId;
+                    
                     return {
-                        cookiePolicyID: _iub.cs.options.cookiePolicyId,
+                        cookiePolicyID,
                     };
                 })();`,
             },
         },
         implies: [
-            "iubenda",
+            "iubenda s.r.l.",
         ],
     },
     {
-        name: "Twitter for Websites",
-        description: "",
+        name: "Twitter Inc.",
+        description: "A microblogging and social networking service on which users post and interact with messages known as tweets.",
         categories: [
-            "Widgets", "Social Networks",
+            "Social Networks", "Companies", "Services", "Twitter",
+        ],
+        uri: "https://twitter.com/",
+        creationYear: "2006",
+    },
+    {
+        name: "Twitter for Websites",
+        description: "A suite of tools bringing Twitter content and functionality to webpages and applications.",
+        categories: [
+            "Social Networks", "Widgets", "Services", "Twitter",
         ],
         uri: "https://developer.twitter.com/en/docs/twitter-for-websites/overview",
         fingerprint: {
@@ -91,14 +104,38 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
                 sources: [
                     "^https://platform\\.twitter\\.com/widgets\\.js$",
                 ],
+                globalDeclarations: [
+                    "^twttr$",
+                ],
             },
         },
+        implies: [
+            "Twitter Inc.",
+        ],
+    },
+    {
+        name: "Twitter Embedded Tweets",
+        description: "A snippet used to embed content published on Twitter.",
+        categories: [
+            "Widgets", "Social Networks", "Services", "Twitter",
+        ],
+        uri: "https://developer.twitter.com/en/docs/twitter-for-websites/embedded-tweets/overview",
+        fingerprint: {
+            selectors: [
+                "blockquote.twitter-tweet",
+                "iframe.twitter-tweet",
+            ],
+        },
+        implies: [
+            "Twitter Inc.",
+            "Twitter for Websites",
+        ],
     },
     {
         name: "Twitter Follow Button",
         description: "A button exposed for following a user on Twitter.",
         categories: [
-            "Widgets", "Social Networks",
+            "Widgets", "Social Networks", "Services", "Twitter",
         ],
         uri: "https://developer.twitter.com/en/docs/twitter-for-websites/follow-button/overview.html",
         fingerprint: {
@@ -107,6 +144,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             ],
         },
         implies: [
+            "Twitter Inc.",
             "Twitter for Websites",
         ],
     },
@@ -114,7 +152,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         name: "Twitter Tweet Button",
         description: "A button exposed for sharing content on Twitter.",
         categories: [
-            "Widgets", "Social Networks",
+            "Widgets", "Social Networks", "Services", "Twitter",
         ],
         uri: "https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview.html",
         fingerprint: {
@@ -123,6 +161,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             ],
         },
         implies: [
+            "Twitter Inc.",
             "Twitter for Websites",
         ],
     },
