@@ -261,7 +261,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         name: "jQuery",
         description: "A JavaScript library designed to simplify HTML DOM tree traversal, manipulation and event handling.",
         categories: [
-            "JavaScript", "JavaScript Libraries",
+            "JavaScript", "JavaScript Libraries", "DOM",
         ],
         uri: "https://jquery.com",
         license: "MIT",
@@ -269,11 +269,12 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         fingerprint: {
             scripts: {
                 globalDeclarations: [
+                    "^\\$$",
                     "^jQuery$",
                 ],
             },
             customEvaluation: {
-                version: "window.jQuery.fn.jquery;",
+                version: `window.jQuery.fn.jquery.split(" ")[0];`,
             },
         },
     },
@@ -338,19 +339,24 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         uri: "https://getbootstrap.com",
         license: "MIT",
         creationYear: "2011",
+        fingerprint: {
+            scripts: {
+                globalDeclarations: [
+                    "^bootstrap$",
+                ],
+            },
+            customEvaluation: {
+                version: "bootstrap.Alert.VERSION;",
+            },
+        },
     },
     {
         name: "Cookiebot",
         description: "A cookie and online tracking consent solution that complies with the EU consent and information requirements.",
         categories: [
-            "Law", "Privacy", "Services", "SaaS",
+            "Law", "Privacy", "SaaS", "Widgets", "Services", "Freemium",
         ],
-    },
-    {
-        name: "Cookiebot Banner",
-        categories: [
-            "Law", "Privacy", "SaaS",
-        ],
+        uri: "https://www.cookiebot.com/",
         fingerprint: {
             scripts: {
                 globalDeclarations: [
@@ -359,9 +365,6 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
                 ],
             },
         },
-        implies: [
-            "Cookiebot",
-        ],
     },
     {
         name: "Yoast SEO",
@@ -373,17 +376,39 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         creationYear: "2010",
         fingerprint: {
             initialContent: [
-                "!-- This site is optimized with the Yoast SEO plugin v.* - https://yoast\\.com/wordpress/plugins/seo/ -->",
+                "<!-- This site is optimized with the Yoast SEO plugin v.* - https://yoast\\.com/wordpress/plugins/seo/ -->",
             ],
             selectors: [
                 "script.yoast-schema-graph",
             ],
             customEvaluation: {
                 version: `(() => {
-                    const yoastVersionRegExp = "!-- This site is optimized with the Yoast SEO plugin v(.*) - https://yoast\\.com/wordpress/plugins/seo/ -->";
-                    const yoastVersion = window.document.documentElement.outerHTML.match(new RegExp(yoastVersionRegExp));
+                    const versionRegExp = "<!-- This site is optimized with the Yoast SEO plugin v(.*) - https://yoast\\.com/wordpress/plugins/seo/ -->";
+                    const version = window.document.documentElement.outerHTML.match(new RegExp(versionRegExp));
                     
-                    return yoastVersion ? yoastVersion[1] : "";
+                    return version ? version[1] : "";
+                })();`,
+            },
+        },
+    },
+    {
+        name: "WP Statistics",
+        description: "A WordPress statistics plugin collecting data from website visitors.",
+        categories: [
+            "Web Plugins", "Statistics", "Analytics", "WordPress", "WordPress Plugins", "Freemium",
+        ],
+        uri: "https://wp-statistics.com/",
+        creationYear: "2016",
+        fingerprint: {
+            initialContent: [
+                "<!-- Analytics by WP-Statistics v.* - https://wp-statistics\\.com/ -->",
+            ],
+            customEvaluation: {
+                version: `(() => {
+                    const versionRegExp = "<!-- Analytics by WP-Statistics v(.*) - https://wp-statistics\\.com/ -->";
+                    const version = window.document.documentElement.outerHTML.match(new RegExp(versionRegExp));
+                    
+                    return version ? version[1] : "";
                 })();`,
             },
         },
@@ -437,7 +462,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
     },
     {
         name: "Phaser",
-        description: "A free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.",
+        description: "A free 2D game framework for making HTML5 games for desktop and mobile web browsers.",
         categories: [
             "Game Engines", "Web Game Engines", "Game Frameworks", "Web Frameworks", "2D", "WebGL", "Canvas",
         ],
@@ -484,9 +509,6 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
                 })();`,
             },
         },
-        implies: [
-            "YouTube",
-        ],
     },
     {
         name: "Google Fonts",
@@ -539,5 +561,15 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         implies: [
             "Ruby",
         ],
+    },
+    {
+        name: "MySQL",
+        description: "An open-source relational database management system offered by Oracle.",
+        categories: [
+            "Databases", "Relational Databases", "DBMS", "SQL", "Oracle",
+        ],
+        uri: "https://www.mysql.com/",
+        license: "GPL-2.0",
+        creationYear: "1995",
     },
 ];
