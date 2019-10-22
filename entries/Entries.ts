@@ -8,22 +8,6 @@ import { VisionEntry } from "../src/entry/VisionEntry";
 
 export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
     {
-        name: "iubenda s.r.l.",
-        description: "A SaaS company accomplishing law requirements through software.",
-        categories: [
-            "Law", "Privacy", "Services", "Freemium", "SaaS", "Companies", "Italian Companies", "Startups", "iubenda",
-        ],
-        uri: "https://www.iubenda.com",
-        creationYear: "2011",
-        fingerprint: {
-            scripts: {
-                globalDeclarations: [
-                    "^_iub$",
-                ],
-            },
-        },
-    },
-    {
         name: "iubenda Privacy Policy",
         description: "A privacy policy generated through iubenda.",
         categories: [
@@ -36,9 +20,6 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
                 "^https://www.iubenda.com/privacy-policy/[0-9]+",
             ],
         },
-        implies: [
-            "iubenda s.r.l.",
-        ],
     },
     {
         name: "iubenda Cookie Policy",
@@ -54,7 +35,6 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             ],
         },
         implies: [
-            "iubenda s.r.l.",
             "iubenda Privacy Policy",
         ],
     },
@@ -79,18 +59,6 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
                 })();`,
             },
         },
-        implies: [
-            "iubenda s.r.l.",
-        ],
-    },
-    {
-        name: "Twitter Inc.",
-        description: "A microblogging and social networking service on which users post and interact with messages known as tweets.",
-        categories: [
-            "Social Networks", "Companies", "Services", "Twitter",
-        ],
-        uri: "https://twitter.com/",
-        creationYear: "2006",
     },
     {
         name: "Twitter for Websites",
@@ -109,9 +77,6 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
                 ],
             },
         },
-        implies: [
-            "Twitter Inc.",
-        ],
     },
     {
         name: "Twitter Embedded Tweets",
@@ -127,7 +92,6 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             ],
         },
         implies: [
-            "Twitter Inc.",
             "Twitter for Websites",
         ],
     },
@@ -144,7 +108,6 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             ],
         },
         implies: [
-            "Twitter Inc.",
             "Twitter for Websites",
         ],
     },
@@ -161,7 +124,6 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             ],
         },
         implies: [
-            "Twitter Inc.",
             "Twitter for Websites",
         ],
     },
