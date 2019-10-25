@@ -1,9 +1,8 @@
 import { VisionEntry } from "../src/entry/VisionEntry";
 
 /*
- * This file contains the definitions of all entries passed by default to Vision.
- * The entries in this collection are meant to be static and read-only. Each new entry should be
- * manually added to this list.
+ * This file contains all the entries passed by default to Vision.
+ * Each new entry should be manually added to this list.
 */
 
 export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
@@ -215,14 +214,6 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         },
     },
     {
-        name: "Capterra",
-        description: "A service for software peer review.",
-        categories: [
-            "Review Sites",
-        ],
-        uri: "https://www.capterra.com",
-    },
-    {
         name: "Capterra Reviews Badge",
         description: "A badge showing the Capterra reviews of a software.",
         categories: [
@@ -233,9 +224,6 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
                 "^https://assets\\.capterra\\.com/badge/",
             ],
         },
-        implies: [
-            "Capterra",
-        ],
     },
     {
         name: "Pickr",
