@@ -68,6 +68,7 @@ export namespace Vision {
             uris: [
                 uri,
             ],
+            date: new Date().toISOString(),
             meta: {
                 languages: scrapeDescriptor.languages || [],
             },

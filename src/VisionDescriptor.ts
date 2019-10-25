@@ -11,6 +11,9 @@ export type VisionDescriptor = {
     // Represents a list containing the visited uris.
     uris: string[];
 
+    // Represents the date the descriptor has been created.
+    date: string;
+
     // Represents meta related to the visited website.
     meta: {
         // Represents a list containing the languages the visited website is available.
