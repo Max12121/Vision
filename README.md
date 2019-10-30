@@ -32,6 +32,7 @@ Using NodeJS
 ```javascript
 const Vision = require("@malgol/vision");
 
+// You can also use async / await.
 Vision.cast("https://www.example.com").then((descriptor) => {
     console.log(descriptor);
 });
@@ -41,16 +42,16 @@ Using NodeJS with TypeScript
 ```typescript
 import { Vision, VisionDescriptor } from "@malgol/vision";
 
-async function main (): Promise<void> {
-    const descriptor: VisionDescriptor = await Vision.cast("https://www.example.com");
-
+// You can also use async / await.
+Vision.cast("https://www.example.com").then((descriptor: VisionDescriptor) => {
     console.log(descriptor);
-}
-
-main();
+});
 ```
 
 Using CLI
+```console
+npm install -g @malgol/vision
+```
 ```console
 vision URI
 ```
