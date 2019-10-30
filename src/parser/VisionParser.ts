@@ -3,6 +3,7 @@ import { VisionEntry, copyEntry } from "../entry/VisionEntry";
 import { VisionEntryFingerprint } from "../entry/VisionEntryFingerprint";
 import { VisionEntrySet } from "../entry/VisionEntrySet";
 import { VisionScrapeDescriptor } from "../scraper/VisionScrapeDescriptor";
+import { VisionUtilities } from "../utilities/VisionUtilities";
 import { VisionParserDictionary } from "./VisionParserDictionary";
 import { VisionParserMatchSet } from "./VisionParserMatchSet";
 import { VisionParserMatcher } from "./VisionParserMatcher";
@@ -22,10 +23,7 @@ export class VisionParser {
 
     public constructor (entries: VisionEntrySet = new VisionEntrySet(), options: VisionParserOptions = {}) {
         this._entries = entries;
-        this._options = {
-            ...defaultOptions,
-            ...options,
-        };
+        this._options = VisionUtilities.mergeOptions(defaultOptions, options);
     }
 
     public get entries (): VisionEntrySet {
