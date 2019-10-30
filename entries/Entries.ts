@@ -126,6 +126,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             "Twitter for Websites",
         ],
     },
+    // Entries are completely defined until this point, the entries below are work in progress.
     {
         name: "Freshchat",
         fingerprint: {
@@ -217,7 +218,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         name: "Capterra Reviews Badge",
         description: "A badge showing the Capterra reviews of a software.",
         categories: [
-            "Review Sites", "Widgets", "Badges",
+            "Review Sites", "Widgets", "Badges", "Capterra",
         ],
         fingerprint: {
             images: [
