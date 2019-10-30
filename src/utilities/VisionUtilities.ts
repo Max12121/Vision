@@ -17,6 +17,10 @@ export namespace VisionUtilities {
             const defaultValue: any = defaultOptions[hash];
             const userValue: any = userOptions[hash];
 
+            if (!defaultValue || !userValue) {
+                continue;
+            }
+
             if (defaultValue.constructor === Object && userValue.constructor === Object) {
                 options[hash] = mergeOptions(defaultValue, userValue);
             }
