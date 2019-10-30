@@ -3,6 +3,7 @@ import * as Path from "path";
 import { IVisionBrowser } from "../browser/IVisionBrowser";
 import { IVisionWindow } from "../browser/IVisionWindow";
 import { IVisionHTTPResponse } from "../browser/IVisionHTTPResponse";
+import { VisionUtilities } from "../utilities/VisionUtilities";
 import { VisionScrapeDescriptor } from "./VisionScrapeDescriptor";
 import { VisionScraperOptions } from "./VisionScraperOptions";
 
@@ -21,10 +22,7 @@ export class VisionScraper {
 
     public constructor (browser: IVisionBrowser, options: VisionScraperOptions = {}) {
         this._browser = browser;
-        this._options = {
-            ...defaultOptions,
-            ...options,
-        };
+        this._options = VisionUtilities.mergeOptions(defaultOptions, options);
     }
 
     public get browser (): IVisionBrowser {
