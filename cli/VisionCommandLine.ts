@@ -48,6 +48,10 @@ async function request (parameters: string[]): Promise<void> {
                 log("  |    |--- " + "No description.");
             }
 
+            if (matchedEntry.uri) {
+                log("  |    |--- " + matchedEntry.uri);
+            }
+
             if (matchedEntry.version) {
                 log("  |    |------- " + matchedEntry.version);
             }
