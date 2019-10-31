@@ -5,7 +5,7 @@ import { VisionEntry } from "./entry/VisionEntry";
 // Represents the Vision options.
 export type VisionOptions = {
     // Represents a list of properties to delete from the matched entries.
-    matchedEntryHiddenProperties?: string[];
+    matchedEntryExcludedProperties?: string[];
 
     // Represents a list of entries added to the parser.
     entries?: VisionEntry[];

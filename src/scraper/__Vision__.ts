@@ -186,6 +186,8 @@ namespace __Vision__ {
         const linksAfterLoad = getAllLinks();
         const imagesAfterLoad = getAllImagesSources();
 
+        scrollMaxY();
+
         return {
             loadedContent: getDocumentOuterHTML(),
             scripts: {
