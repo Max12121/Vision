@@ -18,7 +18,9 @@ export class PuppeteerBrowser implements IVisionBrowser {
 
     public async open (): Promise<void> {
         if (!this._puppeteerBrowser) {
-            this._puppeteerBrowser = await Puppeteer.launch();
+            this._puppeteerBrowser = await Puppeteer.launch({
+                ignoreHTTPSErrors: true,
+            });
             this._PID = this._puppeteerBrowser.process().pid;
         }
     }
