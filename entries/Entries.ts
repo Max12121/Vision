@@ -2,7 +2,7 @@ import { VisionEntry } from "../src/entry/VisionEntry";
 
 /*
  * This file contains all the entries passed by default to Vision.
- * Each new entry should be manually added to this list.
+ * In case you want to contribute: each new entry should be manually added to this list.
 */
 
 export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
@@ -319,14 +319,41 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
     },
     {
         name: "Google Analytics",
+        description: "A web analytics service offered by Google that tracks and reports website traffic.",
         categories: [
-            "Analytics",
+            "Analytics", "Behaviour Analysis", "Web Analytics", "Google", "Statistics",
         ],
+        uri: "https://marketingplatform.google.com/about/analytics/",
+        creationYear: "2005",
         fingerprint: {
             scripts: {
                 globalDeclarations: [
+                    "^ga$",
+                    "^gaData$",
                     "^GoogleAnalyticsObject$",
                 ],
+            },
+            customEvaluation: {
+                extra: `(() => {
+                    const dataLayer = window.dataLayer;
+                    let trackingID = null;
+                    
+                    if (dataLayer) {
+                        const configuration = dataLayer.filter((item) => item[0] === "config")[0];
+                        
+                        if (configuration) {
+                            trackingID = configuration[1];
+                        }
+                    }
+                    
+                    if (!trackingID) {
+                        trackingID = Object.keys(window.gaData)[0];
+                    }
+                    
+                    return {
+                        trackingID,
+                    };
+                })();`,
             },
         },
     },
@@ -395,7 +422,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
         name: "WP Statistics",
         description: "A WordPress statistics plugin collecting data from website visitors.",
         categories: [
-            "Web Plugins", "Statistics", "Analytics", "WordPress", "WordPress Plugins", "Freemium",
+            "Web Plugins", "Statistics", "Analytics", "WordPress", "WordPress Plugins", "Freemium", "Web Analytics",
         ],
         uri: "https://wp-statistics.com/",
         creationYear: "2016",

@@ -188,6 +188,8 @@ namespace __Vision__ {
 
         scrollMaxY();
 
+        // await new Promise((resolve) => setTimeout(resolve, 5000));
+
         return {
             loadedContent: getDocumentOuterHTML(),
             scripts: {
