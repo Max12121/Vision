@@ -43,7 +43,7 @@ Using NodeJS with TypeScript
 import { Vision, VisionDescriptor } from "@malgol/vision";
 
 // You can also use async / await.
-Vision.cast("https://www.example.com").then((descriptor: VisionDescriptor) => {
+Vision.cast("https://www.example.com").then((descriptor: VisionDescriptor): void => {
     console.log(descriptor);
 });
 ```
