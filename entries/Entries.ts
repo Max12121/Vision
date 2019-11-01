@@ -126,9 +126,14 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
             "Twitter for Websites",
         ],
     },
-    // Entries are completely defined until this point, the entries below are work in progress.
     {
         name: "Freshchat",
+        description: "A messaging software built for teams who want to ace customer conversations—marketing, sales, or support.",
+        categories: [
+            "Widgets", "Customer Care", "Live Chat",
+        ],
+        uri: "https://www.freshworks.com/live-chat-software/",
+        creationYear: "2017",
         fingerprint: {
             scripts: {
                 sources: [
@@ -142,6 +147,12 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
     },
     {
         name: "Typekit",
+        description: "A collection of web fonts offered by Adobe.",
+        categories: [
+            "Fonts", "Web Fonts", "Font Library", "CSS", "Adobe",
+        ],
+        uri: "https://fonts.adobe.com/typekit",
+        creationYear: "2009",
         fingerprint: {
             styles: {
                 sources: [
