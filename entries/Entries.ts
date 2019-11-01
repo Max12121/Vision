@@ -239,7 +239,7 @@ export const Entries: ReadonlyArray<Readonly<VisionEntry>> = [
     },
     {
         name: "Pickr",
-        description: "A color picker library.",
+        description: "A free and open source color picker library.",
         categories: [
             "JavaScript", "JavaScript Libraries", "CSS",
         ],
